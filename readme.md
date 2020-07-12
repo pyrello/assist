@@ -1,5 +1,5 @@
 # Assist
-A client tracking and reporting tool for agencies that provide services to the victims of domestic abuse.
+A client tracking and reporting tool for agencies that provide services to the victims of domestic abuse. It is an single page application that was originally built for [Domestic Violence Intervention Program](https://dvipiowa.org) written using Laravel and Vue.js.
 
 ## Running locally
 Assist is built to run locally using [Laravel Homestead](https://github.com/laravel/homestead).
@@ -26,7 +26,14 @@ This command will provision the virtual machine and get it ready to use. Once th
 vagrant ssh
 ```
 ### Setup Application
+* Make a copy of the `.env.example` file called `.env`:
+  ```bash
+  cp .env.example .env
+  ```
 * Generate application key: `artisan key:generate`
 * Run migrations: `artisan migrate`
 * Install Laravel Passport: `artisan passport:install`
 * Seed database, if desired: `artisan db:seed`. This step may take a while because the application will download and populate records for cities and counties for every state.
+
+## License
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
