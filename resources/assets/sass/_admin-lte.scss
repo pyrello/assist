@@ -1,0 +1,53 @@
+.skin-purple {
+  .sidebar-form {
+    border: none;
+
+    input[type="text"],
+    .btn {
+      height: auto;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .main-header .navbar-right {
+     float: right;
+  }
+}
+
+.main-sidebar h3 {
+  padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+  .sidebar-mini.sidebar-collapse .main-sidebar h3 {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .main-sidebar, .left-side {
+    padding-top: 60px;
+  }
+}
+
+.content-wrapper {
+  background-color: $content-bg;
+}
+
+.box-comments {
+  .box-comment {
+    &:first-of-type {
+      padding-top: 0;
+    }
+    &:last-of-type {
+      padding-bottom: 0;
+    }
+
+    & * {
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

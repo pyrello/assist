@@ -1,0 +1,40 @@
+{
+  "label": "Gender",
+  "base_table": "clients",
+  "aggregate_column": "id",
+  "date_column": "incidents.date",
+  "joins": [
+    {
+      "first_table": "activities",
+      "first": "client_id",
+      "operator": "=",
+      "second": "id"
+    },
+    {
+      "first_table": "incidents",
+      "first": "client_id",
+      "operator": "=",
+      "second": "id"
+    }
+  ],
+  "wheres": [
+    {
+      "column_table": "activities",
+      "column": "service_provided",
+      "operator": "=",
+      "arguments": true
+    }
+  ],
+  "sections": [
+    {
+      "list_table": "ethnicity",
+      "list_key_column": "id",
+      "list_label_column": "name",
+      "data_table": "clients",
+      "data_key_column": "gender",
+      "data_label_column": "gender",
+      "aggregate_column": "gender",
+      "order_by": "date"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+
+.selectize-control.multi
+.selectize-input > div {
+  background: $alert-info-bg;
+  color: $alert-info-text;
+}
+
+.has-success {
+  .selectize-input {
+    border-color: $state-success-text;
+  }
+}
+
+.has-warning {
+  .selectize-input {
+    border-color: $state-warning-text;
+  }
+}
+
+.selectize-control.loading {
+  &::before {
+    -webkit-animation: fa-spin 2s infinite linear;
+    animation: fa-spin 2s infinite linear;
+    font-family: 'FontAwesome';
+    content: "\f021";
+    -moz-transition: opacity 0.2s;
+    -webkit-transition: opacity 0.2s;
+    transition: opacity 0.2s;
+    z-index: 2;
+    position: absolute;
+    display: inline-block;
+    top: 50%;
+    right: 34px;
+    margin: -14px 0 0 0;
+    //opacity: 0;
+    width: 1.28571429em;
+    text-align: center;
+  }
+}
+
+// content: "\f002";
+
+.selectize-control.selectize-search .selectize-input:after {
+  font-family: 'FontAwesome';
+  content: "\f002";
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 28px;
+  margin-top: -10px;
+  width: 0;
+  height: 0;
+  border: 0;
+}
+
+.selectize-control.selectize-search .selectize-input.dropdown-active:after {
+  margin-top: -10px;
+}

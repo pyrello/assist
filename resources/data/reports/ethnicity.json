@@ -1,0 +1,48 @@
+{
+  "label": "Ethnicity",
+  "base_table": "clients",
+  "aggregate_column": "id",
+  "date_column": "incidents.date",
+  "joins": [
+    {
+      "first_table": "activities",
+      "first": "client_id",
+      "operator": "=",
+      "second": "id"
+    },
+    {
+      "first_table": "incidents",
+      "first": "client_id",
+      "operator": "=",
+      "second": "id"
+    }
+  ],
+  "wheres": [
+    {
+      "column_table": "activities",
+      "column": "service_provided",
+      "operator": "=",
+      "arguments": true
+    }
+  ],
+  "sections": [
+    {
+      "list_table": "ethnicity",
+      "list_key_column": "id",
+      "list_label_column": "name",
+      "data_table": "client_ethnicity",
+      "data_key_column": "ethnicity_id",
+      "data_label_column": "ethnicity_id",
+      "aggregate_column": "ethnicity_id",
+      "order_by": "date",
+      "joins": [
+        {
+          "first_table": "client_ethnicity",
+          "first": "client_id",
+          "operator": "=",
+          "second": "id"
+        }
+      ]
+    }
+  ]
+}

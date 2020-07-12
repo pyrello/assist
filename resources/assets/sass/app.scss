@@ -1,0 +1,454 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+//@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "bootstrap";
+
+// Font Awesome
+//@import "~font-awesome/scss/font-awesome";
+//@import "~@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-pro-webfonts/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-pro-webfonts/scss/fa-solid.scss";
+
+// AdminLTE
+@import "~admin-lte/dist/css/AdminLTE.min.css";
+@import "~admin-lte/dist/css/skins/_all-skins.min.css";
+@import "admin-lte";
+
+// Selectize
+@import "~selectize/dist/css/selectize";
+@import "~selectize/dist/css/selectize.bootstrap3";
+
+@import "selectize";
+
+// Flatpickr
+@import '~flatpickr/dist/flatpickr.min.css';
+
+// TiTaToggle
+@import '~titatoggle/dist/titatoggle-dist-min.css';
+
+//@import "node_modules/choices.js/assets/styles/scss/base";
+//@import "node_modules/choices.js/assets/styles/scss/choices";
+
+@import "grid";
+
+
+.full-height {
+  height: 100vh;
+}
+
+.flex-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.fit-content {
+  white-space: nowrap;
+  width: 1%;
+}
+
+tr.report-total-row {
+  border-top: 2px solid #dadada;
+}
+
+.user-menu {
+  margin-right: 0;
+}
+
+.content {
+  header {
+    margin-top: ($line-height-computed / 2);
+    margin-bottom: ($line-height-computed / 2);
+    h1 {
+      margin: 0;
+    }
+  }
+}
+
+.alert {
+  border: none;
+}
+
+.messages {
+  .message {
+    margin: 0;
+  }
+
+  //.message:last-of-type {
+  //  margin-bottom: 22px;
+  //}
+}
+
+.well {
+  padding: 15px;
+  h1, h2, h3, h4, h5, h6 {
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  > .row:last-of-type .form-group,
+  > .form-group:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.intake-controls {
+  background-color: #ccc;
+  position: static;
+  bottom: 0;
+}
+
+.breadcrumb {
+  font-size: 1.2em;
+  margin-bottom: 0;
+}
+
+.card {
+  background-color: #efefef;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: $border-radius-large;
+  display: block;
+  font-size: $font-size-h2;
+  font-weight: $headings-font-weight;
+  padding: 40px;
+  text-align: center;
+  width: 100%;
+
+  &:hover {
+    -webkit-box-shadow: 0 0 3px #333;
+    -moz-box-shadow: 0 0 3px #333;
+    box-shadow: 0 0 3px #333;
+  }
+
+  .icon {
+    display: block;
+    font-size: ($font-size-h1 * 2);
+
+    .fa-icon {
+      color: transparent;
+    }
+  }
+}
+
+
+
+
+.btn-rounded {
+  border-radius: 50px;
+}
+
+.range-group {
+  margin-bottom: 7px;
+}
+
+.no-bottom-margin {
+  margin-bottom: 0;
+}
+
+.td-number {
+  min-width: 75px;
+}
+
+.table > tbody > tr {
+  > td.td-input {
+    padding: 5px;
+    .input-sm {
+      height: 28px;
+    }
+  }
+  > td.td-btn {
+    padding: 7px;
+    .btn {
+      min-width: 22px;
+    }
+  }
+}
+
+td small.help-block {
+  margin: 0;
+}
+
+.breadcrumb {
+  > li:first-child > a {
+    @include fa-icon;
+    @extend .fas;
+    &:before {
+      content: fa-content($fa-var-chevron-left);
+      color: $link-color;
+      padding-right: 5px;
+      text-decoration: none;
+      :hover {
+        color: $link-hover-color;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  .breadcrumb {
+    > li:not(:last-child) {
+      display: none;
+    }
+    > li {
+      &:before {
+        content: none !important;
+      }
+      &:last-child > a {
+        //@include fa-icon;
+        //@extend .fas;
+        &:before {
+          content: fa-content($fa-var-chevron-left);
+          color: $link-color;
+          padding-right: 5px;
+          text-decoration: none;
+          :hover {
+            color: $link-hover-color;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+//@media (max-width: 767px) {
+//  .table-responsive{
+//    overflow-x: auto;
+//    overflow-y: auto;
+//  }
+//}
+//@media (min-width: 767px) {
+//  .table-responsive{
+//    overflow: inherit !important; /* Sometimes needs !important */
+//  }
+//}
+
+// Overrides for AdminLTE
+
+.main-header {
+  .navbar {
+    margin-left: 0;
+  }
+
+  .sidebar-toggle {
+    width: 50px;
+    text-align: center;
+  }
+}
+
+.sidebar-toggle {
+  float: left;
+  background-color: transparent;
+  background-image: none;
+  padding: 15px 15px;
+  font-family: fontAwesome;
+}
+
+.sidebar-form {
+  overflow: visible;
+
+  .dropdown-menu {
+    width: 100%;
+  }
+}
+
+.sidebar .dropdown-menu > li > a {
+  color: #333333;
+}
+
+@media (max-width: 767px) {
+  .main-header .logo {
+    width: auto;
+    float: left;
+  }
+}
+
+.skin-purple .main-header .logo {
+  background-color: transparent;
+}
+
+@media (min-width: 768px) {
+  .sidebar-mini.sidebar-collapse .main-header {
+    .logo {
+      width: auto;
+    }
+    .navbar {
+      margin-left: 0;
+    }
+  }
+}
+
+.padded {
+  padding: 15px;
+}
+
+// Sections and drawers
+
+header.content-header {
+  border-bottom: 1px solid #ccc;
+  padding: 15px;
+}
+
+.header-actions {
+  &.desktop {
+    margin-top: -4px;
+  }
+
+  &.mobile {
+    margin-top: 15px;
+  }
+}
+
+.section {
+  padding: 15px;
+
+  header>h2:first-of-type {
+    margin-top: 0;
+  }
+}
+
+.intake-section {
+  h2 {
+    margin-top: 0;
+    border-bottom: 1px solid #dedede;
+    padding-bottom: 10px;
+  }
+}
+
+.drawer {
+  background-color: #aaa;
+  min-height: 100%;
+  .nav {
+    >li>a {
+      display: block;
+      padding: 3px 20px;
+      clear: both;
+      font-weight: 400;
+      line-height: 1.42857143;
+      color: #333;
+      white-space: nowrap;
+    }
+
+    >li>a:hover {
+      color: #262626;
+      text-decoration: none;
+      background-color: #f5f5f5;
+    }
+  }
+}
+
+.drawer-wrapper {
+  .drawer {
+    display: none;
+    position: absolute;
+  }
+
+  .section-wrapper {
+    margin-left: 0;
+  }
+
+  &.open {
+    .drawer {
+      width: 100px;
+      display: block;
+    }
+
+    .section-wrapper {
+      margin-left: 100px;
+    }
+  }
+}
+
+.sidebar-form {
+  position: relative;
+}
+
+.tab-content {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.overlay-background {
+  padding: 5px;
+
+  .overlay {
+    background-color: #ffffff;
+    border-bottom: 1px solid #cccccc;
+    -webkit-box-shadow: 0 1px 5px #ccc;
+    -moz-box-shadow: 0 1px 5px #ccc;
+    box-shadow: 0 1px 5px #ccc;
+
+    .overlay-header {
+      padding: 15px;
+
+      h1 {
+        margin: 0;
+      }
+
+      .nav {
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+.form-control[readonly].flatpickr {
+  background-color: #fff;
+}
+
+@media (max-width: 767px) {
+  .fixed .content-wrapper, .fixed .right-side {
+    padding-top: 50px;
+  }
+}
+
+/**
+ * http://blog.osmosys.asia/2017/01/05/prevent-ios-from-zooming-in-on-input-fields/
+ */
+/*** Styles added to fix the issue with zoom in on iphone ***/
+/* iPhone < 5: */
+@media screen and (device-aspect-ratio: 2/3) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="url"]{ font-size: 16px; }
+}
+
+/* iPhone 5, 5C, 5S, iPod Touch 5g */
+@media screen and (device-aspect-ratio: 40/71) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="url"]{ font-size: 16px; }
+}
+
+/* iPhone 6, iPhone 6s, iPhone 7 portrait/landscape */
+@media screen and (device-aspect-ratio: 375/667) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="url"]{ font-size: 16px; }
+}
+
+/* iPhone 6 Plus, iPhone 6s Plus, iPhone 7 Plus portrait/landscape */
+@media screen and (device-aspect-ratio: 9/16) {
+  select, textarea, input[type="text"], input[type="password"],
+  input[type="datetime"], input[type="datetime-local"],
+  input[type="date"], input[type="month"], input[type="time"],
+  input[type="week"], input[type="number"], input[type="email"],
+  input[type="url"]{ font-size: 16px; }
+}

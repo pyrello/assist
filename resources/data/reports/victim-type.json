@@ -1,0 +1,126 @@
+{
+  "label": "Type of Victim",
+  "base_table": "activities",
+  "aggregate_column": "client_id",
+  "date_column": "started_at",
+  "joins": [
+    {
+      "first_table": "incidents",
+      "first": "client_id",
+      "operator": "=",
+      "second": "client_id"
+    }
+  ],
+  "wheres": [
+    {
+      "column_table": "activities",
+      "column": "service_provided",
+      "operator": "=",
+      "arguments": true
+    }
+  ],
+  "sections": [
+    {
+      "list_table": "incident_types",
+      "list_key_column": "id",
+      "list_label_column": "name",
+      "data_table": "incidents",
+      "data_key_column": "incident_type_id",
+      "data_label_column": "incident_type_id",
+      "aggregate_column": "incident_type_id",
+      "order_by": "date",
+      "joins": [
+        {
+          "first_table": "incidents",
+          "first": "client_id",
+          "operator": "=",
+          "second": "client_id"
+        },
+        {
+          "first_table": "clients",
+          "first": "id",
+          "operator": "=",
+          "second": "client_id"
+        }
+      ],
+      "calculated_rows": [
+        {
+          "label": "Domestic Abuse, Female, including dating violence (18 years and over)",
+          "data_table": "incidents",
+          "data_column": "incident_type_id",
+          "wheres": [
+            {
+              "column_table": "incidents",
+              "column": "incident_type_id",
+              "operator": "in",
+              "arguments": [1, 2]
+            },
+            {
+              "column_table": "clients",
+              "column": "gender",
+              "operator": "in",
+              "arguments": ["female", "trangender (f)"]
+            },
+            {
+              "column_table": "incidents",
+              "column": "client_age",
+              "operator": ">=",
+              "arguments": "18"
+            }
+          ]
+        },
+        {
+          "label": "Domestic Abuse, Male, including dating violence (18 years and over)",
+          "data_table": "incidents",
+          "data_column": "incident_type_id",
+          "wheres": [
+            {
+              "column_table": "incidents",
+              "column": "incident_type_id",
+              "operator": "in",
+              "arguments": [1, 2]
+            },
+            {
+              "column_table": "clients",
+              "column": "gender",
+              "operator": "in",
+              "arguments": ["male", "trangender (m)"]
+            },
+            {
+              "column_table": "incidents",
+              "column": "client_age",
+              "operator": ">=",
+              "arguments": "18"
+            }
+          ]
+        },
+        {
+          "label": "Teen dating violence (13 - 17)",
+          "data_table": "incidents",
+          "data_column": "incident_type_id",
+          "wheres": [
+            {
+              "column_table": "incidents",
+              "column": "incident_type_id",
+              "operator": "in",
+              "arguments": [2]
+            },
+            {
+              "column_table": "incidents",
+              "column": "client_age",
+              "operator": ">=",
+              "arguments": "13"
+            },
+            {
+              "column_table": "incidents",
+              "column": "client_age",
+              "operator": "<",
+              "arguments": "18"
+            }
+          ]
+        }
+      ],
+      "excluded_rows": [1, 2]
+    }
+  ]
+}

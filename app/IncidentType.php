@@ -1,0 +1,12 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class IncidentType extends Model
+{
+    public $fillable = [
+        'name',
+    ];
+}
