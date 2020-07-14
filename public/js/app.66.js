@@ -1,1 +1,518 @@
-webpackJsonp([66],{"+gjZ":function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});n("NYxO");var i=n("rgg6");e.default={name:"advocate-show",mixins:[i.a],created:function(){this.init()},methods:{init:function(){this.fetchCurrentAdvocate()}}}},HnL8:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",[t.advocate?n("header",{staticClass:"content-header"},[n("div",{staticClass:"header-actions pull-right hidden-xs hidden-sm desktop"},[n("div",{staticClass:"btn-group pull-right"},[t._m(0),t._v(" "),n("ul",{staticClass:"dropdown-menu"},[n("li",{attrs:{role:"presentation"}},[n("router-link",{attrs:{to:"/advocates/"+t.advocate.id+"/edit"}},[n("i",{staticClass:"fa fa-edit"}),t._v(" Edit")])],1),t._v(" "),n("li",{attrs:{role:"presentation"}},[n("a",{attrs:{href:"#delete"},on:{click:function(e){t.confirmDelete(t.advocate.id)}}},[n("i",{staticClass:"fa fa-remove"}),t._v(" Delete")])])])])]),t._v(" "),n("h1",[t._v(t._s(t.advocate.first_name)+" "+t._s(t.advocate.last_name))])]):t._e()])},staticRenderFns:[function(){var t=this.$createElement,e=this._self._c||t;return e("button",{staticClass:"btn btn-default dropdown-toggle",attrs:{type:"button","data-toggle":"dropdown","aria-haspopup":"true","aria-expanded":"false"}},[e("i",{staticClass:"fa fa-ellipsis-h"})])}]}},UmUL:function(t,e,n){"use strict";var i=n("Dd8w"),a=n.n(i),s=n("bOdI"),r=n.n(s),o=n("Zrlr"),u=n.n(o),c=n("NYxO"),d=n("OQde"),l=function(t){return t.replace(/\w\S*/g,function(t){return t.charAt(0).toUpperCase()+t.substr(1).toLowerCase()})},h=n("TFAV");e.a=function t(e){var n,i,s,o=e.name,f=e.storeName,m=e.model,p=void 0===m?h.a:m;u()(this,t),this.modelMixinOptions={name:o,storeName:f,model:p};var v=this;this.data=function(){var t;return t={},r()(t,v.modelMixinOptions.name,new v.modelMixinOptions.model),r()(t,"params",r()({},v.modelMixinOptions.name+"_id",null)),t},this.computed=a()({},Object(c.c)(f,(n={},r()(n,o+"ById","byId"),r()(n,"route"+l(o),"byRoute"),r()(n,"fetching"+l(o),"fetching"),n)),r()({},o+"Data",function(){return this["fetching"+l(o)],this["route"+l(o)]})),this.created=function(){this["set"+l(o)+"Id"]()},this.watch=(i={},r()(i,o+"Data",function(){this["reset"+v.modelMixinOptions.name](),this[v.modelMixinOptions.name+"Data"]&&this[""+v.modelMixinOptions.name].assign(this[v.modelMixinOptions.name+"Data"])}),r()(i,"this.$route.params."+o+"_id",function(){this["set"+l(o)+"Id"]()}),i),this.methods=a()({},Object(c.b)(f,r()({},"fetch"+l(o),"fetch")),(s={},r()(s,"set"+l(o)+"Id",function(t){t=t?Number(t):this.$route.params[o+"_id"]?Number(this.$route.params[o+"_id"]):null,Vue.set(this.params,o+"_id",t)}),r()(s,o+"IdExists",function(){return Object(d.f)(this.params[o+"_id"])&&null!==this.params[o+"_id"]}),r()(s,"fetchRoute"+l(o),function(){var t=this,e=Number(this.$route.params[o+"_id"]);return!!e&&this["fetch"+l(o)]({id:e,fetchId:"id:"+e}).then(function(e){return t["route"+l(o)+"Fetched"](),t["current"+l(o)+"Fetched"](),e}).catch(function(t){console.error(t)})}),r()(s,"fetchCurrent"+l(o),function(){return this["fetchRoute"+l(o)]()}),r()(s,"current"+l(o)+"Fetched",function(){}),r()(s,"route"+l(o)+"Fetched",function(){}),r()(s,o+"Fetched",function(){}),r()(s,"reset",function(){this.resetData()}),r()(s,"resetData",function(){this["reset"+o](),this.params[o+"_id"]=null}),r()(s,"reset"+o,function(){this[o]=new p}),s))}},bOdI:function(t,e,n){"use strict";e.__esModule=!0;var i,a=n("C4MV"),s=(i=a)&&i.__esModule?i:{default:i};e.default=function(t,e,n){return e in t?(0,s.default)(t,e,{value:n,enumerable:!0,configurable:!0,writable:!0}):t[e]=n,t}},e9ln:function(t,e,n){var i=n("VU/8")(n("+gjZ"),n("HnL8"),!1,null,null,null);t.exports=i.exports},rgg6:function(t,e,n){"use strict";var i=n("Dd8w"),a=n.n(i),s=n("Zx67"),r=n.n(s),o=n("Zrlr"),u=n.n(o),c=n("wxAW"),d=n.n(c),l=n("zwoO"),h=n.n(l),f=n("Pf15"),m=n.n(f),p=function(){return{id:null,first_name:"",last_name:"",email:"",password:"",password_confirmation:""}},v=function(t){function e(){arguments.length>0&&void 0!==arguments[0]&&arguments[0];var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return u()(this,e),h()(this,(e.__proto__||r()(e)).call(this,p(),t))}return m()(e,t),d()(e,[{key:"defaults",value:function(){return p()}}]),e}(n("TFAV").a),_=n("UmUL");e.a=a()({},new _.a({name:"advocate",storeName:"advocates",model:v}))}});
+webpackJsonp([66,93],{
+
+/***/ 397:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(494)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/RequiredAsterisk.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0b84e1e8", Component.options)
+  } else {
+    hotAPI.reload("data-v-0b84e1e8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 418:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(567)
+/* template */
+var __vue_template__ = __webpack_require__(568)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/forms/HouseholdFormPartial.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-208ded15", Component.options)
+  } else {
+    hotAPI.reload("data-v-208ded15", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 492:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Model__ = __webpack_require__(60);
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    methods: {
+        /**
+         * Set the classes to show feedback for whether form controls
+         * are required and/or valid.
+         *
+         * @param prop
+         * @param model
+         * @param $validation
+         * @param log
+         * @returns {boolean|string}
+         */
+        controlClasses: function controlClasses(prop) {
+            var model = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'model';
+            var $validation = arguments[2];
+            var log = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+
+            // Check if the log flag was sent as an earlier argument
+            if (typeof model === 'boolean') {
+                log = model;
+                model = 'model';
+            } else if (typeof $validation === 'boolean') {
+                log = $validation;
+                $validation = undefined;
+            }
+
+            if (log) console.log({ prop: prop, model: model });
+
+            // If validation is not defined and the this.$v object is defined
+            if (!Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation) && this.$v) {
+                $validation = this.$v;
+
+                // Try accessing the validation using the model
+                if (typeof model === 'string') {
+                    if (log) console.log('Checking if we can use model in validation', model);
+                    if (Object(__WEBPACK_IMPORTED_MODULE_0__common__["i" /* has */])($validation, model)) {
+                        $validation = $validation[model];
+                    }
+                }
+            }
+
+            // Try accessing the validation using the prop
+            $validation = _.get($validation, prop);
+
+            if (log) console.log('$validation', $validation);
+
+            // See if we can grab the model
+            if (typeof model === 'string') {
+                model = this[model];
+            }
+
+            // Otherwise, see if we can use the default one
+            else if (!model) {
+                    model = this.model;
+                }
+
+            if (log) console.log('[controlClasses]', 'model', model);
+
+            // If we don't have a model, we can't process this
+            if (!model || !model instanceof __WEBPACK_IMPORTED_MODULE_1__models_Model__["a" /* default */]) {
+                console.warn('Unable to find model for checking control classes.', prop);
+                return true;
+            }
+
+            if (log) console.log('changed', model.getChanges(prop), Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])(model.getChanges(prop)));
+
+            var check = false,
+                valid = true,
+                required = false,
+                value = _.get(model, prop),
+                changed = Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])(model.getChanges(prop)),
+                empty = !Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])(value) || value === null || !((typeof value === 'string' || typeof value === 'number') && value !== '') || prop === 'id' && !value;
+
+            if (log) console.log('empty', value, !Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])(value), value === null, typeof value === 'string', typeof value === 'number', value !== '', !((typeof value === 'string' || typeof value === 'number') && value !== ''));
+
+            // Validation is defined
+            if (Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation)) {
+
+                if (log) console.log('validation is defined');
+
+                if (log) console.log('required', Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation.required), $validation.required);
+                // Check if the field is required
+                if (Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation.required) || Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation.requiredIf)) {
+                    // check = true
+                    required = true;
+                }
+
+                // Valid if validation passes
+                valid = !$validation.$invalid;
+            }
+
+            if (log) console.log({ check: check, valid: valid, value: value, changed: changed, required: required, empty: empty });
+
+            if (required) {
+                check = true;
+
+                if (empty) {
+                    if (log) console.log('empty and required = invalid');
+                    valid = false;
+                }
+            } else {
+                check = changed;
+            }
+
+            if (model.exists && !changed && (!required || valid)) {
+                if (log) console.log('Model exists and prop has not changed.');
+                return '';
+            }
+
+            if (log) console.log('final', { check: check, valid: valid });
+
+            if (!check) {
+                return '';
+            }
+
+            return {
+                'has-warning': !valid,
+                'has-success': valid
+            };
+        },
+        feedbackClasses: function feedbackClasses(prop) {
+            var $validation = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+            var model = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'model';
+            var log = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+
+            if (typeof $validation === 'boolean') {
+                log = $validation;
+                $validation = undefined;
+            }
+
+            if (log) console.log('prop', prop);
+
+            if (typeof model === 'String') {
+                model = this[model];
+            } else if (!model) {
+                model = this.model;
+            }
+
+            if (!model) {
+                return true;
+            }
+
+            if (log) console.log('$validation', $validation);
+            if (typeof $validation === 'string' && this.$v) {
+                var $vname = $validation;
+                $validation = Object(__WEBPACK_IMPORTED_MODULE_0__common__["d" /* dataGet */])(this.$v, $vname);
+
+                if (!Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation)) {
+                    $validation = Object(__WEBPACK_IMPORTED_MODULE_0__common__["d" /* dataGet */])(this.$v.model, $vname);
+                }
+
+                if (!Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation)) {
+                    console.warn('Validation for ' + $vname + ' is not defined');
+                }
+            }
+
+            if (log) console.log('$validation', $validation);
+
+            var check = false,
+                valid = false,
+                value = _.get(model, prop),
+                changed = Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])(Object(__WEBPACK_IMPORTED_MODULE_0__common__["d" /* dataGet */])(model.changed, prop)),
+                required = false,
+                empty = _.isUndefined(value) || (typeof value === 'string' || typeof value === 'number') && value !== '';
+            // This clause needs to be separate from the next check
+            // because of the case where validation may be defined but
+            // not required. We still want it to show up as valid.
+
+            // Validation is defined
+            if (Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation)) {
+
+                if (log) console.log('validation is defined');
+
+                // Valid if validation passes
+                valid = !$validation.$invalid;
+
+                if (log) console.log('required', Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation.required), $validation.required);
+                // Check if the field is required
+                if (Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation.required)) {
+                    required = true;
+                }
+            }
+
+            if (log) console.log({ check: check, valid: valid, value: value, changed: changed, required: required, empty: empty });
+
+            if (required) {
+                check = true;
+
+                if (empty) {
+                    valid = false;
+                }
+            }
+
+            if (log) console.log('final', { check: check, valid: valid });
+
+            if (!check) {
+                return '';
+            }
+
+            return {
+                'has-warning': !valid,
+                'has-success': valid
+            };
+        }
+    }
+});
+
+/***/ }),
+
+/***/ 494:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("span", [_vm._v("*")])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0b84e1e8", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 567:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__models_Household__ = __webpack_require__(235);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__RequiredAsterisk__ = __webpack_require__(397);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__RequiredAsterisk___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__RequiredAsterisk__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_validationClasses__ = __webpack_require__(492);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    name: 'household-form-partial',
+
+    components: {
+        RequiredAsterisk: __WEBPACK_IMPORTED_MODULE_1__RequiredAsterisk___default.a
+    },
+
+    mixins: [__WEBPACK_IMPORTED_MODULE_2__mixins_validationClasses__["a" /* default */]],
+
+    props: ['value', '$v'],
+
+    data: function data() {
+        return {
+            model: new __WEBPACK_IMPORTED_MODULE_0__models_Household__["a" /* default */]()
+        };
+    },
+
+
+    // Watchers
+    watch: {
+        model: function model() {
+            if (this.model && this.model.isDirty()) {
+                this.$emit('input', this.model);
+            }
+        },
+        value: function value(_value) {
+            this.model = _value;
+        }
+    }
+});
+
+/***/ }),
+
+/***/ 568:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "form-group", class: _vm.controlClasses("size") },
+      [
+        _c(
+          "label",
+          { staticClass: "control-label" },
+          [_vm._v("Size"), _c("required-asterisk")],
+          1
+        ),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model.number",
+              value: _vm.model.size,
+              expression: "model.size",
+              modifiers: { number: true }
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "number" },
+          domProps: { value: _vm.model.size },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.model, "size", _vm._n($event.target.value))
+            },
+            blur: function($event) {
+              return _vm.$forceUpdate()
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("small", { staticClass: "help-block" }, [
+          _vm._v("Including the client.")
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "form-group", class: _vm.controlClasses("annual_income") },
+      [
+        _c(
+          "label",
+          {
+            staticClass: "control-label",
+            attrs: { for: "household.annual_income" }
+          },
+          [_vm._v("Income")]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-group" }, [
+          _c("span", { staticClass: "input-group-addon" }, [_vm._v("$")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.model.annual_income,
+                expression: "model.annual_income"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "household.annual_income",
+              "aria-label": "Amount (to the nearest dollar)"
+            },
+            domProps: { value: _vm.model.annual_income },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.model, "annual_income", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("span", { staticClass: "input-group-addon" }, [_vm._v(".00")])
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-208ded15", module.exports)
+  }
+}
+
+/***/ })
+
+});

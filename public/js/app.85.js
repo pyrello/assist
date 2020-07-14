@@ -1,1 +1,117 @@
-webpackJsonp([85],{"3GxD":function(e,t,s){var l=s("VU/8")(s("vo3d"),s("ayyZ"),!1,null,null,null);e.exports=l.exports},ayyZ:function(e,t){e.exports={render:function(){var e=this.$createElement,t=this._self._c||e;return t("div",{staticClass:"checkbox checkbox-slider--b-flat"},[t("label",[t("input",{attrs:{type:"checkbox"},domProps:{value:this.value,checked:this.value},on:{change:this.select}}),t("span",[this._t("default",[this._v(this._s(this.label))])],2)])])},staticRenderFns:[]}},vo3d:function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={name:"checkbox-slider",props:{label:{type:String,required:!0},value:[Boolean,Number,String]},methods:{select:function(e){this.$emit("input",!!e.target.checked)}}}}});
+webpackJsonp([85],{
+
+/***/ 403:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(532)
+/* template */
+var __vue_template__ = __webpack_require__(533)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/controls/CheckboxSlider.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-281ca2d6", Component.options)
+  } else {
+    hotAPI.reload("data-v-281ca2d6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 532:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    name: 'checkbox-slider',
+
+    props: {
+        label: {
+            type: String,
+            required: true
+        },
+        value: [Boolean, Number, String]
+    },
+
+    methods: {
+        select: function select(event) {
+            this.$emit('input', !!event.target.checked);
+        }
+    }
+
+});
+
+/***/ }),
+
+/***/ 533:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "checkbox checkbox-slider--b-flat" }, [
+    _c("label", [
+      _c("input", {
+        attrs: { type: "checkbox" },
+        domProps: { value: _vm.value, checked: _vm.value },
+        on: { change: _vm.select }
+      }),
+      _c("span", [_vm._t("default", [_vm._v(_vm._s(_vm.label))])], 2)
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-281ca2d6", module.exports)
+  }
+}
+
+/***/ })
+
+});

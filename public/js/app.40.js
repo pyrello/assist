@@ -1,1 +1,849 @@
-webpackJsonp([40],{JREe:function(t,e,i){var n=i("hkKT");"string"==typeof n&&(n=[[t.i,n,""]]),n.locals&&(t.exports=n.locals);i("rjj0")("ee05401c",n,!0,{})},NvCH:function(t,e,i){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var n=i("Dd8w"),s=i.n(n),a=i("NYxO"),r=i("fQ0y");e.default={name:"client-show",mixins:[r.a],created:function(){this.init()},methods:s()({},Object(a.b)("clients",["destroy"]),{confirmDelete:function(){var t=this,e=this.clientData.full_name;confirm("Are you sure that you want to delete the client, "+e+"?")&&this.destroy({id:this.clientData.id}).then(function(){t.addMessage(e+" has been deleted."),t.$router.push("/clients")})},init:function(){this.fetchRouteClient()}})}},UmUL:function(t,e,i){"use strict";var n=i("Dd8w"),s=i.n(n),a=i("bOdI"),r=i.n(a),o=i("Zrlr"),l=i.n(o),c=i("NYxO"),d=i("OQde"),u=function(t){return t.replace(/\w\S*/g,function(t){return t.charAt(0).toUpperCase()+t.substr(1).toLowerCase()})},f=i("TFAV");e.a=function t(e){var i,n,a,o=e.name,h=e.storeName,p=e.model,v=void 0===p?f.a:p;l()(this,t),this.modelMixinOptions={name:o,storeName:h,model:v};var _=this;this.data=function(){var t;return t={},r()(t,_.modelMixinOptions.name,new _.modelMixinOptions.model),r()(t,"params",r()({},_.modelMixinOptions.name+"_id",null)),t},this.computed=s()({},Object(c.c)(h,(i={},r()(i,o+"ById","byId"),r()(i,"route"+u(o),"byRoute"),r()(i,"fetching"+u(o),"fetching"),i)),r()({},o+"Data",function(){return this["fetching"+u(o)],this["route"+u(o)]})),this.created=function(){this["set"+u(o)+"Id"]()},this.watch=(n={},r()(n,o+"Data",function(){this["reset"+_.modelMixinOptions.name](),this[_.modelMixinOptions.name+"Data"]&&this[""+_.modelMixinOptions.name].assign(this[_.modelMixinOptions.name+"Data"])}),r()(n,"this.$route.params."+o+"_id",function(){this["set"+u(o)+"Id"]()}),n),this.methods=s()({},Object(c.b)(h,r()({},"fetch"+u(o),"fetch")),(a={},r()(a,"set"+u(o)+"Id",function(t){t=t?Number(t):this.$route.params[o+"_id"]?Number(this.$route.params[o+"_id"]):null,Vue.set(this.params,o+"_id",t)}),r()(a,o+"IdExists",function(){return Object(d.f)(this.params[o+"_id"])&&null!==this.params[o+"_id"]}),r()(a,"fetchRoute"+u(o),function(){var t=this,e=Number(this.$route.params[o+"_id"]);return!!e&&this["fetch"+u(o)]({id:e,fetchId:"id:"+e}).then(function(e){return t["route"+u(o)+"Fetched"](),t["current"+u(o)+"Fetched"](),e}).catch(function(t){console.error(t)})}),r()(a,"fetchCurrent"+u(o),function(){return this["fetchRoute"+u(o)]()}),r()(a,"current"+u(o)+"Fetched",function(){}),r()(a,"route"+u(o)+"Fetched",function(){}),r()(a,o+"Fetched",function(){}),r()(a,"reset",function(){this.resetData()}),r()(a,"resetData",function(){this["reset"+o](),this.params[o+"_id"]=null}),r()(a,"reset"+o,function(){this[o]=new v}),a))}},bOdI:function(t,e,i){"use strict";e.__esModule=!0;var n,s=i("C4MV"),a=(n=s)&&n.__esModule?n:{default:n};e.default=function(t,e,i){return e in t?(0,a.default)(t,e,{value:i,enumerable:!0,configurable:!0,writable:!0}):t[e]=i,t}},baky:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,i=t._self._c||e;return i("div",[t.client?i("div",[i("header",{staticClass:"content-header"},[i("div",{staticClass:"header-actions pull-right hidden-sm hidden-xs desktop"},[i("router-link",{staticClass:"btn btn-primary",attrs:{to:"/clients/"+t.client.id+"/abuse/add"}},[i("i",{staticClass:"fas fa-frown"}),t._v(" Add Abuser")]),t._v(" "),i("router-link",{staticClass:"btn btn-primary",attrs:{to:"/clients/"+t.client.id+"/incidents/add"}},[i("i",{staticClass:"fas fa-exclamation-triangle"}),t._v(" Add Incident")]),t._v(" "),t.client.last_incident_id?i("router-link",{staticClass:"btn btn-primary",attrs:{to:"/clients/"+t.client.id+"/activities/add"}},[i("i",{staticClass:"fas fa-clock"}),t._v(" Add Service Request")]):t._e(),t._v(" "),t.client.last_incident_id?i("router-link",{staticClass:"btn btn-primary",attrs:{to:"/clients/"+t.client.id+"/outcomes/add"}},[i("i",{staticClass:"fas fa-smile"}),t._v(" Add Outcome")]):t._e(),t._v(" "),i("div",{staticClass:"btn-group"},[t._m(0),t._v(" "),i("ul",{staticClass:"dropdown-menu pull-right"},[t.client.parent_id?t._e():i("li",{attrs:{role:"presentation"}},[i("router-link",{attrs:{to:"/clients/"+t.client.id+"/dependents/add"}},[i("i",{staticClass:"fas fa-child fa-fw"}),t._v(" Add Dependent")])],1),t._v(" "),i("li",{attrs:{role:"presentation"}},[i("router-link",{attrs:{to:"/clients/"+t.client.id+"/notes/add"}},[i("i",{staticClass:"fas fa-sticky-note fa-fw"}),t._v(" Add Note")])],1),t._v(" "),i("li",{attrs:{role:"presentation"}},[i("router-link",{attrs:{to:"/clients/"+t.client.id+"/edit"}},[i("i",{staticClass:"fas fa-edit fa-fw"}),t._v(" Edit")])],1),t._v(" "),i("li",{attrs:{role:"presentation"}},[t.authUser.is_admin?i("a",{attrs:{href:"#delete"},on:{click:function(e){t.confirmDelete()}}},[i("i",{staticClass:"fas fa-trash-alt fa-fw"}),t._v(" Delete")]):t._e()])])])],1),t._v(" "),i("h1",[t.client.full_name?[t._v(t._s(t.client.full_name)),t.client.parent_id?[t._v(" (Dependent) ")]:t._e()]:[t._v("Loading client... ")],t._v(" "),t.fetchingClient?i("small",[i("i",{staticClass:"fas fa-spinner fa-spin"})]):t._e()],2),t._v(" "),i("div",{staticClass:"header-actions hidden-md hidden-lg mobile"},[i("router-link",{staticClass:"btn btn-primary",attrs:{to:"/clients/"+t.client.id+"/abuse/add"}},[i("i",{staticClass:"fas fa-frown"}),t._v(" Add Abuser")]),t._v(" "),i("router-link",{staticClass:"btn btn-primary",attrs:{to:"/clients/"+t.client.id+"/incidents/add"}},[i("i",{staticClass:"fas fa-exclamation-triangle"}),t._v(" Add Incident")]),t._v(" "),t.client.last_incident_id?i("router-link",{staticClass:"btn btn-primary",attrs:{to:"/clients/"+t.client.id+"/activities/add"}},[i("i",{staticClass:"fas fa-clock"}),t._v(" Add Service Request")]):t._e(),t._v(" "),t.client.last_incident_id?i("router-link",{staticClass:"btn btn-primary",attrs:{to:"/clients/"+t.client.id+"/outcomes/add"}},[i("i",{staticClass:"fas fa-smile"}),t._v(" Add Outcome")]):t._e(),t._v(" "),i("div",{staticClass:"btn-group"},[t._m(1),t._v(" "),i("ul",{staticClass:"dropdown-menu"},[t.client.parent_id?t._e():i("li",{attrs:{role:"presentation"}},[i("router-link",{attrs:{to:"/clients/"+t.client.id+"/dependents/add"}},[i("i",{staticClass:"fas fa-child fa-fw"}),t._v(" Add Dependent")])],1),t._v(" "),i("li",{attrs:{role:"presentation"}},[i("router-link",{attrs:{to:"/clients/"+t.client.id+"/notes/add"}},[i("i",{staticClass:"fas fa-sticky-note fa-fw"}),t._v(" Add Note")])],1),t._v(" "),i("li",{attrs:{role:"presentation"}},[i("router-link",{attrs:{to:"/clients/"+t.client.id+"/edit"}},[i("i",{staticClass:"fas fa-edit fa-fw"}),t._v(" Edit")])],1),t._v(" "),i("li",{attrs:{role:"presentation"}},[t.authUser.is_admin?i("a",{attrs:{href:"#delete"},on:{click:function(e){t.confirmDelete(t.client.id)}}},[i("i",{staticClass:"fas fa-trash-alt fa-fw"}),t._v(" Delete")]):t._e()])])])],1)]),t._v(" "),i("div",{staticClass:"section"},[i("nav",[i("ul",{staticClass:"nav nav-tabs"},[i("router-link",{attrs:{role:"presentation",to:"/clients/"+t.client.id+"/profile",tag:"li"}},[i("a",{attrs:{href:"profile"}},[t._v("Info")])]),t._v(" "),t.client.parent_id?t._e():i("router-link",{attrs:{role:"presentation",to:"/clients/"+t.client.id+"/dependents",tag:"li"}},[i("a",{attrs:{href:"dependents"}},[t._v("Dependents")])]),t._v(" "),i("router-link",{attrs:{role:"presentation",to:"/clients/"+t.client.id+"/abuse",tag:"li"}},[i("a",{attrs:{href:"/clients/"+t.client.id+"abusers"}},[t._v("Abusers")])]),t._v(" "),i("router-link",{attrs:{role:"presentation",to:"/clients/"+t.client.id+"/incidents",tag:"li"}},[i("a",{attrs:{href:"incidents"}},[t._v("Incidents")])]),t._v(" "),t.client.last_incident_id?i("router-link",{attrs:{role:"presentation",to:"/clients/"+t.client.id+"/activities",tag:"li"}},[i("a",{attrs:{href:"activities"}},[t._v("Activities")])]):t._e(),t._v(" "),t.client.last_incident_id?i("router-link",{attrs:{role:"presentation",to:"/clients/"+t.client.id+"/outcomes",tag:"li"}},[i("a",{attrs:{href:"activities"}},[t._v("Outcomes")])]):t._e(),t._v(" "),t.client.household_size>1?i("router-link",{attrs:{role:"presentation",to:"/clients/"+t.client.id+"/household",tag:"li"}},[i("a",{attrs:{href:"household"}},[t._v("Household")])]):t._e(),t._v(" "),i("router-link",{attrs:{role:"presentation",to:"/clients/"+t.client.id+"/notes",tag:"li"}},[i("a",{attrs:{href:"notes"}},[t._v("Notes")])])],1)]),t._v(" "),i("div",{staticClass:"tab-content"},[i("router-view")],1)])]):i("div",{staticClass:"lead section"},[i("i",{staticClass:"fas fa-spinner fa-spin"}),t._v(" Loading client\n    ")]),t._v(" "),i("div",{staticClass:"section"})])},staticRenderFns:[function(){var t=this.$createElement,e=this._self._c||t;return e("button",{staticClass:"btn btn-primary dropdown-toggle",attrs:{type:"button","data-toggle":"dropdown","aria-haspopup":"true","aria-expanded":"false"}},[e("i",{staticClass:"fa fa-ellipsis-h"})])},function(){var t=this.$createElement,e=this._self._c||t;return e("button",{staticClass:"btn btn-primary dropdown-toggle",attrs:{type:"button","data-toggle":"dropdown","aria-haspopup":"true","aria-expanded":"false"}},[e("i",{staticClass:"fa fa-ellipsis-h"})])}]}},fQ0y:function(t,e,i){"use strict";var n=i("Dd8w"),s=i.n(n),a=i("b+22"),r=i("UmUL");e.a=s()({},new r.a({name:"client",storeName:"clients",model:a.a}))},hkKT:function(t,e,i){(t.exports=i("FZ+f")(!1)).push([t.i,"",""])},rjj0:function(t,e,i){var n="undefined"!=typeof document;if("undefined"!=typeof DEBUG&&DEBUG&&!n)throw new Error("vue-style-loader cannot be used in a non-browser environment. Use { target: 'node' } in your Webpack config to indicate a server-rendering environment.");var s=i("tTVk"),a={},r=n&&(document.head||document.getElementsByTagName("head")[0]),o=null,l=0,c=!1,d=function(){},u=null,f="data-vue-ssr-id",h="undefined"!=typeof navigator&&/msie [6-9]\b/.test(navigator.userAgent.toLowerCase());function p(t){for(var e=0;e<t.length;e++){var i=t[e],n=a[i.id];if(n){n.refs++;for(var s=0;s<n.parts.length;s++)n.parts[s](i.parts[s]);for(;s<i.parts.length;s++)n.parts.push(_(i.parts[s]));n.parts.length>i.parts.length&&(n.parts.length=i.parts.length)}else{var r=[];for(s=0;s<i.parts.length;s++)r.push(_(i.parts[s]));a[i.id]={id:i.id,refs:1,parts:r}}}}function v(){var t=document.createElement("style");return t.type="text/css",r.appendChild(t),t}function _(t){var e,i,n=document.querySelector("style["+f+'~="'+t.id+'"]');if(n){if(c)return d;n.parentNode.removeChild(n)}if(h){var s=l++;n=o||(o=v()),e=C.bind(null,n,s,!1),i=C.bind(null,n,s,!0)}else n=v(),e=function(t,e){var i=e.css,n=e.media,s=e.sourceMap;n&&t.setAttribute("media",n);u.ssrId&&t.setAttribute(f,e.id);s&&(i+="\n/*# sourceURL="+s.sources[0]+" */",i+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(s))))+" */");if(t.styleSheet)t.styleSheet.cssText=i;else{for(;t.firstChild;)t.removeChild(t.firstChild);t.appendChild(document.createTextNode(i))}}.bind(null,n),i=function(){n.parentNode.removeChild(n)};return e(t),function(n){if(n){if(n.css===t.css&&n.media===t.media&&n.sourceMap===t.sourceMap)return;e(t=n)}else i()}}t.exports=function(t,e,i,n){c=i,u=n||{};var r=s(t,e);return p(r),function(e){for(var i=[],n=0;n<r.length;n++){var o=r[n];(l=a[o.id]).refs--,i.push(l)}e?p(r=s(t,e)):r=[];for(n=0;n<i.length;n++){var l;if(0===(l=i[n]).refs){for(var c=0;c<l.parts.length;c++)l.parts[c]();delete a[l.id]}}}};var m,b=(m=[],function(t,e){return m[t]=e,m.filter(Boolean).join("\n")});function C(t,e,i,n){var s=i?"":n.css;if(t.styleSheet)t.styleSheet.cssText=b(e,s);else{var a=document.createTextNode(s),r=t.childNodes;r[e]&&t.removeChild(r[e]),r.length?t.insertBefore(a,r[e]):t.appendChild(a)}}},tTVk:function(t,e){t.exports=function(t,e){for(var i=[],n={},s=0;s<e.length;s++){var a=e[s],r=a[0],o={id:t+":"+s,css:a[1],media:a[2],sourceMap:a[3]};n[r]?n[r].parts.push(o):i.push(n[r]={id:r,parts:[o]})}return i}},"xH+J":function(t,e,i){var n=i("VU/8")(i("NvCH"),i("baky"),!1,function(t){i("JREe")},null,null);t.exports=n.exports}});
+webpackJsonp([40,84,93],{
+
+/***/ 397:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(494)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/RequiredAsterisk.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0b84e1e8", Component.options)
+  } else {
+    hotAPI.reload("data-v-0b84e1e8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 405:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(538)
+/* template */
+var __vue_template__ = __webpack_require__(539)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/controls/Phone.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-084ebfe8", Component.options)
+  } else {
+    hotAPI.reload("data-v-084ebfe8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 413:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(553)
+/* template */
+var __vue_template__ = __webpack_require__(554)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/forms/PhoneFormPartial.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8d0a39b4", Component.options)
+  } else {
+    hotAPI.reload("data-v-8d0a39b4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 492:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__common__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Model__ = __webpack_require__(60);
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    methods: {
+        /**
+         * Set the classes to show feedback for whether form controls
+         * are required and/or valid.
+         *
+         * @param prop
+         * @param model
+         * @param $validation
+         * @param log
+         * @returns {boolean|string}
+         */
+        controlClasses: function controlClasses(prop) {
+            var model = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'model';
+            var $validation = arguments[2];
+            var log = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+
+            // Check if the log flag was sent as an earlier argument
+            if (typeof model === 'boolean') {
+                log = model;
+                model = 'model';
+            } else if (typeof $validation === 'boolean') {
+                log = $validation;
+                $validation = undefined;
+            }
+
+            if (log) console.log({ prop: prop, model: model });
+
+            // If validation is not defined and the this.$v object is defined
+            if (!Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation) && this.$v) {
+                $validation = this.$v;
+
+                // Try accessing the validation using the model
+                if (typeof model === 'string') {
+                    if (log) console.log('Checking if we can use model in validation', model);
+                    if (Object(__WEBPACK_IMPORTED_MODULE_0__common__["i" /* has */])($validation, model)) {
+                        $validation = $validation[model];
+                    }
+                }
+            }
+
+            // Try accessing the validation using the prop
+            $validation = _.get($validation, prop);
+
+            if (log) console.log('$validation', $validation);
+
+            // See if we can grab the model
+            if (typeof model === 'string') {
+                model = this[model];
+            }
+
+            // Otherwise, see if we can use the default one
+            else if (!model) {
+                    model = this.model;
+                }
+
+            if (log) console.log('[controlClasses]', 'model', model);
+
+            // If we don't have a model, we can't process this
+            if (!model || !model instanceof __WEBPACK_IMPORTED_MODULE_1__models_Model__["a" /* default */]) {
+                console.warn('Unable to find model for checking control classes.', prop);
+                return true;
+            }
+
+            if (log) console.log('changed', model.getChanges(prop), Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])(model.getChanges(prop)));
+
+            var check = false,
+                valid = true,
+                required = false,
+                value = _.get(model, prop),
+                changed = Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])(model.getChanges(prop)),
+                empty = !Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])(value) || value === null || !((typeof value === 'string' || typeof value === 'number') && value !== '') || prop === 'id' && !value;
+
+            if (log) console.log('empty', value, !Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])(value), value === null, typeof value === 'string', typeof value === 'number', value !== '', !((typeof value === 'string' || typeof value === 'number') && value !== ''));
+
+            // Validation is defined
+            if (Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation)) {
+
+                if (log) console.log('validation is defined');
+
+                if (log) console.log('required', Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation.required), $validation.required);
+                // Check if the field is required
+                if (Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation.required) || Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation.requiredIf)) {
+                    // check = true
+                    required = true;
+                }
+
+                // Valid if validation passes
+                valid = !$validation.$invalid;
+            }
+
+            if (log) console.log({ check: check, valid: valid, value: value, changed: changed, required: required, empty: empty });
+
+            if (required) {
+                check = true;
+
+                if (empty) {
+                    if (log) console.log('empty and required = invalid');
+                    valid = false;
+                }
+            } else {
+                check = changed;
+            }
+
+            if (model.exists && !changed && (!required || valid)) {
+                if (log) console.log('Model exists and prop has not changed.');
+                return '';
+            }
+
+            if (log) console.log('final', { check: check, valid: valid });
+
+            if (!check) {
+                return '';
+            }
+
+            return {
+                'has-warning': !valid,
+                'has-success': valid
+            };
+        },
+        feedbackClasses: function feedbackClasses(prop) {
+            var $validation = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+            var model = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'model';
+            var log = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+
+
+            if (typeof $validation === 'boolean') {
+                log = $validation;
+                $validation = undefined;
+            }
+
+            if (log) console.log('prop', prop);
+
+            if (typeof model === 'String') {
+                model = this[model];
+            } else if (!model) {
+                model = this.model;
+            }
+
+            if (!model) {
+                return true;
+            }
+
+            if (log) console.log('$validation', $validation);
+            if (typeof $validation === 'string' && this.$v) {
+                var $vname = $validation;
+                $validation = Object(__WEBPACK_IMPORTED_MODULE_0__common__["d" /* dataGet */])(this.$v, $vname);
+
+                if (!Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation)) {
+                    $validation = Object(__WEBPACK_IMPORTED_MODULE_0__common__["d" /* dataGet */])(this.$v.model, $vname);
+                }
+
+                if (!Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation)) {
+                    console.warn('Validation for ' + $vname + ' is not defined');
+                }
+            }
+
+            if (log) console.log('$validation', $validation);
+
+            var check = false,
+                valid = false,
+                value = _.get(model, prop),
+                changed = Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])(Object(__WEBPACK_IMPORTED_MODULE_0__common__["d" /* dataGet */])(model.changed, prop)),
+                required = false,
+                empty = _.isUndefined(value) || (typeof value === 'string' || typeof value === 'number') && value !== '';
+            // This clause needs to be separate from the next check
+            // because of the case where validation may be defined but
+            // not required. We still want it to show up as valid.
+
+            // Validation is defined
+            if (Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation)) {
+
+                if (log) console.log('validation is defined');
+
+                // Valid if validation passes
+                valid = !$validation.$invalid;
+
+                if (log) console.log('required', Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation.required), $validation.required);
+                // Check if the field is required
+                if (Object(__WEBPACK_IMPORTED_MODULE_0__common__["f" /* defined */])($validation.required)) {
+                    required = true;
+                }
+            }
+
+            if (log) console.log({ check: check, valid: valid, value: value, changed: changed, required: required, empty: empty });
+
+            if (required) {
+                check = true;
+
+                if (empty) {
+                    valid = false;
+                }
+            }
+
+            if (log) console.log('final', { check: check, valid: valid });
+
+            if (!check) {
+                return '';
+            }
+
+            return {
+                'has-warning': !valid,
+                'has-success': valid
+            };
+        }
+    }
+});
+
+/***/ }),
+
+/***/ 494:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("span", [_vm._v("*")])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0b84e1e8", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 537:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export defaultPhone */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Model__ = __webpack_require__(60);
+
+
+
+
+
+
+var defaultPhone = function defaultPhone() {
+    return {
+        client_id: null,
+        number: '',
+        ext: '',
+        type: 'Mobile',
+        primary: true,
+        safe: false
+    };
+};
+
+var Phone = function (_Model) {
+    __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default()(Phone, _Model);
+
+    function Phone() {
+        var attributes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+        __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default()(this, Phone);
+
+        return __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default()(this, (Phone.__proto__ || __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of___default()(Phone)).call(this, defaultPhone(), attributes));
+    }
+
+    return Phone;
+}(__WEBPACK_IMPORTED_MODULE_4__Model__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Phone);
+
+/***/ }),
+
+/***/ 538:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_v_mask__ = __webpack_require__(236);
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    name: 'phone-input',
+
+    directives: {
+        VueMaskDirective: __WEBPACK_IMPORTED_MODULE_0_v_mask__["a" /* VueMaskDirective */]
+    },
+
+    props: ['id', 'value'],
+
+    data: function data() {
+        return {
+            localValue: null,
+            previousValue: ''
+        };
+    },
+    activated: function activated() {
+        this.localValue = null;
+    },
+
+
+    watch: {
+        value: function value() {
+            if (this.localValue === null) {
+                this.localValue = this.value;
+            }
+        }
+    },
+
+    methods: {
+        select: function select(value) {
+            var unmasked = value.replace(/\D+/g, '');
+            this.$emit('input', unmasked);
+        }
+    }
+});
+
+/***/ }),
+
+/***/ 539:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("input", {
+    directives: [
+      {
+        name: "model",
+        rawName: "v-model",
+        value: _vm.localValue,
+        expression: "localValue"
+      },
+      {
+        name: "mask",
+        rawName: "v-mask",
+        value: "(###) ###-####",
+        expression: "'(###) ###-####'"
+      }
+    ],
+    ref: "phone",
+    attrs: { type: "text", id: _vm.id, placeholder: "(319) 555-5555" },
+    domProps: { value: _vm.localValue },
+    on: {
+      input: [
+        function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.localValue = $event.target.value
+        },
+        function($event) {
+          return _vm.select($event.target.value)
+        }
+      ]
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-084ebfe8", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 553:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_controls_Phone__ = __webpack_require__(405);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_controls_Phone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_controls_Phone__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_Phone__ = __webpack_require__(537);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mixins_validationClasses__ = __webpack_require__(492);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__RequiredAsterisk__ = __webpack_require__(397);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__RequiredAsterisk___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__RequiredAsterisk__);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    name: 'phone-form-partial',
+
+    components: {
+        PhoneInput: __WEBPACK_IMPORTED_MODULE_2__components_controls_Phone___default.a,
+        RequiredAsterisk: __WEBPACK_IMPORTED_MODULE_5__RequiredAsterisk___default.a
+    },
+
+    mixins: [__WEBPACK_IMPORTED_MODULE_4__mixins_validationClasses__["a" /* default */]],
+
+    props: ['value', '$v'],
+
+    data: function data() {
+        return {
+            model: new __WEBPACK_IMPORTED_MODULE_3__models_Phone__["a" /* default */]()
+        };
+    },
+
+
+    computed: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])('phoneTypes', {
+        phoneTypes: 'all'
+    })),
+
+    // Watchers
+    watch: {
+        model: function model() {
+            if (this.model && this.model.isDirty()) {
+                this.$emit('input', this.model);
+            }
+        },
+        value: function value(_value) {
+            this.model = _value;
+        }
+    }
+});
+
+/***/ }),
+
+/***/ 554:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "form-group", class: _vm.controlClasses("number") },
+      [
+        _c(
+          "label",
+          { staticClass: "control-label" },
+          [_vm._v("Number"), _c("required-asterisk")],
+          1
+        ),
+        _vm._v(" "),
+        _c("phone-input", {
+          staticClass: "form-control",
+          model: {
+            value: _vm.model.number,
+            callback: function($$v) {
+              _vm.$set(_vm.model, "number", $$v)
+            },
+            expression: "model.number"
+          }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group", class: _vm.controlClasses("ext") }, [
+      _c("label", { staticClass: "control-label" }, [_vm._v("Ext.")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.model.ext,
+            expression: "model.ext"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text", id: "ext" },
+        domProps: { value: _vm.model.ext },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.model, "ext", $event.target.value)
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "form-group", class: _vm.controlClasses("type") },
+      [
+        _c("label", { staticClass: "control-label" }, [_vm._v("Type")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.model.type,
+                expression: "model.type"
+              }
+            ],
+            staticClass: "form-control",
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.model,
+                  "type",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
+            }
+          },
+          _vm._l(_vm.phoneTypes, function(type) {
+            return _c("option", [_vm._v(_vm._s(type))])
+          }),
+          0
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "checkbox", class: _vm.controlClasses("primary") },
+      [
+        _c("label", [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.model.primary,
+                expression: "model.primary"
+              }
+            ],
+            attrs: { type: "checkbox", name: "primary_phone" },
+            domProps: {
+              checked: Array.isArray(_vm.model.primary)
+                ? _vm._i(_vm.model.primary, null) > -1
+                : _vm.model.primary
+            },
+            on: {
+              change: function($event) {
+                var $$a = _vm.model.primary,
+                  $$el = $event.target,
+                  $$c = $$el.checked ? true : false
+                if (Array.isArray($$a)) {
+                  var $$v = null,
+                    $$i = _vm._i($$a, $$v)
+                  if ($$el.checked) {
+                    $$i < 0 && _vm.$set(_vm.model, "primary", $$a.concat([$$v]))
+                  } else {
+                    $$i > -1 &&
+                      _vm.$set(
+                        _vm.model,
+                        "primary",
+                        $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                      )
+                  }
+                } else {
+                  _vm.$set(_vm.model, "primary", $$c)
+                }
+              }
+            }
+          }),
+          _vm._v(" Primary\n        ")
+        ]),
+        _vm._v(" "),
+        _c("small", { staticClass: "help-block" }, [
+          _vm._v(
+            "Making this the primary phone number will unset any other phone number as the primary number"
+          )
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "checkbox", class: _vm.controlClasses("safe") }, [
+      _c("label", [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.model.safe,
+              expression: "model.safe"
+            }
+          ],
+          attrs: { type: "checkbox" },
+          domProps: {
+            checked: Array.isArray(_vm.model.safe)
+              ? _vm._i(_vm.model.safe, null) > -1
+              : _vm.model.safe
+          },
+          on: {
+            change: function($event) {
+              var $$a = _vm.model.safe,
+                $$el = $event.target,
+                $$c = $$el.checked ? true : false
+              if (Array.isArray($$a)) {
+                var $$v = null,
+                  $$i = _vm._i($$a, $$v)
+                if ($$el.checked) {
+                  $$i < 0 && _vm.$set(_vm.model, "safe", $$a.concat([$$v]))
+                } else {
+                  $$i > -1 &&
+                    _vm.$set(
+                      _vm.model,
+                      "safe",
+                      $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                    )
+                }
+              } else {
+                _vm.$set(_vm.model, "safe", $$c)
+              }
+            }
+          }
+        }),
+        _vm._v(" Safe?\n        ")
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8d0a39b4", module.exports)
+  }
+}
+
+/***/ })
+
+});
