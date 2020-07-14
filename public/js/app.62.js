@@ -1,1 +1,528 @@
-webpackJsonp([62],{"74Z1":function(t,e,i){var n=i("VU/8")(i("cwHg"),i("7l1p"),!1,null,null,null);t.exports=n.exports},"7l1p":function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,i=t._self._c||e;return i("div",[t.fetching?i("div",{staticClass:"lead"},[i("i",{staticClass:"fa fa-refresh fa-spin"}),t._v(" Loading data\n    ")]):!t.fetching&&t.incidents.length?i("div",[i("grid",{attrs:{fields:t.fields,data:t.incidents,fetching:t.fetching,meta:t.meta},scopedSlots:t._u([{key:"type.name",fn:function(e){return[t.client?i("router-link",{attrs:{to:"/incidents/"+e.item.id}},[t._v(t._s(e.item.type.name))]):t._e()]}},{key:"date",fn:function(e){return[t._v("\n                "+t._s(t._f("prettyDate")(e.item.date))+"\n            ")]}},{key:"actions",fn:function(e){return[i("div",{staticClass:"table-button-container"},[t.client?i("router-link",{staticClass:"btn btn-warning btn-xs",attrs:{to:"/incidents/"+e.item.id+"/edit"}},[i("i",{staticClass:"fa fa-edit"}),t._v(" Edit")]):t._e(),t._v(" "),t.authUser.is_admin?i("button",{staticClass:"btn btn-danger btn-xs",on:{click:function(i){t.confirmDelete(e.item.id)}}},[i("i",{staticClass:"fa fa-remove"}),t._v(" Delete")]):t._e(),t._v("  \n                ")],1)]}}])})],1):t.client?i("div",{staticClass:"lead"},[i("i",{staticClass:"fa fa-info-circle"}),t._v(" An incident is required to start adding activities and outcomes. "),i("router-link",{attrs:{to:"/clients/"+t.client.id+"/incidents/add"}},[i("i",{staticClass:"fas fa-exclamation-triangle"}),t._v(" Add an incident")]),t._v(" to get started.\n    ")],1):t._e()])},staticRenderFns:[]}},UmUL:function(t,e,i){"use strict";var n=i("Dd8w"),a=i.n(n),s=i("bOdI"),c=i.n(s),r=i("Zrlr"),o=i.n(r),d=i("NYxO"),u=i("OQde"),l=function(t){return t.replace(/\w\S*/g,function(t){return t.charAt(0).toUpperCase()+t.substr(1).toLowerCase()})},f=i("TFAV");e.a=function t(e){var i,n,s,r=e.name,h=e.storeName,m=e.model,p=void 0===m?f.a:m;o()(this,t),this.modelMixinOptions={name:r,storeName:h,model:p};var _=this;this.data=function(){var t;return t={},c()(t,_.modelMixinOptions.name,new _.modelMixinOptions.model),c()(t,"params",c()({},_.modelMixinOptions.name+"_id",null)),t},this.computed=a()({},Object(d.c)(h,(i={},c()(i,r+"ById","byId"),c()(i,"route"+l(r),"byRoute"),c()(i,"fetching"+l(r),"fetching"),i)),c()({},r+"Data",function(){return this["fetching"+l(r)],this["route"+l(r)]})),this.created=function(){this["set"+l(r)+"Id"]()},this.watch=(n={},c()(n,r+"Data",function(){this["reset"+_.modelMixinOptions.name](),this[_.modelMixinOptions.name+"Data"]&&this[""+_.modelMixinOptions.name].assign(this[_.modelMixinOptions.name+"Data"])}),c()(n,"this.$route.params."+r+"_id",function(){this["set"+l(r)+"Id"]()}),n),this.methods=a()({},Object(d.b)(h,c()({},"fetch"+l(r),"fetch")),(s={},c()(s,"set"+l(r)+"Id",function(t){t=t?Number(t):this.$route.params[r+"_id"]?Number(this.$route.params[r+"_id"]):null,Vue.set(this.params,r+"_id",t)}),c()(s,r+"IdExists",function(){return Object(u.f)(this.params[r+"_id"])&&null!==this.params[r+"_id"]}),c()(s,"fetchRoute"+l(r),function(){var t=this,e=Number(this.$route.params[r+"_id"]);return!!e&&this["fetch"+l(r)]({id:e,fetchId:"id:"+e}).then(function(e){return t["route"+l(r)+"Fetched"](),t["current"+l(r)+"Fetched"](),e}).catch(function(t){console.error(t)})}),c()(s,"fetchCurrent"+l(r),function(){return this["fetchRoute"+l(r)]()}),c()(s,"current"+l(r)+"Fetched",function(){}),c()(s,"route"+l(r)+"Fetched",function(){}),c()(s,r+"Fetched",function(){}),c()(s,"reset",function(){this.resetData()}),c()(s,"resetData",function(){this["reset"+r](),this.params[r+"_id"]=null}),c()(s,"reset"+r,function(){this[r]=new p}),s))}},bOdI:function(t,e,i){"use strict";e.__esModule=!0;var n,a=i("C4MV"),s=(n=a)&&n.__esModule?n:{default:n};e.default=function(t,e,i){return e in t?(0,s.default)(t,e,{value:i,enumerable:!0,configurable:!0,writable:!0}):t[e]=i,t}},cwHg:function(t,e,i){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var n=i("bOdI"),a=i.n(n),s=i("Dd8w"),c=i.n(s),r=i("NYxO"),o=i("fQ0y");e.default={name:"incident-index",mixins:[o.a],data:function(){return{fields:[{name:"type.name",title:"Type"},"date",{name:"client_age",title:"Age"},{name:"advocate.name",title:"Advocate",template:"{{ advocate.first_name }} {{ advocate.last_name }}",sortField:"advocate.last_name"},"state","city",{name:"actions",dataClass:"fit-content",titleClass:"fit-content",sortable:!1}]}},computed:c()({},Object(r.c)("incidents",{byId:"byId",fetching:"fetching",incidents:"paginated",meta:"meta"})),created:function(){this.init(this.$route.query)},beforeRouteUpdate:function(t,e,i){this.init(t.query),i()},watch:a()({},"params.client_id",function(){this.init(this.$route.query)}),methods:c()({},Object(r.b)("incidents",["destroy","fetch","setQuery"]),{confirmDelete:function(t){var e=this;if(confirm("Are you sure that you want to delete this incident?")){var i=this.byId(t).client_id;this.destroy({id:t}).then(function(){e.addMessage("This incident has been deleted."),e.fetchClient({id:i})})}},init:function(t){var e={params:c()({},this.params,{page:t&&t.page||1})};this.fetch(e)}})}},fQ0y:function(t,e,i){"use strict";var n=i("Dd8w"),a=i.n(n),s=i("b+22"),c=i("UmUL");e.a=a()({},new c.a({name:"client",storeName:"clients",model:s.a}))}});
+webpackJsonp([62,3],{
+
+/***/ 230:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(490)
+/* template */
+var __vue_template__ = __webpack_require__(491)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/controls/selects/Selectize.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5c600a5e", Component.options)
+  } else {
+    hotAPI.reload("data-v-5c600a5e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 401:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(526)
+/* template */
+var __vue_template__ = __webpack_require__(527)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/controls/selects/Cities.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-644a319a", Component.options)
+  } else {
+    hotAPI.reload("data-v-644a319a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 490:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign__ = __webpack_require__(231);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common__ = __webpack_require__(7);
+
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    name: 'selectize',
+
+    data: function data() {
+        return {
+            fetched: true,
+            localConfig: this.defaultConfig(),
+            updating: false,
+            allCount: 0,
+            allCached: '',
+            previousValue: null
+        };
+    },
+
+
+    props: {
+        all: {
+            type: Array | Object
+        },
+
+        clear: {
+            type: Boolean,
+            default: false
+        },
+
+        config: Object,
+
+        disabled: {
+            default: false,
+            type: Boolean
+        },
+
+        id: String,
+
+        multiple: {
+            default: false,
+            type: Boolean
+        },
+
+        labelField: {
+            default: 'name',
+            type: String
+        },
+
+        placeholder: {
+            default: 'Select the item...',
+            type: String
+        },
+
+        template: String,
+
+        value: Array | String,
+
+        identity: String,
+
+        valueField: {
+            default: 'value',
+            type: String
+        },
+
+        valueType: {
+            default: 'string',
+            type: String
+        }
+    },
+
+    computed: {
+        selectize: function selectize() {
+            return this.$el && this.$el.selectize || null;
+        }
+    },
+
+    /**
+     * this.init() needs to be run during the mounted hook
+     * or there is no element to attach to.
+     */
+    mounted: function mounted() {
+        //            this.allCached = JSON.stringify(this.all)
+        __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(this.localConfig, this.config);
+        this.init();
+        //            this.previousValue = this.value
+        //            console.log('previousValue', this.previousValue)
+    },
+    updated: function updated() {
+        __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(this.localConfig, this.config);
+        this.init();
+    },
+    destroyed: function destroyed() {
+        this.$el.selectize.destroy();
+    },
+
+
+    watch: {
+        all: function all() {
+            var _this = this;
+
+            // It is kind of amazing that I came up with a solution
+            // to this issue, but it is a disgusting workaround
+            // and it should be replaced with a better solution
+            // Edit: It is fixed! There is a difference between how
+            // vue.js treats bound attributes that are inline vs
+            // defined in $data. Here's the code:
+            //                const allCached = JSON.stringify(this.all)
+            //                if (allCached !== this.allCached) {
+            //                    console.log('all is changing', this.id)
+            //                    this.allCached = allCached
+            //                }
+
+            this.updating = true;
+
+            if (this.selectize) {
+                this.selectize.disable();
+                /**
+                 * Instead of this:
+                 * selectize.clearOptions()
+                 * It is necessary to call the underlying functions that get
+                 * called by that function because there is a not a silent
+                 * option that can be passed through to the eventual
+                 * selectize.clear(). This issue was really annoying to debug :(
+                 *
+                 * Hopefully, the selectize library eventually updates to include this
+                 * PR: https://github.com/selectize/selectize.js/pull/894
+                 */
+                this.clearOptions();
+
+                this.selectize.load(function (callback) {
+                    if (_this.all.length > 0) {
+                        _this.selectize.enable();
+                        callback(_this.all);
+                        //                                console.log('re-loading all', this.id, this.value)
+                        /**
+                         * Second parameter of setValue, silent, should be set to
+                         * true, to prevent triggering the onChange event
+                         */
+                        _this.selectize.setValue(_this.value, true);
+                    } else {
+                        callback();
+                    }
+                    _this.updating = false;
+                });
+            }
+        },
+        disabled: function disabled(value) {
+            if (this.selectize) {
+                if (value) {
+                    this.selectize.disable();
+                } else {
+                    this.selectize.enable();
+                }
+            }
+        },
+        clear: function clear(value) {
+            if (value) {
+                this.clearOptions();
+            }
+            this.$emit('clear');
+        },
+        value: function value(_value) {
+            // Don't update unless the value has changed
+            //                if (value !== this.previousValue) {
+            this.previousValue = _value;
+
+            if (!_value) {
+                this.clearOptions();
+            }
+
+            if (this.selectize) {
+                // this.selectize.load(callback => callback)
+                /**
+                 * Second parameter of setValue, silent, should be set to
+                 * true, to prevent triggering the onChange event
+                 */
+                this.selectize.setValue(_value, true);
+            }
+            //                }
+        }
+    },
+
+    methods: {
+        defaultConfig: function defaultConfig() {
+            var _this2 = this;
+
+            var that = this;
+
+            return {
+                // plugins: {
+                //     remove_button: {
+                //         mode: 'single',
+                //     },
+                // },
+                valueField: this.valueField,
+                labelField: this.labelField,
+                searchField: this.labelField,
+                onInitialize: function onInitialize() {
+                    _this2.setValue();
+                },
+                onChange: function onChange(value) {
+                    _this2.select(value);
+                },
+                render: {
+                    option: function option(item, escape) {
+                        return '<div class="option">' + escape(that.itemLabel(item)) + '</div>';
+                    },
+                    item: function item(_item, escape) {
+                        return '<div class="item">' + escape(that.itemLabel(_item)) + '</div>';
+                    }
+                }
+            };
+        },
+        clearOptions: function clearOptions() {
+            if (this.selectize) {
+                this.selectize.loadedSearches = {};
+                this.selectize.userOptions = {};
+                this.selectize.renderCache = {};
+                this.selectize.options = this.selectize.sifter.items = {};
+                this.selectize.lastQuery = null;
+                this.selectize.trigger('option_clear');
+                this.selectize.clear(true);
+            }
+        },
+        init: function init() {
+            this.selectEl = this.$refs.select;
+            $(this.$el).selectize(this.localConfig);
+            this.setValue();
+        },
+        itemLabel: function itemLabel(item) {
+            if (Object(__WEBPACK_IMPORTED_MODULE_1__common__["f" /* defined */])(this.template)) {
+                if (item.first_name && !Object(__WEBPACK_IMPORTED_MODULE_1__common__["f" /* defined */])(item.first_name) && item.last_name && !Object(__WEBPACK_IMPORTED_MODULE_1__common__["f" /* defined */])(item.last_name)) {
+                    console.warn('first name and last name are undefined', item);
+                }
+                return Object(__WEBPACK_IMPORTED_MODULE_1__common__["k" /* mustacheTemplate */])(this.template, item);
+            }
+
+            if (typeof item === 'string') {
+                return item;
+            }
+
+            return item[this.labelField];
+        },
+        itemValue: function itemValue(item) {
+            if (typeof item === 'string') {
+                return item;
+            }
+            if (Object(__WEBPACK_IMPORTED_MODULE_1__common__["i" /* has */])(item, this.valueField)) {
+                return item[this.valueField];
+            }
+
+            return item.id;
+        },
+        select: function select(value) {
+            if (this.valueType === 'number' && value !== 0 && value !== '0') {
+                if (Array.isArray(value)) {
+                    value = value.map(function (item) {
+                        return Number(item);
+                    });
+                } else {
+                    value = Number(value);
+                }
+            }
+            this.$emit('input', value);
+        },
+        setValue: function setValue() {
+            this.$el.selectize.setValue(this.value, true);
+        }
+    }
+});
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(20)))
+
+/***/ }),
+
+/***/ 491:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "select",
+    {
+      ref: "select",
+      staticClass: "form-control",
+      attrs: {
+        id: _vm.id,
+        placeholder: _vm.placeholder,
+        multiple: _vm.multiple
+      },
+      domProps: { value: _vm.value },
+      on: {
+        "update:value": function($event) {
+          _vm.value = $event
+        }
+      }
+    },
+    [
+      _vm._t(
+        "default",
+        _vm._l(_vm.all, function(item) {
+          return _c("option", {
+            domProps: {
+              value: _vm.itemValue(item),
+              textContent: _vm._s(_vm.itemLabel(item))
+            }
+          })
+        })
+      )
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5c600a5e", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 526:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Selectize_vue__ = __webpack_require__(230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Selectize_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Selectize_vue__);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    components: {
+        Selectize: __WEBPACK_IMPORTED_MODULE_2__Selectize_vue___default.a
+    },
+
+    props: ['id', 'stateName', 'value', 'disabled'],
+
+    computed: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])('locations', ['cities']), {
+        citiesByState: function citiesByState() {
+            return this.cities(this.stateName);
+        }
+    }),
+
+    methods: {
+        select: function select(value) {
+            this.$emit('input', value);
+        }
+    }
+});
+
+/***/ }),
+
+/***/ 527:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("selectize", {
+    attrs: {
+      all: _vm.citiesByState,
+      value: _vm.value,
+      disabled: _vm.disabled,
+      id: _vm.id,
+      placeholder: "Select the city...",
+      valueField: "name"
+    },
+    on: {
+      "update:value": function($event) {
+        _vm.value = $event
+      },
+      input: _vm.select
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-644a319a", module.exports)
+  }
+}
+
+/***/ })
+
+});

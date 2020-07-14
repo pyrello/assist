@@ -1,1 +1,2083 @@
-webpackJsonp([30,3,47,81,82],{"/7L0":function(t,e,s){var n=s("VU/8")(s("BJ4r"),s("Wsdi"),!1,null,null,null);t.exports=n.exports},"06Lg":function(t,e,s){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),function(t){var n=s("woOf"),i=s.n(n),a=s("OQde");e.default={name:"selectize",data:function(){return{fetched:!0,localConfig:this.defaultConfig(),updating:!1,allCount:0,allCached:"",previousValue:null}},props:{all:{type:Array|Object},clear:{type:Boolean,default:!1},config:Object,disabled:{default:!1,type:Boolean},id:String,multiple:{default:!1,type:Boolean},labelField:{default:"name",type:String},placeholder:{default:"Select the item...",type:String},template:String,value:Array|String,identity:String,valueField:{default:"value",type:String},valueType:{default:"string",type:String}},computed:{selectize:function(){return this.$el&&this.$el.selectize||null}},mounted:function(){i()(this.localConfig,this.config),this.init()},updated:function(){i()(this.localConfig,this.config),this.init()},destroyed:function(){this.$el.selectize.destroy()},watch:{all:function(){var t=this;this.updating=!0,this.selectize&&(this.selectize.disable(),this.clearOptions(),this.selectize.load(function(e){t.all.length>0?(t.selectize.enable(),e(t.all),t.selectize.setValue(t.value,!0)):e(),t.updating=!1}))},disabled:function(t){this.selectize&&(t?this.selectize.disable():this.selectize.enable())},clear:function(t){t&&this.clearOptions(),this.$emit("clear")},value:function(t){this.previousValue=t,t||this.clearOptions(),this.selectize&&this.selectize.setValue(t,!0)}},methods:{defaultConfig:function(){var t=this,e=this;return{valueField:this.valueField,labelField:this.labelField,searchField:this.labelField,onInitialize:function(){t.setValue()},onChange:function(e){t.select(e)},render:{option:function(t,s){return'<div class="option">'+s(e.itemLabel(t))+"</div>"},item:function(t,s){return'<div class="item">'+s(e.itemLabel(t))+"</div>"}}}},clearOptions:function(){this.selectize&&(this.selectize.loadedSearches={},this.selectize.userOptions={},this.selectize.renderCache={},this.selectize.options=this.selectize.sifter.items={},this.selectize.lastQuery=null,this.selectize.trigger("option_clear"),this.selectize.clear(!0))},init:function(){this.selectEl=this.$refs.select,t(this.$el).selectize(this.localConfig),this.setValue()},itemLabel:function(t){return Object(a.f)(this.template)?(t.first_name&&!Object(a.f)(t.first_name)&&t.last_name&&!Object(a.f)(t.last_name)&&console.warn("first name and last name are undefined",t),Object(a.k)(this.template,t)):"string"==typeof t?t:t[this.labelField]},itemValue:function(t){return"string"==typeof t?t:Object(a.i)(t,this.valueField)?t[this.valueField]:t.id},select:function(t){"number"===this.valueType&&0!==t&&"0"!==t&&(t=Array.isArray(t)?t.map(function(t){return Number(t)}):Number(t)),this.$emit("input",t)},setValue:function(){this.$el.selectize.setValue(this.value,!0)}}}}.call(e,s("7t+N"))},"1LT8":function(t,e,s){var n=s("VU/8")(s("2KWr"),s("8og9"),!1,null,null,null);t.exports=n.exports},"2KWr":function(t,e,s){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),function(t){var n=s("Dd8w"),i=s.n(n),a=s("M4fF"),l=(s.n(a),s("71cn")),r=s.n(l);e.default={components:{DemographicOptions:r.a},data:function(){return{activeRange:0,includeAll:!0,include:[],subs:{},labels:{},showModal:!1,showOptionsIndex:-1}},methods:{allowSplit:function(t){return null!==t.min&&null!==t.max},blankRange:function(){return{min:null}},deleteRange:function(t){var e=this.ranges[t];this.ranges.splice(t,1),this.$set(this.ranges[t],"min",e.min)},rangeName:function(t){var e="";return null===t.min?"":(e+=t.min.toString(),t.hasOwnProperty("max")&&null!==t.max?e+=" - "+t.max.toString():e+="+",e)},setLabel:function(t,e){this.list.splice(t,1,this.initObject(this.list[t],e))},setNextRangeMin:function(t,e){this.$set(this.ranges[t+1],"min",Number(e)+1)},showSplitOptions:function(t){this.showOptionsIndex=t,this.showModal=!0},splitRange:function(e){var s=this,n=this.ranges[e],a=i()({},this.blankRange(),{max:null}),l=this.blankRange();a.min=n.min,n.hasOwnProperty("max")&&null!==n.max&&(l.max=n.max),this.ranges.splice(e,1,a),this.ranges.splice(e+1,0,l),this.$nextTick(function(){s.activeRange=e,t(s.$refs["range-max-"+e]).focus()})},toggleAll:function(){this.includeAll?this.$set(this,"include",this.services.map(function(t){return t.name})):this.$set(this,"include",[])},toggleInclude:function(t){console.log("toggling include"),"string"==typeof this.list[t]&&this.list.splice(t,1,this.initObject(this.list[t],"",!1))},convertToObject:function(t){"string"==typeof this.list[t]?this.list.splice(t,1,this.initObject(this.list[t])):console.error("Attempted to convert an object into an object")},initObject:function(t){var e=arguments.length>1&&void 0!==arguments[1]?arguments[1]:"",s=!(arguments.length>2&&void 0!==arguments[2])||arguments[2];return console.log("creating object",t,e,s),{name:t,label:e,include:s}}},props:{label:{type:String,default:"Range"},type:String,list:Array},watch:{}}}.call(e,s("7t+N"))},"71cn":function(t,e,s){var n=s("VU/8")(s("r/2Y"),s("oUie"),!1,null,null,null);t.exports=n.exports},"8og9":function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,s=t._self._c||e;return s("div",{staticClass:"form-group"},[t.label?s("label",{staticClass:"control-label",domProps:{textContent:t._s(t.label)}}):t._e(),t._v(" "),s("table",{staticClass:"table table-striped no-bottom-margin"},[s("thead",[s("tr",[s("th",{staticClass:"fit-content"},[s("input",{directives:[{name:"model",rawName:"v-model",value:t.includeAll,expression:"includeAll"}],attrs:{type:"checkbox"},domProps:{checked:Array.isArray(t.includeAll)?t._i(t.includeAll,null)>-1:t.includeAll},on:{change:[function(e){var s=t.includeAll,n=e.target,i=!!n.checked;if(Array.isArray(s)){var a=t._i(s,null);n.checked?a<0&&(t.includeAll=s.concat([null])):a>-1&&(t.includeAll=s.slice(0,a).concat(s.slice(a+1)))}else t.includeAll=i},t.toggleAll]}})]),t._v(" "),s("th",[t._v("Label")]),t._v(" "),s("th",[t._v("Options")])])]),t._v(" "),s("tbody",[t._l(t.list,function(e,n){return["string"==typeof e?[s("tr",[s("td",{staticClass:"fit-content"},[s("input",{attrs:{type:"checkbox",id:"victim_types-include-"+e,checked:"checked"},on:{click:function(e){t.toggleInclude(n)}}})]),t._v(" "),s("td",{staticClass:"td-input"},[s("input",{staticClass:"form-control input-sm",attrs:{type:"text",placeholder:e},on:{input:function(e){t.setLabel(n,e.target.value)}}})]),t._v(" "),s("td",[s("a",{staticClass:"btn btn-rounded btn-primary btn-xs",attrs:{href:"#split-range"},on:{click:function(e){e.stopPropagation(),t.showSplitOptions(n)}}},[s("i",{staticClass:"fa fa-chevron-left"})])])])]:[s("tr",[s("td",{staticClass:"fit-content"},[s("input",{directives:[{name:"model",rawName:"v-model",value:t.list[n].include,expression:"list[index].include"}],attrs:{type:"checkbox",id:"victim_types-include-"+e},domProps:{value:e,checked:Array.isArray(t.list[n].include)?t._i(t.list[n].include,e)>-1:t.list[n].include},on:{change:function(s){var i=t.list[n].include,a=s.target,l=!!a.checked;if(Array.isArray(i)){var r=e,o=t._i(i,r);a.checked?o<0&&t.$set(t.list[n],"include",i.concat([r])):o>-1&&t.$set(t.list[n],"include",i.slice(0,o).concat(i.slice(o+1)))}else t.$set(t.list[n],"include",l)}}})]),t._v(" "),s("td",{staticClass:"td-input"},[s("input",{directives:[{name:"model",rawName:"v-model",value:e.label,expression:"item.label"}],staticClass:"form-control input-sm",attrs:{type:"text",placeholder:e.name,disabled:!e.include},domProps:{value:e.label},on:{input:function(s){s.target.composing||t.$set(e,"label",s.target.value)}}})]),t._v(" "),s("td",[s("a",{staticClass:"btn btn-rounded btn-primary btn-xs",attrs:{href:"#split-range"},on:{click:function(e){e.stopPropagation(),t.showSplitOptions(n)}}},[s("i",{staticClass:"fa fa-chevron-left"})])])])]]})],2)]),t._v(" "),s("modal",{attrs:{show:t.showModal},on:{"update:show":function(e){t.showModal=e}}},[t.showOptionsIndex>=0?[s("header",[s("h1",[t._v("Select demographic to sub-divide by")])]),t._v(" "),s("form",{attrs:{role:"form"},on:{submit:function(e){return e.preventDefault(),t.add(e)}}},[s("demographic-options",{attrs:{label:"Base demographic set",exclude:[t.type]}})],1)]:t._e()],2),t._v(" "),t._m(0)],1)},staticRenderFns:[function(){var t=this.$createElement,e=this._self._c||t;return e("small",{staticClass:"help-block"},[this._v("Use the insert button ("),e("i",{staticClass:"fa fa-chevron-left"}),this._v(") to break a range into multiple ranges. Use the delete button ("),e("i",{staticClass:"fa fa-times"}),this._v(") to remove a range. Use the label box to create an different label for the range.")])}]}},BJ4r:function(t,e,s){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),function(t){var n=s("Dd8w"),i=s.n(n),a=s("NYxO"),l=s("PJh5"),r=s.n(l),o=s("sDUr"),c=s.n(o),u=s("qvTH"),d=s.n(u),h=s("1LT8"),p=s.n(h),f=s("71cn"),m=s.n(f);e.default={computed:i()({},Object(a.c)("profiles",{profiles:"all"})),components:{DemographicOptions:m.a,ListWidget:p.a,SelectAgeRanges:c.a,SelectEthnicity:d.a},data:function(){var t=r()().format("YYYY-MM-DD");return{model:{report_profile_id:0,start_date:r()().subtract(1,"year").format("YYYY-MM-DD"),end_date:t},controls:{dates:"This month"}}},created:function(){this.controls.dates="Last quarter",this.setDates(this.controls.dates),this.fetchProfiles()},methods:i()({},Object(a.b)("profiles",{fetchProfiles:"fetch"}),Object(a.b)("reports",["create"]),{process:function(){var t=this,e={data:this.model};this.create(e).then(function(e){t.addMessage("Report created successfully"),t.$router.push("/reporting/reports/"+e.id)}).catch(function(e){t.addMessage({text:e.message,type:"danger"})})},setDates:function(t){var e=this.getDatesFromLabel(t),s=e.start_date,n=e.end_date;this.model.start_date=s,this.model.end_date=n},getDatesFromLabel:function(t){var e=r()(),s=r()();switch(t){case"This month":e=e.startOf("month");break;case"This quarter":e=e.startOf("quarter");break;case"This year":e=e.startOf("year");break;case"Last month":e=e.subtract(1,"month").startOf("month"),s=s.subtract(1,"month").endOf("month");break;case"Last quarter":e=e.subtract(1,"quarter").startOf("quarter"),s=s.subtract(1,"quarter").endOf("quarter");break;case"Last year":e=e.subtract(1,"year").startOf("year"),s=s.subtract(1,"year").endOf("year")}return{start_date:e=e.format("YYYY-MM-DD"),end_date:s=s.format("YYYY-MM-DD")}},setNextRangeMin:function(t,e,s){this.$set(t[e+1],"min",Number(s)+1)},showSplitOptions:function(t,e){this.controls.split.modal.show=!0},splitByAges:function(t,e,s){if(Object.prototype.hasOwnProperty.call(this.report.query,t))if(Object.prototype.hasOwnProperty.call(this.report.query[t].ages,e)||this.$set(this.report.query[t].ages,e,[]),void 0===s){this.report.query[t].ages[e].splice(0,1,{min:0})}else{var n=this.report.query[t].ages[e][s],a=i()({},this.blankRange(),{max:null}),l=this.blankRange();a.min=n.min,n.hasOwnProperty("max")&&null!==n.max&&(l.max=n.max),this.report.query[t].ages[e].splice(s,1,a),this.report.query[t].ages[e].splice(s+1,0,l)}},splitRange:function(e){var s=this,n=this.ranges[e],a=i()({},this.blankRange(),{max:null}),l=this.blankRange();a.min=n.min,n.hasOwnProperty("max")&&null!==n.max&&(l.max=n.max),this.ranges.splice(e,1,a),this.ranges.splice(e+1,0,l),this.$nextTick(function(){s.activeRange=e,t(s.$refs["range-max-"+e]).focus()})},toggleAllEthnicity:function(){this.controls.ethnicity.include_all?this.$set(this.report.query.ethnicity,"include",this.ethnicity.map(function(t){return t.name})):this.$set(this.report.query.ethnicity,"include",[])},toggleAllServices:function(){this.controls.services.include_all?this.$set(this.report.query.services,"include",this.services.map(function(t){return t.name})):this.$set(this.report.query.services,"include",[])},toggleAllVictimTypes:function(){this.controls.services.include_all?this.$set(this.report.query.services,"include",this.services.map(function(t){return t.name})):this.$set(this.report.query.services,"include",[])}})}}.call(e,s("7t+N"))},EUaC:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,s=t._self._c||e;return s("select",{ref:"select",staticClass:"form-control",attrs:{id:t.id,placeholder:t.placeholder,multiple:t.multiple},domProps:{value:t.value},on:{"update:value":function(e){t.value=e}}},[t._t("default",t._l(t.all,function(e){return s("option",{domProps:{value:t.itemValue(e),textContent:t._s(t.itemLabel(e))}})}))],2)},staticRenderFns:[]}},Wsdi:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,s=t._self._c||e;return s("div",{staticClass:"overlay-background"},[s("div",{staticClass:"overlay"},[s("header",{staticClass:"overlay-header"},[s("div",{staticClass:"header-actions pull-right"},[s("button",{staticClass:"close",attrs:{type:"button","aria-label":"Close"},on:{click:function(e){e.stopPropagation(),t.$router.back()}}},[s("i",{staticClass:"fa fa-close"}),t._v(" "),s("span",{staticClass:"hidden-xs"},[t._v("Cancel")])])]),t._v(" "),s("h1",[t._v("Add Report")])]),t._v(" "),s("div",{staticClass:"section"},[s("form",{attrs:{role:"form"},on:{submit:function(e){return e.preventDefault(),t.process(e)}}},[s("div",{staticClass:"form-group"},[s("label",{staticClass:"control-label"},[t._v("Dates")]),t._v(" "),s("select",{directives:[{name:"model",rawName:"v-model",value:t.controls.dates,expression:"controls.dates"}],staticClass:"form-control",on:{change:[function(e){var s=Array.prototype.filter.call(e.target.options,function(t){return t.selected}).map(function(t){return"_value"in t?t._value:t.value});t.$set(t.controls,"dates",e.target.multiple?s:s[0])},function(e){t.setDates(e.target.value)}]}},[s("option",[t._v("This month")]),t._v(" "),s("option",[t._v("This quarter")]),t._v(" "),s("option",[t._v("This year")]),t._v(" "),s("option",[t._v("Last month")]),t._v(" "),s("option",[t._v("Last quarter")]),t._v(" "),s("option",[t._v("Last year")]),t._v(" "),s("option",[t._v("Custom...")])])]),t._v(" "),"Custom..."===t.controls.dates?s("div",{staticClass:"well"},[s("div",{staticClass:"row"},[s("div",{staticClass:"col-sm-6"},[s("input-date",{attrs:{label:"Start Date",id:"start_date"},model:{value:t.model.start_date,callback:function(e){t.$set(t.model,"start_date",e)},expression:"model.start_date"}})],1),t._v(" "),s("div",{staticClass:"col-sm-6"},[s("input-date",{attrs:{label:"End Date",id:"end_date"},model:{value:t.model.end_date,callback:function(e){t.$set(t.model,"end_date",e)},expression:"model.end_date"}})],1)])]):t._e(),t._v(" "),s("div",{staticClass:"form-group"},[s("select",{directives:[{name:"model",rawName:"v-model",value:t.model.report_profile_id,expression:"model.report_profile_id"}],staticClass:"form-control",on:{change:function(e){var s=Array.prototype.filter.call(e.target.options,function(t){return t.selected}).map(function(t){return"_value"in t?t._value:t.value});t.$set(t.model,"report_profile_id",e.target.multiple?s:s[0])}}},[s("option",{attrs:{value:"0",selected:""}},[t._v("Select a report profile...")]),t._v(" "),t._l(t.profiles,function(e){return s("option",{domProps:{value:e.id}},[t._v(t._s(e.label))])})],2)]),t._v(" "),s("button",{staticClass:"btn btn-primary btn-lg",attrs:{type:"submit"}},[t._v("Create")]),t._v(" "),s("a",{staticClass:"btn btn-link",on:{click:function(e){e.stopPropagation(),t.$router.back()}}},[t._v("Cancel")])])])])])},staticRenderFns:[]}},YTeY:function(t,e,s){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),function(t){var n=s("Dd8w"),i=s.n(n),a=s("M4fF");s.n(a);e.default={data:function(){return{activeRange:0}},methods:{allowSplit:function(t){return null!==t.min&&null!==t.max},blankRange:function(){return{min:null}},deleteRange:function(t){var e=this.ranges[t];this.ranges.splice(t,1),this.$set(this.ranges[t],"min",e.min)},rangeName:function(t){var e="";return null===t.min?"":(e+=t.min.toString(),t.hasOwnProperty("max")&&null!==t.max?e+=" - "+t.max.toString():e+="+",e)},setLabel:function(t,e){this.$set(this.ranges[t],"label",e)},setNextRangeMin:function(t,e){this.$set(this.ranges[t+1],"min",Number(e)+1)},splitRange:function(e){var s=this,n=this.ranges[e],a=i()({},this.blankRange(),{max:null}),l=this.blankRange();a.min=n.min,n.hasOwnProperty("max")&&null!==n.max&&(l.max=n.max),this.ranges.splice(e,1,a),this.ranges.splice(e+1,0,l),this.$nextTick(function(){s.activeRange=e,t(s.$refs["range-max-"+e]).focus()})}},props:{label:{type:String,default:"Range"},ranges:Array},watch:{ranges:function(){this.$emit("update:ranges",this.ranges)}}}}.call(e,s("7t+N"))},oUie:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement;return(t._self._c||e)("selectize",{attrs:{all:t.allExceptExcluded,selected:t.selected,label:t.label},on:{"update:selected":[function(e){t.selected=e},t.select]}})},staticRenderFns:[]}},qvTH:function(t,e,s){var n=s("VU/8")(s("06Lg"),s("EUaC"),!1,null,null,null);t.exports=n.exports},"r/2Y":function(t,e,s){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.default={computed:{allExceptExcluded:function(){var t=this;return this.options.filter(function(e){return t.exclude.indexOf(e.value)<0})}},data:function(){return{options:[{name:"Age",value:"age"},{name:"Ethnicity",value:"ethnicity"},{name:"Gender",value:"gender"},{name:"Services Provided",value:"services"},{name:"Victim Types",value:"victimTypes",nameField:"description"}]}},methods:{select:function(t){void 0===t&&(t=this.selected),this.$emit("update:selected",t)}},props:{exclude:{type:Array,default:function(){return[]}},label:String,selected:Array|String}}},sDUr:function(t,e,s){var n=s("VU/8")(s("YTeY"),s("tgRN"),!1,null,null,null);t.exports=n.exports},tgRN:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,s=t._self._c||e;return s("div",{staticClass:"form-group"},[s("label",{staticClass:"control-label",domProps:{textContent:t._s(t.label)}}),t._v(" "),s("table",{staticClass:"table"},[t._m(0),t._v(" "),s("tbody",t._l(t.ranges,function(e,n){return s("tr",[s("td",{staticClass:"col-sm-1 text-right"},[t._v(t._s(e.min))]),t._v(" "),e.hasOwnProperty("max")?s("td",{staticClass:"fit-content"},[t._v("-")]):s("td",{staticClass:"fit-content"},[t._v("+")]),t._v(" "),s("td",{staticClass:"fit-content td-number td-input"},[e.hasOwnProperty("max")?s("input",{directives:[{name:"model",rawName:"v-model.number",value:t.ranges[n].max,expression:"ranges[index].max",modifiers:{number:!0}}],ref:"range-max-"+n,refInFor:!0,staticClass:"form-control input-sm col-sm-1",attrs:{type:"number",size:"4",min:e.min+1},domProps:{value:t.ranges[n].max},on:{keyup:function(e){t.setNextRangeMin(n,e.target.value)},input:function(e){e.target.composing||t.$set(t.ranges[n],"max",t._n(e.target.value))},blur:function(e){t.$forceUpdate()}}}):t._e()]),t._v(" "),t.allowSplit(e)?s("td",{staticClass:"td-btn"},[t.allowSplit(e)?s("a",{staticClass:"btn btn-rounded btn-primary btn-xs",attrs:{href:"#split-range"},on:{click:function(e){e.stopPropagation(),t.splitRange(n)}}},[s("i",{staticClass:"fa fa-chevron-left"})]):t._e(),t._v(" "),t.allowSplit(e)&&n<t.ranges.length-1?s("a",{staticClass:"btn btn-rounded btn-danger btn-xs",attrs:{href:"#delete-range"},on:{click:function(e){e.stopPropagation(),t.deleteRange(n)}}},[s("i",{staticClass:"fa fa-times"})]):t._e()]):t.activeRange==n?s("td",[s("small",{staticClass:"help-block"},[t._v("Enter the top of the range")])]):t.activeRange+1==n?s("td",[s("small",{staticClass:"help-block"},[t._v("This will update automatically")])]):s("td"),t._v(" "),s("td",{staticClass:"td-input"},[t.allowSplit(e)?s("input",{staticClass:"form-control input-sm",attrs:{type:"text",placeholder:t.rangeName(e)},domProps:{value:t.ranges[n].label},on:{input:function(e){t.setLabel(n,e.target.value)}}}):t._e()])])}))]),t._v(" "),t._m(1)])},staticRenderFns:[function(){var t=this.$createElement,e=this._self._c||t;return e("thead",[e("tr",[e("th",{staticClass:"col-sm-1"},[this._v("Min")]),this._v(" "),e("th",{staticClass:"fit-content"}),this._v(" "),e("th",{staticClass:"fit-content"},[this._v("Max")]),this._v(" "),e("th"),this._v(" "),e("th",[this._v("Label")])])])},function(){var t=this.$createElement,e=this._self._c||t;return e("small",{staticClass:"help-block"},[this._v("Use the insert button ("),e("i",{staticClass:"fa fa-chevron-left"}),this._v(") to break a range into multiple ranges. Use the delete button ("),e("i",{staticClass:"fa fa-times"}),this._v(") to remove a range. Use the label box to create an different label for the range.")])}]}}});
+webpackJsonp([30,3,53,81,82],{
+
+/***/ 230:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(490)
+/* template */
+var __vue_template__ = __webpack_require__(491)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/controls/selects/Selectize.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5c600a5e", Component.options)
+  } else {
+    hotAPI.reload("data-v-5c600a5e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 407:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(555)
+/* template */
+var __vue_template__ = __webpack_require__(556)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/reporting/DemographicOptions.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-fe76291e", Component.options)
+  } else {
+    hotAPI.reload("data-v-fe76291e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 421:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(573)
+/* template */
+var __vue_template__ = __webpack_require__(574)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/reporting/DemographicListWidget.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0331aa02", Component.options)
+  } else {
+    hotAPI.reload("data-v-0331aa02", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 422:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(575)
+/* template */
+var __vue_template__ = __webpack_require__(576)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/reporting/RangeWidget.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5a08ac4e", Component.options)
+  } else {
+    hotAPI.reload("data-v-5a08ac4e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 481:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(718)
+/* template */
+var __vue_template__ = __webpack_require__(719)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/pages/reporting/Add.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-32eccb5a", Component.options)
+  } else {
+    hotAPI.reload("data-v-32eccb5a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 490:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign__ = __webpack_require__(231);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common__ = __webpack_require__(7);
+
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    name: 'selectize',
+
+    data: function data() {
+        return {
+            fetched: true,
+            localConfig: this.defaultConfig(),
+            updating: false,
+            allCount: 0,
+            allCached: '',
+            previousValue: null
+        };
+    },
+
+
+    props: {
+        all: {
+            type: Array | Object
+        },
+
+        clear: {
+            type: Boolean,
+            default: false
+        },
+
+        config: Object,
+
+        disabled: {
+            default: false,
+            type: Boolean
+        },
+
+        id: String,
+
+        multiple: {
+            default: false,
+            type: Boolean
+        },
+
+        labelField: {
+            default: 'name',
+            type: String
+        },
+
+        placeholder: {
+            default: 'Select the item...',
+            type: String
+        },
+
+        template: String,
+
+        value: Array | String,
+
+        identity: String,
+
+        valueField: {
+            default: 'value',
+            type: String
+        },
+
+        valueType: {
+            default: 'string',
+            type: String
+        }
+    },
+
+    computed: {
+        selectize: function selectize() {
+            return this.$el && this.$el.selectize || null;
+        }
+    },
+
+    /**
+     * this.init() needs to be run during the mounted hook
+     * or there is no element to attach to.
+     */
+    mounted: function mounted() {
+        //            this.allCached = JSON.stringify(this.all)
+        __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(this.localConfig, this.config);
+        this.init();
+        //            this.previousValue = this.value
+        //            console.log('previousValue', this.previousValue)
+    },
+    updated: function updated() {
+        __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(this.localConfig, this.config);
+        this.init();
+    },
+    destroyed: function destroyed() {
+        this.$el.selectize.destroy();
+    },
+
+
+    watch: {
+        all: function all() {
+            var _this = this;
+
+            // It is kind of amazing that I came up with a solution
+            // to this issue, but it is a disgusting workaround
+            // and it should be replaced with a better solution
+            // Edit: It is fixed! There is a difference between how
+            // vue.js treats bound attributes that are inline vs
+            // defined in $data. Here's the code:
+            //                const allCached = JSON.stringify(this.all)
+            //                if (allCached !== this.allCached) {
+            //                    console.log('all is changing', this.id)
+            //                    this.allCached = allCached
+            //                }
+
+            this.updating = true;
+
+            if (this.selectize) {
+                this.selectize.disable();
+                /**
+                 * Instead of this:
+                 * selectize.clearOptions()
+                 * It is necessary to call the underlying functions that get
+                 * called by that function because there is a not a silent
+                 * option that can be passed through to the eventual
+                 * selectize.clear(). This issue was really annoying to debug :(
+                 *
+                 * Hopefully, the selectize library eventually updates to include this
+                 * PR: https://github.com/selectize/selectize.js/pull/894
+                 */
+                this.clearOptions();
+
+                this.selectize.load(function (callback) {
+                    if (_this.all.length > 0) {
+                        _this.selectize.enable();
+                        callback(_this.all);
+                        //                                console.log('re-loading all', this.id, this.value)
+                        /**
+                         * Second parameter of setValue, silent, should be set to
+                         * true, to prevent triggering the onChange event
+                         */
+                        _this.selectize.setValue(_this.value, true);
+                    } else {
+                        callback();
+                    }
+                    _this.updating = false;
+                });
+            }
+        },
+        disabled: function disabled(value) {
+            if (this.selectize) {
+                if (value) {
+                    this.selectize.disable();
+                } else {
+                    this.selectize.enable();
+                }
+            }
+        },
+        clear: function clear(value) {
+            if (value) {
+                this.clearOptions();
+            }
+            this.$emit('clear');
+        },
+        value: function value(_value) {
+            // Don't update unless the value has changed
+            //                if (value !== this.previousValue) {
+            this.previousValue = _value;
+
+            if (!_value) {
+                this.clearOptions();
+            }
+
+            if (this.selectize) {
+                // this.selectize.load(callback => callback)
+                /**
+                 * Second parameter of setValue, silent, should be set to
+                 * true, to prevent triggering the onChange event
+                 */
+                this.selectize.setValue(_value, true);
+            }
+            //                }
+        }
+    },
+
+    methods: {
+        defaultConfig: function defaultConfig() {
+            var _this2 = this;
+
+            var that = this;
+
+            return {
+                // plugins: {
+                //     remove_button: {
+                //         mode: 'single',
+                //     },
+                // },
+                valueField: this.valueField,
+                labelField: this.labelField,
+                searchField: this.labelField,
+                onInitialize: function onInitialize() {
+                    _this2.setValue();
+                },
+                onChange: function onChange(value) {
+                    _this2.select(value);
+                },
+                render: {
+                    option: function option(item, escape) {
+                        return '<div class="option">' + escape(that.itemLabel(item)) + '</div>';
+                    },
+                    item: function item(_item, escape) {
+                        return '<div class="item">' + escape(that.itemLabel(_item)) + '</div>';
+                    }
+                }
+            };
+        },
+        clearOptions: function clearOptions() {
+            if (this.selectize) {
+                this.selectize.loadedSearches = {};
+                this.selectize.userOptions = {};
+                this.selectize.renderCache = {};
+                this.selectize.options = this.selectize.sifter.items = {};
+                this.selectize.lastQuery = null;
+                this.selectize.trigger('option_clear');
+                this.selectize.clear(true);
+            }
+        },
+        init: function init() {
+            this.selectEl = this.$refs.select;
+            $(this.$el).selectize(this.localConfig);
+            this.setValue();
+        },
+        itemLabel: function itemLabel(item) {
+            if (Object(__WEBPACK_IMPORTED_MODULE_1__common__["f" /* defined */])(this.template)) {
+                if (item.first_name && !Object(__WEBPACK_IMPORTED_MODULE_1__common__["f" /* defined */])(item.first_name) && item.last_name && !Object(__WEBPACK_IMPORTED_MODULE_1__common__["f" /* defined */])(item.last_name)) {
+                    console.warn('first name and last name are undefined', item);
+                }
+                return Object(__WEBPACK_IMPORTED_MODULE_1__common__["k" /* mustacheTemplate */])(this.template, item);
+            }
+
+            if (typeof item === 'string') {
+                return item;
+            }
+
+            return item[this.labelField];
+        },
+        itemValue: function itemValue(item) {
+            if (typeof item === 'string') {
+                return item;
+            }
+            if (Object(__WEBPACK_IMPORTED_MODULE_1__common__["i" /* has */])(item, this.valueField)) {
+                return item[this.valueField];
+            }
+
+            return item.id;
+        },
+        select: function select(value) {
+            if (this.valueType === 'number' && value !== 0 && value !== '0') {
+                if (Array.isArray(value)) {
+                    value = value.map(function (item) {
+                        return Number(item);
+                    });
+                } else {
+                    value = Number(value);
+                }
+            }
+            this.$emit('input', value);
+        },
+        setValue: function setValue() {
+            this.$el.selectize.setValue(this.value, true);
+        }
+    }
+});
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(20)))
+
+/***/ }),
+
+/***/ 491:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "select",
+    {
+      ref: "select",
+      staticClass: "form-control",
+      attrs: {
+        id: _vm.id,
+        placeholder: _vm.placeholder,
+        multiple: _vm.multiple
+      },
+      domProps: { value: _vm.value },
+      on: {
+        "update:value": function($event) {
+          _vm.value = $event
+        }
+      }
+    },
+    [
+      _vm._t(
+        "default",
+        _vm._l(_vm.all, function(item) {
+          return _c("option", {
+            domProps: {
+              value: _vm.itemValue(item),
+              textContent: _vm._s(_vm.itemLabel(item))
+            }
+          })
+        })
+      )
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5c600a5e", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 555:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    computed: {
+        allExceptExcluded: function allExceptExcluded() {
+            var _this = this;
+
+            return this.options.filter(function (item) {
+                return _this.exclude.indexOf(item.value) < 0;
+            });
+        }
+    },
+
+    data: function data() {
+        return {
+            options: [{
+                name: 'Age',
+                value: 'age'
+            }, {
+                name: 'Ethnicity',
+                value: 'ethnicity'
+            }, {
+                name: 'Gender',
+                value: 'gender'
+            }, {
+                name: 'Services Provided',
+                value: 'services'
+            }, {
+                name: 'Victim Types',
+                value: 'victimTypes',
+                nameField: 'description'
+            }]
+        };
+    },
+
+
+    methods: {
+        select: function select(value) {
+            if (typeof value === 'undefined') {
+                value = this.selected;
+            }
+            this.$emit('update:selected', value);
+        }
+    },
+
+    props: {
+        exclude: {
+            type: Array,
+            default: function _default() {
+                return [];
+            }
+        },
+        label: String,
+        selected: Array | String
+    }
+});
+
+/***/ }),
+
+/***/ 556:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("selectize", {
+    attrs: {
+      all: _vm.allExceptExcluded,
+      selected: _vm.selected,
+      label: _vm.label
+    },
+    on: {
+      "update:selected": [
+        function($event) {
+          _vm.selected = $event
+        },
+        _vm.select
+      ]
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-fe76291e", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 573:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__DemographicOptions_vue__ = __webpack_require__(407);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__DemographicOptions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__DemographicOptions_vue__);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    components: {
+        DemographicOptions: __WEBPACK_IMPORTED_MODULE_2__DemographicOptions_vue___default.a
+    },
+
+    data: function data() {
+        return {
+            activeRange: 0,
+            includeAll: true,
+            include: [],
+            subs: {},
+            labels: {},
+            showModal: false,
+            showOptionsIndex: -1
+        };
+    },
+
+
+    methods: {
+        allowSplit: function allowSplit(range) {
+            // Both values must be set
+            if (range.min === null || range.max === null) {
+                return false;
+            }
+
+            // If we made it this far, then yes
+            return true;
+        },
+        blankRange: function blankRange() {
+            return {
+                min: null
+            };
+        },
+        deleteRange: function deleteRange(index) {
+            // Get the current range
+            var range = this.ranges[index];
+
+            // Delete the current range
+            this.ranges.splice(index, 1);
+
+            this.$set(this.ranges[index], 'min', range.min);
+        },
+        rangeName: function rangeName(range) {
+            var label = '';
+            if (range.min === null) {
+                return '';
+            } else {
+                label += range.min.toString();
+            }
+
+            if (range.hasOwnProperty('max') && range.max !== null) {
+                label += ' - ' + range.max.toString();
+            } else {
+                label += '+';
+            }
+
+            return label;
+        },
+        setLabel: function setLabel(index, value) {
+            this.list.splice(index, 1, this.initObject(this.list[index], value));
+        },
+        setNextRangeMin: function setNextRangeMin(index, value) {
+            // Set it's min value to value + 1
+            this.$set(this.ranges[index + 1], 'min', Number(value) + 1);
+        },
+        showSplitOptions: function showSplitOptions(index) {
+            this.showOptionsIndex = index;
+            this.showModal = true;
+        },
+        splitRange: function splitRange(index) {
+            var _this = this;
+
+            var range = this.ranges[index],
+                current = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, this.blankRange(), { max: null }),
+                next = this.blankRange();
+
+            current.min = range.min;
+
+            // If the range has a max value
+            if (range.hasOwnProperty('max') && range.max !== null) {
+                next.max = range.max;
+            }
+
+            // Insert a new range
+            this.ranges.splice(index, 1, current);
+            // Update the next range
+            this.ranges.splice(index + 1, 0, next);
+
+            // There is a slight lag, so wait until the next tick
+            this.$nextTick(function () {
+                // Set focus on the newly created input
+                _this.activeRange = index;
+                $(_this.$refs['range-max-' + index]).focus();
+            });
+        },
+        toggleAll: function toggleAll() {
+            if (this.includeAll) {
+                this.$set(this, 'include', this.services.map(function (item) {
+                    return item.name;
+                }));
+            } else {
+                this.$set(this, 'include', []);
+            }
+        },
+        toggleInclude: function toggleInclude(index) {
+            console.log('toggling include');
+            if (typeof this.list[index] === 'string') {
+                this.list.splice(index, 1, this.initObject(this.list[index], '', false));
+            }
+        },
+        convertToObject: function convertToObject(index) {
+            if (typeof this.list[index] === 'string') {
+                this.list.splice(index, 1, this.initObject(this.list[index]));
+            } else {
+                console.error('Attempted to convert an object into an object');
+            }
+        },
+        initObject: function initObject(name) {
+            var label = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+            var include = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+            console.log('creating object', name, label, include);
+            return {
+                name: name,
+                label: label,
+                include: include
+            };
+        }
+    },
+
+    props: {
+        label: {
+            type: String,
+            default: 'Range'
+        },
+        type: String,
+        list: Array
+    },
+
+    watch: {
+        // I'm using a watch function for this because
+        // there are many moving parts of which to keep track
+        //            list() {
+        //                console.log('updated list')
+        //                this.$emit('update:list', this.list)
+        //            }
+    }
+});
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(20)))
+
+/***/ }),
+
+/***/ 574:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "form-group" },
+    [
+      _vm.label
+        ? _c("label", {
+            staticClass: "control-label",
+            domProps: { textContent: _vm._s(_vm.label) }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _c("table", { staticClass: "table table-striped no-bottom-margin" }, [
+        _c("thead", [
+          _c("tr", [
+            _c("th", { staticClass: "fit-content" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.includeAll,
+                    expression: "includeAll"
+                  }
+                ],
+                attrs: { type: "checkbox" },
+                domProps: {
+                  checked: Array.isArray(_vm.includeAll)
+                    ? _vm._i(_vm.includeAll, null) > -1
+                    : _vm.includeAll
+                },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$a = _vm.includeAll,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.includeAll = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.includeAll = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.includeAll = $$c
+                      }
+                    },
+                    _vm.toggleAll
+                  ]
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("th", [_vm._v("Label")]),
+            _vm._v(" "),
+            _c("th", [_vm._v("Options")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          [
+            _vm._l(_vm.list, function(item, index) {
+              return [
+                typeof item === "string"
+                  ? [
+                      _c("tr", [
+                        _c("td", { staticClass: "fit-content" }, [
+                          _c("input", {
+                            attrs: {
+                              type: "checkbox",
+                              id: "victim_types-include-" + item,
+                              checked: "checked"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.toggleInclude(index)
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "td-input" }, [
+                          _c("input", {
+                            staticClass: "form-control input-sm",
+                            attrs: { type: "text", placeholder: item },
+                            on: {
+                              input: function($event) {
+                                return _vm.setLabel(index, $event.target.value)
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-rounded btn-primary btn-xs",
+                              attrs: { href: "#split-range" },
+                              on: {
+                                click: function($event) {
+                                  $event.stopPropagation()
+                                  return _vm.showSplitOptions(index)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-chevron-left" })]
+                          )
+                        ])
+                      ])
+                    ]
+                  : [
+                      _c("tr", [
+                        _c("td", { staticClass: "fit-content" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.list[index].include,
+                                expression: "list[index].include"
+                              }
+                            ],
+                            attrs: {
+                              type: "checkbox",
+                              id: "victim_types-include-" + item
+                            },
+                            domProps: {
+                              value: item,
+                              checked: Array.isArray(_vm.list[index].include)
+                                ? _vm._i(_vm.list[index].include, item) > -1
+                                : _vm.list[index].include
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$a = _vm.list[index].include,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = item,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        _vm.list[index],
+                                        "include",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        _vm.list[index],
+                                        "include",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(_vm.list[index], "include", $$c)
+                                }
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "td-input" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: item.label,
+                                expression: "item.label"
+                              }
+                            ],
+                            staticClass: "form-control input-sm",
+                            attrs: {
+                              type: "text",
+                              placeholder: item.name,
+                              disabled: !item.include
+                            },
+                            domProps: { value: item.label },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(item, "label", $event.target.value)
+                              }
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-rounded btn-primary btn-xs",
+                              attrs: { href: "#split-range" },
+                              on: {
+                                click: function($event) {
+                                  $event.stopPropagation()
+                                  return _vm.showSplitOptions(index)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-chevron-left" })]
+                          )
+                        ])
+                      ])
+                    ]
+              ]
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "modal",
+        {
+          attrs: { show: _vm.showModal },
+          on: {
+            "update:show": function($event) {
+              _vm.showModal = $event
+            }
+          }
+        },
+        [
+          _vm.showOptionsIndex >= 0
+            ? [
+                _c("header", [
+                  _c("h1", [_vm._v("Select demographic to sub-divide by")])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    attrs: { role: "form" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.add($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("demographic-options", {
+                      attrs: {
+                        label: "Base demographic set",
+                        exclude: [_vm.type]
+                      }
+                    })
+                  ],
+                  1
+                )
+              ]
+            : _vm._e()
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _vm._m(0)
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("small", { staticClass: "help-block" }, [
+      _vm._v("Use the insert button ("),
+      _c("i", { staticClass: "fa fa-chevron-left" }),
+      _vm._v(
+        ") to break a range into multiple ranges. Use the delete button ("
+      ),
+      _c("i", { staticClass: "fa fa-times" }),
+      _vm._v(
+        ") to remove a range. Use the label box to create an different label for the range."
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0331aa02", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 575:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            activeRange: 0
+        };
+    },
+
+
+    methods: {
+        allowSplit: function allowSplit(range) {
+            // Both values must be set
+            if (range.min === null || range.max === null) {
+                return false;
+            }
+
+            // If we made it this far, then yes
+            return true;
+        },
+        blankRange: function blankRange() {
+            return {
+                min: null
+            };
+        },
+        deleteRange: function deleteRange(index) {
+            // Get the current range
+            var range = this.ranges[index];
+
+            // Delete the current range
+            this.ranges.splice(index, 1);
+
+            this.$set(this.ranges[index], 'min', range.min);
+        },
+        rangeName: function rangeName(range) {
+            var label = '';
+            if (range.min === null) {
+                return '';
+            } else {
+                label += range.min.toString();
+            }
+
+            if (range.hasOwnProperty('max') && range.max !== null) {
+                label += ' - ' + range.max.toString();
+            } else {
+                label += '+';
+            }
+
+            return label;
+        },
+        setLabel: function setLabel(index, value) {
+            this.$set(this.ranges[index], 'label', value);
+        },
+        setNextRangeMin: function setNextRangeMin(index, value) {
+            // Set it's min value to value + 1
+            this.$set(this.ranges[index + 1], 'min', Number(value) + 1);
+        },
+        splitRange: function splitRange(index) {
+            var _this = this;
+
+            var range = this.ranges[index],
+                current = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, this.blankRange(), { max: null }),
+                next = this.blankRange();
+
+            current.min = range.min;
+
+            // If the range has a max value
+            if (range.hasOwnProperty('max') && range.max !== null) {
+                next.max = range.max;
+            }
+
+            // Insert a new range
+            this.ranges.splice(index, 1, current);
+            // Update the next range
+            this.ranges.splice(index + 1, 0, next);
+
+            // There is a slight lag, so wait until the next tick
+            this.$nextTick(function () {
+                // Set focus on the newly created input
+                _this.activeRange = index;
+                $(_this.$refs['range-max-' + index]).focus();
+            });
+        }
+    },
+
+    props: {
+        label: {
+            type: String,
+            default: 'Range'
+        },
+        ranges: Array
+    },
+
+    watch: {
+        // I'm using a watch function for this because
+        // there are many moving parts of which to keep track
+        ranges: function ranges() {
+            this.$emit('update:ranges', this.ranges);
+        }
+    }
+});
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(20)))
+
+/***/ }),
+
+/***/ 576:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "form-group" }, [
+    _c("label", {
+      staticClass: "control-label",
+      domProps: { textContent: _vm._s(_vm.label) }
+    }),
+    _vm._v(" "),
+    _c("table", { staticClass: "table" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.ranges, function(item, index) {
+          return _c("tr", [
+            _c("td", { staticClass: "col-sm-1 text-right" }, [
+              _vm._v(_vm._s(item.min))
+            ]),
+            _vm._v(" "),
+            item.hasOwnProperty("max")
+              ? _c("td", { staticClass: "fit-content" }, [_vm._v("-")])
+              : _c("td", { staticClass: "fit-content" }, [_vm._v("+")]),
+            _vm._v(" "),
+            _c("td", { staticClass: "fit-content td-number td-input" }, [
+              item.hasOwnProperty("max")
+                ? _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.ranges[index].max,
+                        expression: "ranges[index].max",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    ref: "range-max-" + index,
+                    refInFor: true,
+                    staticClass: "form-control input-sm col-sm-1",
+                    attrs: { type: "number", size: "4", min: item.min + 1 },
+                    domProps: { value: _vm.ranges[index].max },
+                    on: {
+                      keyup: function($event) {
+                        return _vm.setNextRangeMin(index, $event.target.value)
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.ranges[index],
+                          "max",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _vm.allowSplit(item)
+              ? _c("td", { staticClass: "td-btn" }, [
+                  _vm.allowSplit(item)
+                    ? _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-rounded btn-primary btn-xs",
+                          attrs: { href: "#split-range" },
+                          on: {
+                            click: function($event) {
+                              $event.stopPropagation()
+                              return _vm.splitRange(index)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fa fa-chevron-left" })]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.allowSplit(item) && index < _vm.ranges.length - 1
+                    ? _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-rounded btn-danger btn-xs",
+                          attrs: { href: "#delete-range" },
+                          on: {
+                            click: function($event) {
+                              $event.stopPropagation()
+                              return _vm.deleteRange(index)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fa fa-times" })]
+                      )
+                    : _vm._e()
+                ])
+              : _vm.activeRange == index
+              ? _c("td", [
+                  _c("small", { staticClass: "help-block" }, [
+                    _vm._v("Enter the top of the range")
+                  ])
+                ])
+              : _vm.activeRange + 1 == index
+              ? _c("td", [
+                  _c("small", { staticClass: "help-block" }, [
+                    _vm._v("This will update automatically")
+                  ])
+                ])
+              : _c("td"),
+            _vm._v(" "),
+            _c("td", { staticClass: "td-input" }, [
+              _vm.allowSplit(item)
+                ? _c("input", {
+                    staticClass: "form-control input-sm",
+                    attrs: { type: "text", placeholder: _vm.rangeName(item) },
+                    domProps: { value: _vm.ranges[index].label },
+                    on: {
+                      input: function($event) {
+                        return _vm.setLabel(index, $event.target.value)
+                      }
+                    }
+                  })
+                : _vm._e()
+            ])
+          ])
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(1)
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "col-sm-1" }, [_vm._v("Min")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "fit-content" }),
+        _vm._v(" "),
+        _c("th", { staticClass: "fit-content" }, [_vm._v("Max")]),
+        _vm._v(" "),
+        _c("th"),
+        _vm._v(" "),
+        _c("th", [_vm._v("Label")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("small", { staticClass: "help-block" }, [
+      _vm._v("Use the insert button ("),
+      _c("i", { staticClass: "fa fa-chevron-left" }),
+      _vm._v(
+        ") to break a range into multiple ranges. Use the delete button ("
+      ),
+      _c("i", { staticClass: "fa fa-times" }),
+      _vm._v(
+        ") to remove a range. Use the label box to create an different label for the range."
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5a08ac4e", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 718:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_reporting_RangeWidget_vue__ = __webpack_require__(422);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_reporting_RangeWidget_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_reporting_RangeWidget_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_controls_selects_Selectize_vue__ = __webpack_require__(230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_controls_selects_Selectize_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_controls_selects_Selectize_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_reporting_DemographicListWidget_vue__ = __webpack_require__(421);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_reporting_DemographicListWidget_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_reporting_DemographicListWidget_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_reporting_DemographicOptions_vue__ = __webpack_require__(407);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_reporting_DemographicOptions_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__components_reporting_DemographicOptions_vue__);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    computed: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])('profiles', { profiles: 'all' })),
+
+    components: {
+        DemographicOptions: __WEBPACK_IMPORTED_MODULE_6__components_reporting_DemographicOptions_vue___default.a,
+        ListWidget: __WEBPACK_IMPORTED_MODULE_5__components_reporting_DemographicListWidget_vue___default.a,
+        SelectAgeRanges: __WEBPACK_IMPORTED_MODULE_3__components_reporting_RangeWidget_vue___default.a,
+        SelectEthnicity: __WEBPACK_IMPORTED_MODULE_4__components_controls_selects_Selectize_vue___default.a
+    },
+
+    data: function data() {
+        var end = __WEBPACK_IMPORTED_MODULE_2_moment___default()().format('YYYY-MM-DD'),
+            start = __WEBPACK_IMPORTED_MODULE_2_moment___default()().subtract(1, 'year').format('YYYY-MM-DD');
+
+        return {
+            model: {
+                report_profile_id: 0,
+                start_date: start,
+                end_date: end
+            },
+
+            controls: {
+                dates: 'This month'
+            }
+        };
+    },
+    created: function created() {
+        this.controls.dates = 'Last quarter';
+        this.setDates(this.controls.dates);
+        this.fetchProfiles();
+    },
+
+
+    methods: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])('profiles', { fetchProfiles: 'fetch' }), Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])('reports', ['create']), {
+        process: function process() {
+            var _this = this;
+
+            var data = {
+                data: this.model
+            };
+            this.create(data).then(function (created) {
+                // console.log('created', created)
+                _this.addMessage('Report created successfully');
+                _this.$router.push('/reporting/reports/' + created.id);
+            }).catch(function (error) {
+                // console.log('error', error)
+                _this.addMessage({
+                    text: error.message,
+                    type: 'danger'
+                });
+            });
+        },
+        setDates: function setDates(label) {
+            var _getDatesFromLabel = this.getDatesFromLabel(label),
+                start_date = _getDatesFromLabel.start_date,
+                end_date = _getDatesFromLabel.end_date;
+
+            this.model.start_date = start_date;
+            this.model.end_date = end_date;
+        },
+        getDatesFromLabel: function getDatesFromLabel(label) {
+            // console.log('label', label)
+            var start_date = __WEBPACK_IMPORTED_MODULE_2_moment___default()(),
+                end_date = __WEBPACK_IMPORTED_MODULE_2_moment___default()();
+
+            switch (label) {
+                case 'This month':
+                    start_date = start_date.startOf('month');
+                    break;
+                case 'This quarter':
+                    start_date = start_date.startOf('quarter');
+                    break;
+                case 'This year':
+                    start_date = start_date.startOf('year');
+                    break;
+                case 'Last month':
+                    start_date = start_date.subtract(1, 'month').startOf('month');
+                    end_date = end_date.subtract(1, 'month').endOf('month');
+                    break;
+                case 'Last quarter':
+                    start_date = start_date.subtract(1, 'quarter').startOf('quarter');
+                    end_date = end_date.subtract(1, 'quarter').endOf('quarter');
+                    break;
+                case 'Last year':
+                    start_date = start_date.subtract(1, 'year').startOf('year');
+                    end_date = end_date.subtract(1, 'year').endOf('year');
+                    break;
+                default:
+                    break;
+            }
+
+            start_date = start_date.format('YYYY-MM-DD');
+            end_date = end_date.format('YYYY-MM-DD');
+
+            return { start_date: start_date, end_date: end_date };
+        },
+        setNextRangeMin: function setNextRangeMin(ranges, index, value) {
+            // Set it's min value to value + 1
+            this.$set(ranges[index + 1], 'min', Number(value) + 1);
+        },
+        showSplitOptions: function showSplitOptions(demographic, item) {
+            this.controls.split.modal.show = true;
+        },
+        splitByAges: function splitByAges(type, name, index) {
+            // console.log(type, name, index)
+
+            if (Object.prototype.hasOwnProperty.call(this.report.query, type)) {
+                // Todo: generalize this so that it doesn't depend on the item.description
+                if (!Object.prototype.hasOwnProperty.call(this.report.query[type].ages, name)) {
+                    this.$set(this.report.query[type].ages, name, []);
+                }
+
+                if (typeof index === 'undefined') {
+                    var current = { min: 0 };
+                    this.report.query[type].ages[name].splice(0, 1, current);
+                } else {
+
+                    var range = this.report.query[type].ages[name][index],
+                        _current = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, this.blankRange(), { max: null }),
+                        next = this.blankRange();
+
+                    _current.min = range.min;
+
+                    // If the range has a max value
+                    if (range.hasOwnProperty('max') && range.max !== null) {
+                        next.max = range.max;
+                    }
+
+                    // Insert a new range
+                    this.report.query[type].ages[name].splice(index, 1, _current);
+
+                    // Update the next range
+                    this.report.query[type].ages[name].splice(index + 1, 0, next);
+                }
+            }
+        },
+        splitRange: function splitRange(index) {
+            var _this2 = this;
+
+            var range = this.ranges[index],
+                current = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, this.blankRange(), { max: null }),
+                next = this.blankRange();
+
+            current.min = range.min;
+
+            // If the range has a max value
+            if (range.hasOwnProperty('max') && range.max !== null) {
+                next.max = range.max;
+            }
+
+            // Insert a new range
+            this.ranges.splice(index, 1, current);
+            // Update the next range
+            this.ranges.splice(index + 1, 0, next);
+
+            // There is a slight lag, so wait until the next tick
+            this.$nextTick(function () {
+                // Set focus on the newly created input
+                _this2.activeRange = index;
+                $(_this2.$refs['range-max-' + index]).focus();
+            });
+        },
+        toggleAllEthnicity: function toggleAllEthnicity() {
+            // console.log(this.report.query.ethnicity)
+            if (this.controls.ethnicity.include_all) {
+                this.$set(this.report.query.ethnicity, 'include', this.ethnicity.map(function (item) {
+                    return item.name;
+                }));
+            } else {
+                this.$set(this.report.query.ethnicity, 'include', []);
+            }
+        },
+        toggleAllServices: function toggleAllServices() {
+            // console.log(this.report.query.services)
+            if (this.controls.services.include_all) {
+                this.$set(this.report.query.services, 'include', this.services.map(function (item) {
+                    return item.name;
+                }));
+            } else {
+                this.$set(this.report.query.services, 'include', []);
+            }
+        },
+        toggleAllVictimTypes: function toggleAllVictimTypes() {
+            // console.log(this.report.query.services)
+            if (this.controls.services.include_all) {
+                this.$set(this.report.query.services, 'include', this.services.map(function (item) {
+                    return item.name;
+                }));
+            } else {
+                this.$set(this.report.query.services, 'include', []);
+            }
+        }
+    })
+});
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(20)))
+
+/***/ }),
+
+/***/ 719:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "overlay-background" }, [
+    _c("div", { staticClass: "overlay" }, [
+      _c("header", { staticClass: "overlay-header" }, [
+        _c("div", { staticClass: "header-actions pull-right" }, [
+          _c(
+            "button",
+            {
+              staticClass: "close",
+              attrs: { type: "button", "aria-label": "Close" },
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                  return _vm.$router.back()
+                }
+              }
+            },
+            [
+              _c("i", { staticClass: "fa fa-close" }),
+              _vm._v(" "),
+              _c("span", { staticClass: "hidden-xs" }, [_vm._v("Cancel")])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("h1", [_vm._v("Add Report")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "section" }, [
+        _c(
+          "form",
+          {
+            attrs: { role: "form" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.process($event)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", { staticClass: "control-label" }, [_vm._v("Dates")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.controls.dates,
+                      expression: "controls.dates"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.controls,
+                          "dates",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                      function($event) {
+                        return _vm.setDates($event.target.value)
+                      }
+                    ]
+                  }
+                },
+                [
+                  _c("option", [_vm._v("This month")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("This quarter")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("This year")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("Last month")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("Last quarter")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("Last year")]),
+                  _vm._v(" "),
+                  _c("option", [_vm._v("Custom...")])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm.controls.dates === "Custom..."
+              ? _c("div", { staticClass: "well" }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c(
+                      "div",
+                      { staticClass: "col-sm-6" },
+                      [
+                        _c("input-date", {
+                          attrs: { label: "Start Date", id: "start_date" },
+                          model: {
+                            value: _vm.model.start_date,
+                            callback: function($$v) {
+                              _vm.$set(_vm.model, "start_date", $$v)
+                            },
+                            expression: "model.start_date"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "col-sm-6" },
+                      [
+                        _c("input-date", {
+                          attrs: { label: "End Date", id: "end_date" },
+                          model: {
+                            value: _vm.model.end_date,
+                            callback: function($$v) {
+                              _vm.$set(_vm.model, "end_date", $$v)
+                            },
+                            expression: "model.end_date"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.model.report_profile_id,
+                      expression: "model.report_profile_id"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.model,
+                        "report_profile_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "0", selected: "" } }, [
+                    _vm._v("Select a report profile...")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.profiles, function(profile) {
+                    return _c("option", { domProps: { value: profile.id } }, [
+                      _vm._v(_vm._s(profile.label))
+                    ])
+                  })
+                ],
+                2
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-lg",
+                attrs: { type: "submit" }
+              },
+              [_vm._v("Create")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-link",
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation()
+                    return _vm.$router.back()
+                  }
+                }
+              },
+              [_vm._v("Cancel")]
+            )
+          ]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-32eccb5a", module.exports)
+  }
+}
+
+/***/ })
+
+});

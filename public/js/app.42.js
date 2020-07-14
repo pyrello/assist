@@ -1,1 +1,852 @@
-webpackJsonp([42],{"9OIq":function(t,e,i){"use strict";var n=i("Dd8w"),a=i.n(n),s=i("jtR9"),r=i("UmUL");e.a=a()({},new r.a({name:"incident",storeName:"incidents",model:s.a}))},IbYd:function(t,e,i){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var n=i("Dd8w"),a=i.n(n),s=i("NYxO"),r=i("fQ0y"),c=i("9OIq");e.default={name:"client-activities",mixins:[r.a,c.a],data:function(){return{activity_ids:[],fields:[{name:"select",dataClass:"fit-content",title:"",sortable:!1},{name:"service.name",title:"Service"},{name:"started_at",title:"When"},{name:"advocate.full_name",template:"{{ advocate.first_name }} {{ advocate.last_name }}",title:"Advocate"},{name:"actions",dataClass:"fit-content",titleClass:"fit-content",sortable:!1}]}},computed:a()({},Object(s.c)("activities",{byId:"byId",fetching:"fetching",activities:"paginated",meta:"meta"}),Object(s.c)("services",{serviceById:"byId"}),Object(s.c)("serviceNotProvidedReasons",{serviceNotProvidedReasons:"byId"})),created:function(){this.init(this.$route.query)},beforeRouteUpdate:function(t,e,i){this.init(t.query),i()},watch:{$route:function(){this.init(this.$route.query)}},methods:a()({},Object(s.b)("activities",["fetch","destroy"]),{confirmDelete:function(t){var e=this,i=confirm("Are you sure that you want to delete this activity?"),n=this.client.id;i&&this.destroy({client_id:n,id:t}).then(function(){e.addMessage("The activities for "+e.client.full_name+" has been deleted.")})},init:function(t){var e={params:{client_id:this.$route.params.client_id,page:t&&t.page||1}};this.fetch(e)},whyServiceNotProvided:function(t){return this.whyServiceNotProvidedById(t)||null}})}},UmUL:function(t,e,i){"use strict";var n=i("Dd8w"),a=i.n(n),s=i("bOdI"),r=i.n(s),c=i("Zrlr"),o=i.n(c),d=i("NYxO"),u=i("OQde"),l=function(t){return t.replace(/\w\S*/g,function(t){return t.charAt(0).toUpperCase()+t.substr(1).toLowerCase()})},f=i("TFAV");e.a=function t(e){var i,n,s,c=e.name,v=e.storeName,m=e.model,h=void 0===m?f.a:m;o()(this,t),this.modelMixinOptions={name:c,storeName:v,model:h};var _=this;this.data=function(){var t;return t={},r()(t,_.modelMixinOptions.name,new _.modelMixinOptions.model),r()(t,"params",r()({},_.modelMixinOptions.name+"_id",null)),t},this.computed=a()({},Object(d.c)(v,(i={},r()(i,c+"ById","byId"),r()(i,"route"+l(c),"byRoute"),r()(i,"fetching"+l(c),"fetching"),i)),r()({},c+"Data",function(){return this["fetching"+l(c)],this["route"+l(c)]})),this.created=function(){this["set"+l(c)+"Id"]()},this.watch=(n={},r()(n,c+"Data",function(){this["reset"+_.modelMixinOptions.name](),this[_.modelMixinOptions.name+"Data"]&&this[""+_.modelMixinOptions.name].assign(this[_.modelMixinOptions.name+"Data"])}),r()(n,"this.$route.params."+c+"_id",function(){this["set"+l(c)+"Id"]()}),n),this.methods=a()({},Object(d.b)(v,r()({},"fetch"+l(c),"fetch")),(s={},r()(s,"set"+l(c)+"Id",function(t){t=t?Number(t):this.$route.params[c+"_id"]?Number(this.$route.params[c+"_id"]):null,Vue.set(this.params,c+"_id",t)}),r()(s,c+"IdExists",function(){return Object(u.f)(this.params[c+"_id"])&&null!==this.params[c+"_id"]}),r()(s,"fetchRoute"+l(c),function(){var t=this,e=Number(this.$route.params[c+"_id"]);return!!e&&this["fetch"+l(c)]({id:e,fetchId:"id:"+e}).then(function(e){return t["route"+l(c)+"Fetched"](),t["current"+l(c)+"Fetched"](),e}).catch(function(t){console.error(t)})}),r()(s,"fetchCurrent"+l(c),function(){return this["fetchRoute"+l(c)]()}),r()(s,"current"+l(c)+"Fetched",function(){}),r()(s,"route"+l(c)+"Fetched",function(){}),r()(s,c+"Fetched",function(){}),r()(s,"reset",function(){this.resetData()}),r()(s,"resetData",function(){this["reset"+c](),this.params[c+"_id"]=null}),r()(s,"reset"+c,function(){this[c]=new h}),s))}},bOdI:function(t,e,i){"use strict";e.__esModule=!0;var n,a=i("C4MV"),s=(n=a)&&n.__esModule?n:{default:n};e.default=function(t,e,i){return e in t?(0,s.default)(t,e,{value:i,enumerable:!0,configurable:!0,writable:!0}):t[e]=i,t}},f3j5:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,i=t._self._c||e;return i("div",[t.fetching?i("div",{staticClass:"lead"},[i("i",{staticClass:"fa fa-refresh fa-spin"}),t._v(" Loading data\n    ")]):!t.fetching&&t.activities.length?i("div",[i("grid",{attrs:{fields:t.fields,data:t.activities,fetching:t.fetching,meta:t.meta},scopedSlots:t._u([{key:"select",fn:function(e){return[e.item.service_provided?i("input",{directives:[{name:"model",rawName:"v-model",value:t.activity_ids,expression:"activity_ids"}],attrs:{type:"checkbox"},domProps:{value:e.item.id,checked:Array.isArray(t.activity_ids)?t._i(t.activity_ids,e.item.id)>-1:t.activity_ids},on:{change:function(i){var n=t.activity_ids,a=i.target,s=!!a.checked;if(Array.isArray(n)){var r=e.item.id,c=t._i(n,r);a.checked?c<0&&(t.activity_ids=n.concat([r])):c>-1&&(t.activity_ids=n.slice(0,c).concat(n.slice(c+1)))}else t.activity_ids=s}}}):t._e()]}},{key:"service.name",fn:function(e){return[t.client?i("router-link",{attrs:{to:"activities/"+e.item.id}},[t._v(t._s(e.item.service.name))]):t._e()]}},{key:"started_at",fn:function(e){return[e.item.service_provided?[t._v("\n                    "+t._s(t._f("prettyDatetime")(e.item.started_at))+"\n                ")]:t.serviceNotProvidedReasons(e.item.why_not_provided)?[t._v("Not provided: "+t._s(t.serviceNotProvidedReasons(e.item.why_not_provided).name))]:t._e()]}},{key:"actions",fn:function(e){return[i("div",{staticClass:"table-button-container"},[i("router-link",{staticClass:"btn btn-warning btn-xs",attrs:{to:"/clients/"+t.client.id+"/activities/"+e.item.id+"/edit"}},[i("i",{staticClass:"fa fa-edit"}),t._v(" Edit")]),t._v(" "),t.authUser.is_admin?i("button",{staticClass:"btn btn-danger btn-xs",on:{click:function(i){t.confirmDelete(e.item.id)}}},[i("i",{staticClass:"fa fa-remove"}),t._v(" Delete")]):t._e(),t._v("  \n                ")],1)]}}])}),t._v(" "),t.activity_ids.length?i("router-link",{staticClass:"btn btn-primary",attrs:{to:"outcomes/add?activity_ids="+t.activity_ids.join(",")}},[t._v("Add outcome")]):t._e(),t._v(" "),i("small",{staticClass:"help-block"},[t._v("Select one or more activities to assign an outcome.")])],1):i("div",{staticClass:"lead"},[i("p",[t._v("There are no activities for this client.")]),t._v(" "),i("p",[i("router-link",{staticClass:"btn btn-lg btn-primary",attrs:{to:"activities/add"}},[t._v("Add Activity")])],1),t._v(" "),t._m(0)])])},staticRenderFns:[function(){var t=this.$createElement,e=this._self._c||t;return e("p",[e("i",{staticClass:"fa fa-info-circle"}),this._v(" Activities are interactions between the client and staff. Once activities are entered you can associate one or more of them with an outcome.")])}]}},fQ0y:function(t,e,i){"use strict";var n=i("Dd8w"),a=i.n(n),s=i("b+22"),r=i("UmUL");e.a=a()({},new r.a({name:"client",storeName:"clients",model:s.a}))},jtR9:function(t,e,i){"use strict";var n=i("Zx67"),a=i.n(n),s=i("Zrlr"),r=i.n(s),c=i("zwoO"),o=i.n(c),d=i("Pf15"),u=i.n(d),l=i("OQde"),f=i("vXSK"),v=i("TFAV"),m=(i("0aVa"),function(){return{date:Object(l.h)(f.a),client_id:null,advocate_id:null,incident_type_id:null,state:null,city:null,note:""}}),h=function(t){function e(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};return r()(this,e),o()(this,(e.__proto__||a()(e)).call(this,m(),t))}return u()(e,t),e}(v.a);e.a=h},qzuZ:function(t,e,i){var n=i("VU/8")(i("IbYd"),i("f3j5"),!1,null,null,null);t.exports=n.exports},vXSK:function(t,e,i){"use strict";i.d(e,"a",function(){return a}),i.d(e,"b",function(){return s});var n=i("Dd8w"),a=(i.n(n),i("OQde"),"YYYY-MM-DD"),s=function(){return{first_name:"",last_name:"",email:"",password:"",password_confirmation:""}}}});
+webpackJsonp([42],{
+
+/***/ 453:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(659)
+/* template */
+var __vue_template__ = __webpack_require__(660)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/pages/clients/activities/Index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6439e6d4", Component.options)
+  } else {
+    hotAPI.reload("data-v-6439e6d4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 488:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty__ = __webpack_require__(489);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vuex__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__filters_capitalize__ = __webpack_require__(493);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_Model__ = __webpack_require__(60);
+
+
+
+
+
+
+
+
+var ModelMixin = function ModelMixin(_ref) {
+    var _mapGetters, _watch, _extends3;
+
+    var name = _ref.name,
+        storeName = _ref.storeName,
+        _ref$model = _ref.model,
+        model = _ref$model === undefined ? __WEBPACK_IMPORTED_MODULE_6__models_Model__["a" /* default */] : _ref$model;
+
+    __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_classCallCheck___default()(this, ModelMixin);
+
+    this.modelMixinOptions = {
+        name: name,
+        storeName: storeName,
+        model: model
+    };
+
+    var that = this;
+
+    this.data = function () {
+        var _ref2;
+
+        return _ref2 = {}, __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_ref2, that.modelMixinOptions.name, new that.modelMixinOptions.model()), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_ref2, 'params', __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()({}, that.modelMixinOptions.name + '_id', null)), _ref2;
+    };
+
+    this.computed = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["c" /* mapGetters */])(storeName, (_mapGetters = {}, __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_mapGetters, name + 'ById', 'byId'), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_mapGetters, 'route' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name), 'byRoute'), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_mapGetters, 'fetching' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name), 'fetching'), _mapGetters)), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()({}, name + 'Data', function undefined() {
+        var fetching = this['fetching' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name)]; // This is a hack to force this to re-render when fetch completes
+        return this['route' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name)];
+    }));
+
+    this.created = function () {
+        this['set' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name) + 'Id']();
+    };
+
+    this.watch = (_watch = {}, __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_watch, name + 'Data', function undefined() {
+        // this.log(`${name}Data`, this[`${name}Data`])
+        // Reset the model to prevent lingering data
+        this['reset' + that.modelMixinOptions.name]();
+        // Assign the raw data to the model
+        if (this[that.modelMixinOptions.name + 'Data']) {
+            this['' + that.modelMixinOptions.name].assign(this[that.modelMixinOptions.name + 'Data']);
+        }
+    }), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_watch, 'this.$route.params.' + name + '_id', function undefined() {
+        this['set' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name) + 'Id']();
+    }), _watch);
+
+    this.methods = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_3_vuex__["b" /* mapActions */])(storeName, __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()({}, 'fetch' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name), 'fetch')), (_extends3 = {}, __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_extends3, 'set' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name) + 'Id', function undefined(id) {
+        if (id) {
+            id = Number(id);
+        } else if (this.$route.params[name + '_id']) {
+            id = Number(this.$route.params[name + '_id']);
+        } else {
+            id = null;
+        }
+        // this.log(`set${capitalize(name)}Id`, id)
+
+        Vue.set(this.params, name + '_id', id);
+    }), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_extends3, name + 'IdExists', function undefined() {
+        return Object(__WEBPACK_IMPORTED_MODULE_4__common__["f" /* defined */])(this.params[name + '_id']) && this.params[name + '_id'] !== null;
+    }), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_extends3, 'fetchRoute' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name), function undefined() {
+        var _this = this;
+
+        var id = Number(this.$route.params[name + '_id']);
+        if (!id) {
+            return false;
+        }
+        return this['fetch' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name)]({ id: id, fetchId: 'id:' + id }).then(function (current) {
+            _this['route' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name) + 'Fetched']();
+            _this['current' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name) + 'Fetched']();
+            return current;
+        }).catch(function (error) {
+            console.error(error);
+            // this.addMessage({
+            //     text: error,
+            //     type: 'danger',
+            // })
+            // this.$router.push('/abusers')
+        });
+    }), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_extends3, 'fetchCurrent' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name), function undefined() {
+        return this['fetchRoute' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name)]();
+    }), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_extends3, 'current' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name) + 'Fetched', function undefined() {
+        //
+    }), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_extends3, 'route' + Object(__WEBPACK_IMPORTED_MODULE_5__filters_capitalize__["a" /* default */])(name) + 'Fetched', function undefined() {
+        //
+    }), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_extends3, name + 'Fetched', function undefined() {
+        //
+    }), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_extends3, 'reset', function reset() {
+        this.resetData();
+    }), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_extends3, 'resetData', function resetData() {
+        this['reset' + name]();
+        this.params[name + '_id'] = null;
+    }), __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_defineProperty___default()(_extends3, 'reset' + name, function undefined() {
+        this[name] = new model();
+    }), _extends3));
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (ModelMixin);
+
+/***/ }),
+
+/***/ 489:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _defineProperty = __webpack_require__(35);
+
+var _defineProperty2 = _interopRequireDefault(_defineProperty);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (obj, key, value) {
+  if (key in obj) {
+    (0, _defineProperty2.default)(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+};
+
+/***/ }),
+
+/***/ 493:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * Capitalizes a text string.
+ * Example: capitalize this => Capitalize This
+ * 
+ * @param  {String} str the string to convert
+ * @return {String}
+ */
+/* harmony default export */ __webpack_exports__["a"] = (function (str) {
+    return str.replace(/\w\S*/g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+});
+
+/***/ }),
+
+/***/ 495:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Client__ = __webpack_require__(232);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ModelMixin__ = __webpack_require__(488);
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, new __WEBPACK_IMPORTED_MODULE_2__ModelMixin__["a" /* default */]({
+    name: 'client',
+    storeName: 'clients',
+    model: __WEBPACK_IMPORTED_MODULE_1__models_Client__["a" /* default */]
+})));
+
+/***/ }),
+
+/***/ 516:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export DEFAULT_STATE */
+/* unused harmony export DEFAULT_CITY */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MOMENT_DATE_FORMAT; });
+/* unused harmony export MOMENT_TIME_FORMAT */
+/* unused harmony export MOMENT_DATETIME_FORMAT */
+/* unused harmony export blankAbuser */
+/* unused harmony export blankAbusiveRelationship */
+/* unused harmony export blankAbuseRelationship */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return blankAdvocate; });
+/* unused harmony export blankClientPersonal */
+/* unused harmony export blankClient */
+/* unused harmony export blankIntake */
+/* unused harmony export blankPhone */
+/* unused harmony export blankRelationship */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common__ = __webpack_require__(7);
+
+
+
+var DEFAULT_STATE = 'Iowa';
+var DEFAULT_CITY = 'Iowa City';
+var MOMENT_DATE_FORMAT = 'YYYY-MM-DD';
+var MOMENT_TIME_FORMAT = 'HH:mm:ss';
+var MOMENT_DATETIME_FORMAT = MOMENT_DATE_FORMAT + ' ' + MOMENT_TIME_FORMAT;
+
+var blankAbuser = function blankAbuser() {
+    return {
+        id: null,
+        intake_id: null,
+        first_name: null,
+        last_name: null,
+        birth_date: null,
+        gender: null,
+        eye_color: null,
+        hair_color: null,
+        hair_length: null,
+        height: null,
+        weight: null,
+        identifying_features: null,
+        vehicle: null,
+        relationship: null
+    };
+};
+
+var blankAbusiveRelationship = function blankAbusiveRelationship() {
+    return {
+        id: null,
+        intake_id: null,
+        relationship: '',
+        abuser: null,
+        abuser_id: null
+    };
+};
+
+var blankAbuseRelationship = function blankAbuseRelationship() {
+    return {
+        abuser_id: null,
+        client_id: null,
+        relationshipType: ''
+    };
+};
+
+var blankAdvocate = function blankAdvocate() {
+    return {
+        first_name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        password_confirmation: ''
+    };
+};
+
+var blankClientPersonal = function blankClientPersonal() {
+    return {
+        first_name: '',
+        middle_initial: '',
+        last_name: '',
+        last_four: '',
+        birth_date: null,
+        gender: '',
+        phones: [],
+        ethnicity_ids: []
+    };
+};
+
+var blankClient = function blankClient() {
+    var relationship = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+
+    // Need to pass in a flag that tells us that this client belongs to another household
+    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({
+        id: null,
+        intake_id: null
+    }, blankClientPersonal(), {
+        homeless: false,
+        address: {
+            street: '',
+            apt: '',
+            state: '',
+            city: '',
+            county: '',
+            zip: ''
+        },
+        note: ''
+    });
+};
+
+var blankIntake = function blankIntake() {
+    var relationship = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+    return {
+        id: null,
+        date: Object(__WEBPACK_IMPORTED_MODULE_1__common__["h" /* formattedDatetime */])(MOMENT_DATE_FORMAT),
+        advocate_id: null,
+        referred_by_id: null,
+        note: ''
+    };
+};
+
+var blankPhone = function blankPhone() {
+
+    return {
+        number: '',
+        type: 'Mobile',
+        primary: true,
+        safe: false
+    };
+};
+
+var blankRelationship = function blankRelationship() {
+    return {
+        type: ''
+    };
+};
+
+/***/ }),
+
+/***/ 523:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export defaultIncident */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__common__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__factory__ = __webpack_require__(516);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Model__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ModelPlus__ = __webpack_require__(234);
+
+
+
+
+
+
+
+
+
+var defaultIncident = function defaultIncident() {
+    return {
+        date: Object(__WEBPACK_IMPORTED_MODULE_4__common__["h" /* formattedDatetime */])(__WEBPACK_IMPORTED_MODULE_5__factory__["a" /* MOMENT_DATE_FORMAT */]),
+        client_id: null,
+        advocate_id: null,
+        incident_type_id: null,
+        state: null,
+        city: null,
+        note: ''
+    };
+};
+
+var Incident = function (_Model) {
+    __WEBPACK_IMPORTED_MODULE_3_babel_runtime_helpers_inherits___default()(Incident, _Model);
+
+    function Incident() {
+        var attributes = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+        __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_classCallCheck___default()(this, Incident);
+
+        return __WEBPACK_IMPORTED_MODULE_2_babel_runtime_helpers_possibleConstructorReturn___default()(this, (Incident.__proto__ || __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_get_prototype_of___default()(Incident)).call(this, defaultIncident(), attributes));
+    }
+
+    // defaults() {
+    //     return defaultIncident()
+    // }
+
+
+    return Incident;
+}(__WEBPACK_IMPORTED_MODULE_6__Model__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (Incident);
+
+/***/ }),
+
+/***/ 530:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_Incident__ = __webpack_require__(523);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ModelMixin__ = __webpack_require__(488);
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, new __WEBPACK_IMPORTED_MODULE_2__ModelMixin__["a" /* default */]({
+    name: 'incident',
+    storeName: 'incidents',
+    model: __WEBPACK_IMPORTED_MODULE_1__models_Incident__["a" /* default */]
+})));
+
+/***/ }),
+
+/***/ 659:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_initClient__ = __webpack_require__(495);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mixins_initIncident__ = __webpack_require__(530);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    name: 'client-activities',
+
+    mixins: [__WEBPACK_IMPORTED_MODULE_2__mixins_initClient__["a" /* default */], __WEBPACK_IMPORTED_MODULE_3__mixins_initIncident__["a" /* default */]],
+
+    data: function data() {
+        return {
+            activity_ids: [],
+            fields: [{
+                name: 'select',
+                dataClass: 'fit-content',
+                title: '',
+                sortable: false
+            }, {
+                name: 'service.name',
+                title: 'Service'
+            }, {
+                name: 'started_at',
+                title: 'When'
+            }, {
+                name: 'advocate.full_name',
+                template: '{{ advocate.first_name }} {{ advocate.last_name }}',
+                title: 'Advocate'
+            }, {
+                name: 'actions',
+                dataClass: 'fit-content',
+                titleClass: 'fit-content',
+                sortable: false
+            }]
+        };
+    },
+
+
+    computed: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])('activities', {
+        byId: 'byId',
+        fetching: 'fetching',
+        activities: 'paginated',
+        meta: 'meta'
+    }), Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])('services', {
+        serviceById: 'byId'
+    }), Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])('serviceNotProvidedReasons', {
+        serviceNotProvidedReasons: 'byId'
+    })),
+
+    // Hooks
+    created: function created() {
+        this.init(this.$route.query);
+    },
+    beforeRouteUpdate: function beforeRouteUpdate(to, from, next) {
+        this.init(to.query);
+        next();
+    },
+
+
+    watch: {
+        '$route': function $route() {
+            this.init(this.$route.query);
+        }
+    },
+
+    methods: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])('activities', ['fetch', 'destroy']), {
+        confirmDelete: function confirmDelete(id) {
+            var _this = this;
+
+            var c = confirm('Are you sure that you want to delete this activity?');
+            var client_id = this.client.id;
+            if (c) {
+                this.destroy({ client_id: client_id, id: id }).then(function () {
+                    _this.addMessage('The activities for ' + _this.client.full_name + ' has been deleted.');
+                });
+            }
+        },
+        init: function init(query) {
+            var config = {
+                params: {
+                    client_id: this.$route.params.client_id,
+                    page: query && query.page || 1
+                }
+            };
+
+            this.fetch(config);
+        },
+        whyServiceNotProvided: function whyServiceNotProvided(id) {
+            var reason = this.whyServiceNotProvidedById(id);
+            return reason || null;
+        }
+    })
+});
+
+/***/ }),
+
+/***/ 660:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.fetching
+      ? _c("div", { staticClass: "lead" }, [
+          _c("i", { staticClass: "fa fa-refresh fa-spin" }),
+          _vm._v(" Loading data\n    ")
+        ])
+      : !_vm.fetching && _vm.activities.length
+      ? _c(
+          "div",
+          [
+            _c("grid", {
+              attrs: {
+                fields: _vm.fields,
+                data: _vm.activities,
+                fetching: _vm.fetching,
+                meta: _vm.meta
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "select",
+                  fn: function(props) {
+                    return [
+                      props.item.service_provided
+                        ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.activity_ids,
+                                expression: "activity_ids"
+                              }
+                            ],
+                            attrs: { type: "checkbox" },
+                            domProps: {
+                              value: props.item.id,
+                              checked: Array.isArray(_vm.activity_ids)
+                                ? _vm._i(_vm.activity_ids, props.item.id) > -1
+                                : _vm.activity_ids
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$a = _vm.activity_ids,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = props.item.id,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      (_vm.activity_ids = $$a.concat([$$v]))
+                                  } else {
+                                    $$i > -1 &&
+                                      (_vm.activity_ids = $$a
+                                        .slice(0, $$i)
+                                        .concat($$a.slice($$i + 1)))
+                                  }
+                                } else {
+                                  _vm.activity_ids = $$c
+                                }
+                              }
+                            }
+                          })
+                        : _vm._e()
+                    ]
+                  }
+                },
+                {
+                  key: "service.name",
+                  fn: function(props) {
+                    return [
+                      _vm.client
+                        ? _c(
+                            "router-link",
+                            { attrs: { to: "activities/" + props.item.id } },
+                            [_vm._v(_vm._s(props.item.service.name))]
+                          )
+                        : _vm._e()
+                    ]
+                  }
+                },
+                {
+                  key: "started_at",
+                  fn: function(props) {
+                    return [
+                      props.item.service_provided
+                        ? [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(
+                                  _vm._f("prettyDatetime")(
+                                    props.item.started_at
+                                  )
+                                ) +
+                                "\n                "
+                            )
+                          ]
+                        : _vm.serviceNotProvidedReasons(
+                            props.item.why_not_provided
+                          )
+                        ? [
+                            _vm._v(
+                              "Not provided: " +
+                                _vm._s(
+                                  _vm.serviceNotProvidedReasons(
+                                    props.item.why_not_provided
+                                  ).name
+                                )
+                            )
+                          ]
+                        : _vm._e()
+                    ]
+                  }
+                },
+                {
+                  key: "actions",
+                  fn: function(props) {
+                    return [
+                      _c(
+                        "div",
+                        { staticClass: "table-button-container" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn btn-warning btn-xs",
+                              attrs: {
+                                to:
+                                  "/clients/" +
+                                  _vm.client.id +
+                                  "/activities/" +
+                                  props.item.id +
+                                  "/edit"
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fa fa-edit" }),
+                              _vm._v(" Edit")
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm.authUser.is_admin
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-danger btn-xs",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.confirmDelete(props.item.id)
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", { staticClass: "fa fa-remove" }),
+                                  _vm._v(" Delete")
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v("  \n                ")
+                        ],
+                        1
+                      )
+                    ]
+                  }
+                }
+              ])
+            }),
+            _vm._v(" "),
+            _vm.activity_ids.length
+              ? _c(
+                  "router-link",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: {
+                      to:
+                        "outcomes/add?activity_ids=" +
+                        _vm.activity_ids.join(",")
+                    }
+                  },
+                  [_vm._v("Add outcome")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c("small", { staticClass: "help-block" }, [
+              _vm._v("Select one or more activities to assign an outcome.")
+            ])
+          ],
+          1
+        )
+      : _c("div", { staticClass: "lead" }, [
+          _c("p", [_vm._v("There are no activities for this client.")]),
+          _vm._v(" "),
+          _c(
+            "p",
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "btn btn-lg btn-primary",
+                  attrs: { to: "activities/add" }
+                },
+                [_vm._v("Add Activity")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm._m(0)
+        ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _c("i", { staticClass: "fa fa-info-circle" }),
+      _vm._v(
+        " Activities are interactions between the client and staff. Once activities are entered you can associate one or more of them with an outcome."
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6439e6d4", module.exports)
+  }
+}
+
+/***/ })
+
+});

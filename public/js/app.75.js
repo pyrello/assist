@@ -1,1 +1,297 @@
-webpackJsonp([75],{"1Wog":function(t,e,n){var i=n("VU/8")(n("50IA"),n("e+pp"),!1,null,null,null);t.exports=i.exports},"50IA":function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var i=n("Dd8w"),s=n.n(i),a=n("NYxO");e.default={name:"dependents-index",data:function(){return{fields:["client",{name:"name",title:"Name"},{name:"age",title:"Age"},{name:"actions",dataClass:"fit-content",titleClass:"fit-content",sortable:!1}]}},computed:s()({},Object(a.c)("dependents",{byId:"byId",dependents:"paginated",fetching:"fetching",meta:"meta"})),created:function(){this.init(this.$route.query)},watch:{$route:function(){this.init(this.$route.query)}},methods:s()({},Object(a.b)("dependents",["destroy","fetch"]),{confirmDelete:function(t){var e=this;if(confirm("Are you sure that you want to delete this incident?")){var n=this.byId(t).client_id;this.destroy({id:t}).then(function(){e.addMessage("This incident has been deleted."),e.fetchClient({id:n})})}},init:function(t){var e={params:s()({},this.params,{page:t&&t.page||1})};this.fetch(e)}})}},"e+pp":function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",[t._m(0),t._v(" "),n("div",{staticClass:"section"},[t.fetching?n("div",{staticClass:"lead"},[n("i",{staticClass:"fa fa-refresh fa-spin"}),t._v(" Loading data\n        ")]):t.dependents.length?n("div",[n("grid",{attrs:{fields:t.fields,data:t.dependents,fetching:t.fetching,meta:t.meta},scopedSlots:t._u([{key:"client",fn:function(t){return[n("client-link",{attrs:{client:t.item.client}})]}},{key:"name",fn:function(e){return[n("router-link",{attrs:{to:"/dependents/"+e.item.id}},[t._v(t._s(e.item.name))])]}},{key:"actions",fn:function(e){return[n("div",{staticClass:"table-button-container"},[n("router-link",{staticClass:"btn btn-warning btn-xs",attrs:{to:"/dependents/"+e.item.id+"/edit"}},[n("i",{staticClass:"fa fa-edit"}),t._v(" Edit")]),t._v(" "),t.authUser.is_admin?n("button",{staticClass:"btn btn-danger btn-xs",on:{click:function(n){t.confirmDelete(e.item.id)}}},[n("i",{staticClass:"fa fa-remove"}),t._v(" Delete")]):t._e(),t._v("  \n                    ")],1)]}}])})],1):t._e()])])},staticRenderFns:[function(){var t=this.$createElement,e=this._self._c||t;return e("header",{staticClass:"content-header"},[e("h1",[this._v("Dependents")])])}]}}});
+webpackJsonp([75],{
+
+/***/ 470:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(694)
+/* template */
+var __vue_template__ = __webpack_require__(695)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/pages/dependents/Index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-b6474258", Component.options)
+  } else {
+    hotAPI.reload("data-v-b6474258", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 694:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(26);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    name: 'dependents-index',
+
+    data: function data() {
+        return {
+            fields: ['client', {
+                name: 'name',
+                title: 'Name'
+            },
+            // {
+            //     name: 'birth_date',
+            //     title: 'Birth Date'
+            // },
+            {
+                name: 'age',
+                title: 'Age'
+            }, {
+                name: 'actions',
+                dataClass: 'fit-content',
+                titleClass: 'fit-content',
+                sortable: false
+            }]
+        };
+    },
+
+
+    computed: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])('dependents', {
+        byId: 'byId',
+        dependents: 'paginated',
+        fetching: 'fetching',
+        meta: 'meta'
+    })),
+
+    // Hooks
+    created: function created() {
+        this.init(this.$route.query);
+    },
+
+
+    // beforeRouteUpdate(to, from, next) {
+    //     this.init(to.query)
+    //     next()
+    // },
+
+    watch: {
+        '$route': function $route() {
+            this.init(this.$route.query);
+        }
+    },
+
+    methods: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])('dependents', ['destroy', 'fetch']), {
+        confirmDelete: function confirmDelete(id) {
+            var _this = this;
+
+            var c = confirm('Are you sure that you want to delete this incident?');
+
+            if (c) {
+                var client_id = this.byId(id).client_id;
+                this.destroy({ id: id }).then(function () {
+                    _this.addMessage('This incident has been deleted.');
+                    _this.fetchClient({ id: client_id });
+                });
+            }
+        },
+        init: function init(query) {
+            var config = {
+                params: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, this.params, {
+                    page: query && query.page || 1
+                })
+            };
+
+            this.fetch(config);
+        }
+    })
+});
+
+/***/ }),
+
+/***/ 695:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "section" }, [
+      _vm.fetching
+        ? _c("div", { staticClass: "lead" }, [
+            _c("i", { staticClass: "fa fa-refresh fa-spin" }),
+            _vm._v(" Loading data\n        ")
+          ])
+        : _vm.dependents.length
+        ? _c(
+            "div",
+            [
+              _c("grid", {
+                attrs: {
+                  fields: _vm.fields,
+                  data: _vm.dependents,
+                  fetching: _vm.fetching,
+                  meta: _vm.meta
+                },
+                scopedSlots: _vm._u([
+                  {
+                    key: "client",
+                    fn: function(props) {
+                      return [
+                        _c("client-link", {
+                          attrs: { client: props.item.client }
+                        })
+                      ]
+                    }
+                  },
+                  {
+                    key: "name",
+                    fn: function(props) {
+                      return [
+                        _c(
+                          "router-link",
+                          { attrs: { to: "/dependents/" + props.item.id } },
+                          [_vm._v(_vm._s(props.item.name))]
+                        )
+                      ]
+                    }
+                  },
+                  {
+                    key: "actions",
+                    fn: function(props) {
+                      return [
+                        _c(
+                          "div",
+                          { staticClass: "table-button-container" },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "btn btn-warning btn-xs",
+                                attrs: {
+                                  to: "/dependents/" + props.item.id + "/edit"
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fa fa-edit" }),
+                                _vm._v(" Edit")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _vm.authUser.is_admin
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger btn-xs",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.confirmDelete(props.item.id)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", { staticClass: "fa fa-remove" }),
+                                    _vm._v(" Delete")
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v("  \n                    ")
+                          ],
+                          1
+                        )
+                      ]
+                    }
+                  }
+                ])
+              })
+            ],
+            1
+          )
+        : _vm._e()
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("header", { staticClass: "content-header" }, [
+      _c("h1", [_vm._v("Dependents")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-b6474258", module.exports)
+  }
+}
+
+/***/ })
+
+});

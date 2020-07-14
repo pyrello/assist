@@ -1,1 +1,393 @@
-webpackJsonp([81],{YTeY:function(t,e,a){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),function(t){var n=a("Dd8w"),s=a.n(n),i=a("M4fF");a.n(i);e.default={data:function(){return{activeRange:0}},methods:{allowSplit:function(t){return null!==t.min&&null!==t.max},blankRange:function(){return{min:null}},deleteRange:function(t){var e=this.ranges[t];this.ranges.splice(t,1),this.$set(this.ranges[t],"min",e.min)},rangeName:function(t){var e="";return null===t.min?"":(e+=t.min.toString(),t.hasOwnProperty("max")&&null!==t.max?e+=" - "+t.max.toString():e+="+",e)},setLabel:function(t,e){this.$set(this.ranges[t],"label",e)},setNextRangeMin:function(t,e){this.$set(this.ranges[t+1],"min",Number(e)+1)},splitRange:function(e){var a=this,n=this.ranges[e],i=s()({},this.blankRange(),{max:null}),l=this.blankRange();i.min=n.min,n.hasOwnProperty("max")&&null!==n.max&&(l.max=n.max),this.ranges.splice(e,1,i),this.ranges.splice(e+1,0,l),this.$nextTick(function(){a.activeRange=e,t(a.$refs["range-max-"+e]).focus()})}},props:{label:{type:String,default:"Range"},ranges:Array},watch:{ranges:function(){this.$emit("update:ranges",this.ranges)}}}}.call(e,a("7t+N"))},sDUr:function(t,e,a){var n=a("VU/8")(a("YTeY"),a("tgRN"),!1,null,null,null);t.exports=n.exports},tgRN:function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,a=t._self._c||e;return a("div",{staticClass:"form-group"},[a("label",{staticClass:"control-label",domProps:{textContent:t._s(t.label)}}),t._v(" "),a("table",{staticClass:"table"},[t._m(0),t._v(" "),a("tbody",t._l(t.ranges,function(e,n){return a("tr",[a("td",{staticClass:"col-sm-1 text-right"},[t._v(t._s(e.min))]),t._v(" "),e.hasOwnProperty("max")?a("td",{staticClass:"fit-content"},[t._v("-")]):a("td",{staticClass:"fit-content"},[t._v("+")]),t._v(" "),a("td",{staticClass:"fit-content td-number td-input"},[e.hasOwnProperty("max")?a("input",{directives:[{name:"model",rawName:"v-model.number",value:t.ranges[n].max,expression:"ranges[index].max",modifiers:{number:!0}}],ref:"range-max-"+n,refInFor:!0,staticClass:"form-control input-sm col-sm-1",attrs:{type:"number",size:"4",min:e.min+1},domProps:{value:t.ranges[n].max},on:{keyup:function(e){t.setNextRangeMin(n,e.target.value)},input:function(e){e.target.composing||t.$set(t.ranges[n],"max",t._n(e.target.value))},blur:function(e){t.$forceUpdate()}}}):t._e()]),t._v(" "),t.allowSplit(e)?a("td",{staticClass:"td-btn"},[t.allowSplit(e)?a("a",{staticClass:"btn btn-rounded btn-primary btn-xs",attrs:{href:"#split-range"},on:{click:function(e){e.stopPropagation(),t.splitRange(n)}}},[a("i",{staticClass:"fa fa-chevron-left"})]):t._e(),t._v(" "),t.allowSplit(e)&&n<t.ranges.length-1?a("a",{staticClass:"btn btn-rounded btn-danger btn-xs",attrs:{href:"#delete-range"},on:{click:function(e){e.stopPropagation(),t.deleteRange(n)}}},[a("i",{staticClass:"fa fa-times"})]):t._e()]):t.activeRange==n?a("td",[a("small",{staticClass:"help-block"},[t._v("Enter the top of the range")])]):t.activeRange+1==n?a("td",[a("small",{staticClass:"help-block"},[t._v("This will update automatically")])]):a("td"),t._v(" "),a("td",{staticClass:"td-input"},[t.allowSplit(e)?a("input",{staticClass:"form-control input-sm",attrs:{type:"text",placeholder:t.rangeName(e)},domProps:{value:t.ranges[n].label},on:{input:function(e){t.setLabel(n,e.target.value)}}}):t._e()])])}))]),t._v(" "),t._m(1)])},staticRenderFns:[function(){var t=this.$createElement,e=this._self._c||t;return e("thead",[e("tr",[e("th",{staticClass:"col-sm-1"},[this._v("Min")]),this._v(" "),e("th",{staticClass:"fit-content"}),this._v(" "),e("th",{staticClass:"fit-content"},[this._v("Max")]),this._v(" "),e("th"),this._v(" "),e("th",[this._v("Label")])])])},function(){var t=this.$createElement,e=this._self._c||t;return e("small",{staticClass:"help-block"},[this._v("Use the insert button ("),e("i",{staticClass:"fa fa-chevron-left"}),this._v(") to break a range into multiple ranges. Use the delete button ("),e("i",{staticClass:"fa fa-times"}),this._v(") to remove a range. Use the label box to create an different label for the range.")])}]}}});
+webpackJsonp([81],{
+
+/***/ 422:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(575)
+/* template */
+var __vue_template__ = __webpack_require__(576)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/reporting/RangeWidget.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5a08ac4e", Component.options)
+  } else {
+    hotAPI.reload("data-v-5a08ac4e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 575:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash__);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            activeRange: 0
+        };
+    },
+
+
+    methods: {
+        allowSplit: function allowSplit(range) {
+            // Both values must be set
+            if (range.min === null || range.max === null) {
+                return false;
+            }
+
+            // If we made it this far, then yes
+            return true;
+        },
+        blankRange: function blankRange() {
+            return {
+                min: null
+            };
+        },
+        deleteRange: function deleteRange(index) {
+            // Get the current range
+            var range = this.ranges[index];
+
+            // Delete the current range
+            this.ranges.splice(index, 1);
+
+            this.$set(this.ranges[index], 'min', range.min);
+        },
+        rangeName: function rangeName(range) {
+            var label = '';
+            if (range.min === null) {
+                return '';
+            } else {
+                label += range.min.toString();
+            }
+
+            if (range.hasOwnProperty('max') && range.max !== null) {
+                label += ' - ' + range.max.toString();
+            } else {
+                label += '+';
+            }
+
+            return label;
+        },
+        setLabel: function setLabel(index, value) {
+            this.$set(this.ranges[index], 'label', value);
+        },
+        setNextRangeMin: function setNextRangeMin(index, value) {
+            // Set it's min value to value + 1
+            this.$set(this.ranges[index + 1], 'min', Number(value) + 1);
+        },
+        splitRange: function splitRange(index) {
+            var _this = this;
+
+            var range = this.ranges[index],
+                current = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, this.blankRange(), { max: null }),
+                next = this.blankRange();
+
+            current.min = range.min;
+
+            // If the range has a max value
+            if (range.hasOwnProperty('max') && range.max !== null) {
+                next.max = range.max;
+            }
+
+            // Insert a new range
+            this.ranges.splice(index, 1, current);
+            // Update the next range
+            this.ranges.splice(index + 1, 0, next);
+
+            // There is a slight lag, so wait until the next tick
+            this.$nextTick(function () {
+                // Set focus on the newly created input
+                _this.activeRange = index;
+                $(_this.$refs['range-max-' + index]).focus();
+            });
+        }
+    },
+
+    props: {
+        label: {
+            type: String,
+            default: 'Range'
+        },
+        ranges: Array
+    },
+
+    watch: {
+        // I'm using a watch function for this because
+        // there are many moving parts of which to keep track
+        ranges: function ranges() {
+            this.$emit('update:ranges', this.ranges);
+        }
+    }
+});
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(20)))
+
+/***/ }),
+
+/***/ 576:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "form-group" }, [
+    _c("label", {
+      staticClass: "control-label",
+      domProps: { textContent: _vm._s(_vm.label) }
+    }),
+    _vm._v(" "),
+    _c("table", { staticClass: "table" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.ranges, function(item, index) {
+          return _c("tr", [
+            _c("td", { staticClass: "col-sm-1 text-right" }, [
+              _vm._v(_vm._s(item.min))
+            ]),
+            _vm._v(" "),
+            item.hasOwnProperty("max")
+              ? _c("td", { staticClass: "fit-content" }, [_vm._v("-")])
+              : _c("td", { staticClass: "fit-content" }, [_vm._v("+")]),
+            _vm._v(" "),
+            _c("td", { staticClass: "fit-content td-number td-input" }, [
+              item.hasOwnProperty("max")
+                ? _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.ranges[index].max,
+                        expression: "ranges[index].max",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    ref: "range-max-" + index,
+                    refInFor: true,
+                    staticClass: "form-control input-sm col-sm-1",
+                    attrs: { type: "number", size: "4", min: item.min + 1 },
+                    domProps: { value: _vm.ranges[index].max },
+                    on: {
+                      keyup: function($event) {
+                        return _vm.setNextRangeMin(index, $event.target.value)
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.ranges[index],
+                          "max",
+                          _vm._n($event.target.value)
+                        )
+                      },
+                      blur: function($event) {
+                        return _vm.$forceUpdate()
+                      }
+                    }
+                  })
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _vm.allowSplit(item)
+              ? _c("td", { staticClass: "td-btn" }, [
+                  _vm.allowSplit(item)
+                    ? _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-rounded btn-primary btn-xs",
+                          attrs: { href: "#split-range" },
+                          on: {
+                            click: function($event) {
+                              $event.stopPropagation()
+                              return _vm.splitRange(index)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fa fa-chevron-left" })]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.allowSplit(item) && index < _vm.ranges.length - 1
+                    ? _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-rounded btn-danger btn-xs",
+                          attrs: { href: "#delete-range" },
+                          on: {
+                            click: function($event) {
+                              $event.stopPropagation()
+                              return _vm.deleteRange(index)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fa fa-times" })]
+                      )
+                    : _vm._e()
+                ])
+              : _vm.activeRange == index
+              ? _c("td", [
+                  _c("small", { staticClass: "help-block" }, [
+                    _vm._v("Enter the top of the range")
+                  ])
+                ])
+              : _vm.activeRange + 1 == index
+              ? _c("td", [
+                  _c("small", { staticClass: "help-block" }, [
+                    _vm._v("This will update automatically")
+                  ])
+                ])
+              : _c("td"),
+            _vm._v(" "),
+            _c("td", { staticClass: "td-input" }, [
+              _vm.allowSplit(item)
+                ? _c("input", {
+                    staticClass: "form-control input-sm",
+                    attrs: { type: "text", placeholder: _vm.rangeName(item) },
+                    domProps: { value: _vm.ranges[index].label },
+                    on: {
+                      input: function($event) {
+                        return _vm.setLabel(index, $event.target.value)
+                      }
+                    }
+                  })
+                : _vm._e()
+            ])
+          ])
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(1)
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "col-sm-1" }, [_vm._v("Min")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "fit-content" }),
+        _vm._v(" "),
+        _c("th", { staticClass: "fit-content" }, [_vm._v("Max")]),
+        _vm._v(" "),
+        _c("th"),
+        _vm._v(" "),
+        _c("th", [_vm._v("Label")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("small", { staticClass: "help-block" }, [
+      _vm._v("Use the insert button ("),
+      _c("i", { staticClass: "fa fa-chevron-left" }),
+      _vm._v(
+        ") to break a range into multiple ranges. Use the delete button ("
+      ),
+      _c("i", { staticClass: "fa fa-times" }),
+      _vm._v(
+        ") to remove a range. Use the label box to create an different label for the range."
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5a08ac4e", module.exports)
+  }
+}
+
+/***/ })
+
+});

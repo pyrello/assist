@@ -1,1 +1,529 @@
-webpackJsonp([63],{"3Dq8":function(t,e){t.exports={render:function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",[n("h4",[t._v("Dependents")]),t._v(" "),n("div",[n("grid",{attrs:{fields:t.clientFields,data:t.clientDependents,fetching:t.fetchingClient},scopedSlots:t._u([{key:"first_name",fn:function(e){return[n("router-link",{attrs:{to:"/clients/"+e.item.id}},[t._v(t._s(e.item.first_name))])]}},{key:"last_name",fn:function(e){return[n("router-link",{attrs:{to:"/clients/"+e.item.id}},[t._v(t._s(e.item.last_name))])]}},{key:"actions",fn:function(e){return[n("div",{staticClass:"table-button-container"},[n("router-link",{staticClass:"btn btn-warning btn-xs",attrs:{to:"/clients/"+e.item.id+"/edit"}},[n("i",{staticClass:"fas fa-edit"}),t._v(" Edit")]),t._v(" "),t.authUser.is_admin?n("button",{staticClass:"btn btn-danger btn-xs",on:{click:function(n){t.confirmRemove(e.item.id)}}},[n("i",{staticClass:"fas fa-trash-alt"}),t._v(" Remove")]):t._e(),t._v("  \n                ")],1)]}}])})],1),t._v(" "),n("h4",[t._v("Non-client Dependents")]),t._v(" "),t.fetching?n("div",{staticClass:"lead"},[n("i",{staticClass:"fa fa-refresh fa-spin"}),t._v(" Loading data\n    ")]):n("div",[n("grid",{attrs:{fields:t.fields,data:t.dependents,fetching:t.fetching},scopedSlots:t._u([{key:"name",fn:function(e){return[n("router-link",{attrs:{to:"/dependents/"+e.item.id}},[t._v(t._s(e.item.name))])]}},{key:"actions",fn:function(e){return[n("div",{staticClass:"table-button-container"},[n("router-link",{staticClass:"btn btn-warning btn-xs",attrs:{to:"/dependents/"+e.item.id+"/edit"}},[n("i",{staticClass:"fas fa-edit"}),t._v(" Edit")]),t._v(" "),t.authUser.is_admin?n("button",{staticClass:"btn btn-danger btn-xs",on:{click:function(n){t.confirmDelete(e.item.id)}}},[n("i",{staticClass:"fas fa-trash-alt"}),t._v(" Delete")]):t._e(),t._v("  \n                ")],1)]}}])})],1)])},staticRenderFns:[]}},FWW6:function(t,e,n){"use strict";Object.defineProperty(e,"__esModule",{value:!0});var i=n("Dd8w"),a=n.n(i),s=n("NYxO"),r=n("N4sO"),d=n("fQ0y");e.default={name:"dependent-index",mixins:[d.a],data:function(){return{fields:[{name:"name",title:"Type"},{name:"age",title:"Age"},{name:"actions",dataClass:"fit-content",titleClass:"fit-content",sortable:!1}],clientFields:[{name:"first_name",title:"First name"},{name:"last_name",title:"Last name"},"age",{name:"actions",dataClass:"fit-content",titleClass:"fit-content",sortable:!1}]}},computed:a()({},Object(s.c)("clients",{filtered:"filtered"}),Object(s.c)("dependents",{byId:"byId",dependents:"paginated",fetching:"fetching",meta:"meta"}),{clientDependents:function(){return this.filtered(Object(r.paramSignature)({params:{parent_id:this.$route.params.client_id}}))}}),created:function(){this.init()},watch:{$route:function(){this.init()}},methods:a()({},Object(s.b)("dependents",["destroy","fetch"]),Object(s.b)("clients",{update:"update"}),{confirmDelete:function(t){var e=this;if(confirm("Are you sure that you want to delete this dependent?")){var n=this.byId(t).client_id;this.destroy({id:t}).then(function(){e.addMessage("The dependent has been deleted."),e.fetchClient({id:n})})}},confirmRemove:function(t){var e=this,n=this.clientById(t);if(confirm("Are you sure that you want to remove "+n.full_name+" as a dependent of "+this.client.full_name+"? The record for "+n.full_name+" will not be deleted.")){var i={id:t,data:{parent_id:null}};this.update(i).then(function(){e.addMessage(n.full_name+" was removed as a dependent of "+e.client.full_name+"."),e.init()})}},init:function(){var t={params:a()({},this.$route.params)};this.fetch(t);var e={params:{parent_id:this.$route.params.client_id}};this.fetchClient(e)}})}},UmUL:function(t,e,n){"use strict";var i=n("Dd8w"),a=n.n(i),s=n("bOdI"),r=n.n(s),d=n("Zrlr"),o=n.n(d),c=n("NYxO"),u=n("OQde"),l=function(t){return t.replace(/\w\S*/g,function(t){return t.charAt(0).toUpperCase()+t.substr(1).toLowerCase()})},f=n("TFAV");e.a=function t(e){var n,i,s,d=e.name,m=e.storeName,h=e.model,p=void 0===h?f.a:h;o()(this,t),this.modelMixinOptions={name:d,storeName:m,model:p};var _=this;this.data=function(){var t;return t={},r()(t,_.modelMixinOptions.name,new _.modelMixinOptions.model),r()(t,"params",r()({},_.modelMixinOptions.name+"_id",null)),t},this.computed=a()({},Object(c.c)(m,(n={},r()(n,d+"ById","byId"),r()(n,"route"+l(d),"byRoute"),r()(n,"fetching"+l(d),"fetching"),n)),r()({},d+"Data",function(){return this["fetching"+l(d)],this["route"+l(d)]})),this.created=function(){this["set"+l(d)+"Id"]()},this.watch=(i={},r()(i,d+"Data",function(){this["reset"+_.modelMixinOptions.name](),this[_.modelMixinOptions.name+"Data"]&&this[""+_.modelMixinOptions.name].assign(this[_.modelMixinOptions.name+"Data"])}),r()(i,"this.$route.params."+d+"_id",function(){this["set"+l(d)+"Id"]()}),i),this.methods=a()({},Object(c.b)(m,r()({},"fetch"+l(d),"fetch")),(s={},r()(s,"set"+l(d)+"Id",function(t){t=t?Number(t):this.$route.params[d+"_id"]?Number(this.$route.params[d+"_id"]):null,Vue.set(this.params,d+"_id",t)}),r()(s,d+"IdExists",function(){return Object(u.f)(this.params[d+"_id"])&&null!==this.params[d+"_id"]}),r()(s,"fetchRoute"+l(d),function(){var t=this,e=Number(this.$route.params[d+"_id"]);return!!e&&this["fetch"+l(d)]({id:e,fetchId:"id:"+e}).then(function(e){return t["route"+l(d)+"Fetched"](),t["current"+l(d)+"Fetched"](),e}).catch(function(t){console.error(t)})}),r()(s,"fetchCurrent"+l(d),function(){return this["fetchRoute"+l(d)]()}),r()(s,"current"+l(d)+"Fetched",function(){}),r()(s,"route"+l(d)+"Fetched",function(){}),r()(s,d+"Fetched",function(){}),r()(s,"reset",function(){this.resetData()}),r()(s,"resetData",function(){this["reset"+d](),this.params[d+"_id"]=null}),r()(s,"reset"+d,function(){this[d]=new p}),s))}},bOdI:function(t,e,n){"use strict";e.__esModule=!0;var i,a=n("C4MV"),s=(i=a)&&i.__esModule?i:{default:i};e.default=function(t,e,n){return e in t?(0,s.default)(t,e,{value:n,enumerable:!0,configurable:!0,writable:!0}):t[e]=n,t}},fQ0y:function(t,e,n){"use strict";var i=n("Dd8w"),a=n.n(i),s=n("b+22"),r=n("UmUL");e.a=a()({},new r.a({name:"client",storeName:"clients",model:s.a}))},vyFY:function(t,e,n){var i=n("VU/8")(n("FWW6"),n("3Dq8"),!1,null,null,null);t.exports=i.exports}});
+webpackJsonp([63,3],{
+
+/***/ 230:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(490)
+/* template */
+var __vue_template__ = __webpack_require__(491)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/controls/selects/Selectize.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5c600a5e", Component.options)
+  } else {
+    hotAPI.reload("data-v-5c600a5e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 400:
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(42)
+/* script */
+var __vue_script__ = __webpack_require__(524)
+/* template */
+var __vue_template__ = __webpack_require__(525)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/controls/selects/Advocates.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-586311ee", Component.options)
+  } else {
+    hotAPI.reload("data-v-586311ee", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 490:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* WEBPACK VAR INJECTION */(function($) {/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign__ = __webpack_require__(231);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__common__ = __webpack_require__(7);
+
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    name: 'selectize',
+
+    data: function data() {
+        return {
+            fetched: true,
+            localConfig: this.defaultConfig(),
+            updating: false,
+            allCount: 0,
+            allCached: '',
+            previousValue: null
+        };
+    },
+
+
+    props: {
+        all: {
+            type: Array | Object
+        },
+
+        clear: {
+            type: Boolean,
+            default: false
+        },
+
+        config: Object,
+
+        disabled: {
+            default: false,
+            type: Boolean
+        },
+
+        id: String,
+
+        multiple: {
+            default: false,
+            type: Boolean
+        },
+
+        labelField: {
+            default: 'name',
+            type: String
+        },
+
+        placeholder: {
+            default: 'Select the item...',
+            type: String
+        },
+
+        template: String,
+
+        value: Array | String,
+
+        identity: String,
+
+        valueField: {
+            default: 'value',
+            type: String
+        },
+
+        valueType: {
+            default: 'string',
+            type: String
+        }
+    },
+
+    computed: {
+        selectize: function selectize() {
+            return this.$el && this.$el.selectize || null;
+        }
+    },
+
+    /**
+     * this.init() needs to be run during the mounted hook
+     * or there is no element to attach to.
+     */
+    mounted: function mounted() {
+        //            this.allCached = JSON.stringify(this.all)
+        __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(this.localConfig, this.config);
+        this.init();
+        //            this.previousValue = this.value
+        //            console.log('previousValue', this.previousValue)
+    },
+    updated: function updated() {
+        __WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_assign___default()(this.localConfig, this.config);
+        this.init();
+    },
+    destroyed: function destroyed() {
+        this.$el.selectize.destroy();
+    },
+
+
+    watch: {
+        all: function all() {
+            var _this = this;
+
+            // It is kind of amazing that I came up with a solution
+            // to this issue, but it is a disgusting workaround
+            // and it should be replaced with a better solution
+            // Edit: It is fixed! There is a difference between how
+            // vue.js treats bound attributes that are inline vs
+            // defined in $data. Here's the code:
+            //                const allCached = JSON.stringify(this.all)
+            //                if (allCached !== this.allCached) {
+            //                    console.log('all is changing', this.id)
+            //                    this.allCached = allCached
+            //                }
+
+            this.updating = true;
+
+            if (this.selectize) {
+                this.selectize.disable();
+                /**
+                 * Instead of this:
+                 * selectize.clearOptions()
+                 * It is necessary to call the underlying functions that get
+                 * called by that function because there is a not a silent
+                 * option that can be passed through to the eventual
+                 * selectize.clear(). This issue was really annoying to debug :(
+                 *
+                 * Hopefully, the selectize library eventually updates to include this
+                 * PR: https://github.com/selectize/selectize.js/pull/894
+                 */
+                this.clearOptions();
+
+                this.selectize.load(function (callback) {
+                    if (_this.all.length > 0) {
+                        _this.selectize.enable();
+                        callback(_this.all);
+                        //                                console.log('re-loading all', this.id, this.value)
+                        /**
+                         * Second parameter of setValue, silent, should be set to
+                         * true, to prevent triggering the onChange event
+                         */
+                        _this.selectize.setValue(_this.value, true);
+                    } else {
+                        callback();
+                    }
+                    _this.updating = false;
+                });
+            }
+        },
+        disabled: function disabled(value) {
+            if (this.selectize) {
+                if (value) {
+                    this.selectize.disable();
+                } else {
+                    this.selectize.enable();
+                }
+            }
+        },
+        clear: function clear(value) {
+            if (value) {
+                this.clearOptions();
+            }
+            this.$emit('clear');
+        },
+        value: function value(_value) {
+            // Don't update unless the value has changed
+            //                if (value !== this.previousValue) {
+            this.previousValue = _value;
+
+            if (!_value) {
+                this.clearOptions();
+            }
+
+            if (this.selectize) {
+                // this.selectize.load(callback => callback)
+                /**
+                 * Second parameter of setValue, silent, should be set to
+                 * true, to prevent triggering the onChange event
+                 */
+                this.selectize.setValue(_value, true);
+            }
+            //                }
+        }
+    },
+
+    methods: {
+        defaultConfig: function defaultConfig() {
+            var _this2 = this;
+
+            var that = this;
+
+            return {
+                // plugins: {
+                //     remove_button: {
+                //         mode: 'single',
+                //     },
+                // },
+                valueField: this.valueField,
+                labelField: this.labelField,
+                searchField: this.labelField,
+                onInitialize: function onInitialize() {
+                    _this2.setValue();
+                },
+                onChange: function onChange(value) {
+                    _this2.select(value);
+                },
+                render: {
+                    option: function option(item, escape) {
+                        return '<div class="option">' + escape(that.itemLabel(item)) + '</div>';
+                    },
+                    item: function item(_item, escape) {
+                        return '<div class="item">' + escape(that.itemLabel(_item)) + '</div>';
+                    }
+                }
+            };
+        },
+        clearOptions: function clearOptions() {
+            if (this.selectize) {
+                this.selectize.loadedSearches = {};
+                this.selectize.userOptions = {};
+                this.selectize.renderCache = {};
+                this.selectize.options = this.selectize.sifter.items = {};
+                this.selectize.lastQuery = null;
+                this.selectize.trigger('option_clear');
+                this.selectize.clear(true);
+            }
+        },
+        init: function init() {
+            this.selectEl = this.$refs.select;
+            $(this.$el).selectize(this.localConfig);
+            this.setValue();
+        },
+        itemLabel: function itemLabel(item) {
+            if (Object(__WEBPACK_IMPORTED_MODULE_1__common__["f" /* defined */])(this.template)) {
+                if (item.first_name && !Object(__WEBPACK_IMPORTED_MODULE_1__common__["f" /* defined */])(item.first_name) && item.last_name && !Object(__WEBPACK_IMPORTED_MODULE_1__common__["f" /* defined */])(item.last_name)) {
+                    console.warn('first name and last name are undefined', item);
+                }
+                return Object(__WEBPACK_IMPORTED_MODULE_1__common__["k" /* mustacheTemplate */])(this.template, item);
+            }
+
+            if (typeof item === 'string') {
+                return item;
+            }
+
+            return item[this.labelField];
+        },
+        itemValue: function itemValue(item) {
+            if (typeof item === 'string') {
+                return item;
+            }
+            if (Object(__WEBPACK_IMPORTED_MODULE_1__common__["i" /* has */])(item, this.valueField)) {
+                return item[this.valueField];
+            }
+
+            return item.id;
+        },
+        select: function select(value) {
+            if (this.valueType === 'number' && value !== 0 && value !== '0') {
+                if (Array.isArray(value)) {
+                    value = value.map(function (item) {
+                        return Number(item);
+                    });
+                } else {
+                    value = Number(value);
+                }
+            }
+            this.$emit('input', value);
+        },
+        setValue: function setValue() {
+            this.$el.selectize.setValue(this.value, true);
+        }
+    }
+});
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(20)))
+
+/***/ }),
+
+/***/ 491:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "select",
+    {
+      ref: "select",
+      staticClass: "form-control",
+      attrs: {
+        id: _vm.id,
+        placeholder: _vm.placeholder,
+        multiple: _vm.multiple
+      },
+      domProps: { value: _vm.value },
+      on: {
+        "update:value": function($event) {
+          _vm.value = $event
+        }
+      }
+    },
+    [
+      _vm._t(
+        "default",
+        _vm._l(_vm.all, function(item) {
+          return _c("option", {
+            domProps: {
+              value: _vm.itemValue(item),
+              textContent: _vm._s(_vm.itemLabel(item))
+            }
+          })
+        })
+      )
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5c600a5e", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ 524:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Selectize_vue__ = __webpack_require__(230);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Selectize_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Selectize_vue__);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    name: 'select-advocates',
+
+    components: {
+        Selectize: __WEBPACK_IMPORTED_MODULE_2__Selectize_vue___default.a
+    },
+
+    props: ['value'],
+
+    computed: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])('advocates', ['all'])),
+
+    created: function created() {
+        this.fetch();
+    },
+
+
+    methods: __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default()({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])('advocates', ['fetch']), {
+        select: function select(value) {
+            this.$emit('input', value);
+        }
+    })
+});
+
+/***/ }),
+
+/***/ 525:
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("selectize", {
+    attrs: {
+      all: _vm.all,
+      value: _vm.value,
+      labelField: "full_name",
+      valueField: "id",
+      valueType: "number"
+    },
+    on: {
+      "update:value": function($event) {
+        _vm.value = $event
+      },
+      input: _vm.select
+    }
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-586311ee", module.exports)
+  }
+}
+
+/***/ })
+
+});
