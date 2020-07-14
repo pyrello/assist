@@ -26,10 +26,7 @@ This command will provision the virtual machine and get it ready to use. Once th
 vagrant ssh
 ```
 ### Setup Application
-* Make a copy of the `.env.example` file called `.env`:
-  ```bash
-  cp .env.example .env
-  ```
+* Make a copy of the `.env.example` file called `.env`: `cp .env.example .env`
 * Generate application key: `artisan key:generate`
 * Run migrations: `artisan migrate`
 * Install Laravel Passport: `artisan passport:install`
