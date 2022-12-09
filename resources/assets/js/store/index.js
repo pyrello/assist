@@ -27,6 +27,7 @@ import referralSources from './modules/list'
 import serviceNotProvidedReasons from './modules/list'
 import locations from './modules/locations'
 import messages from './modules/messages'
+import models from './modules/models'
 import notes from './modules/notes'
 import outcomes from './modules/outcomes'
 import phones from './modules/phones'
@@ -60,6 +61,7 @@ export default new Vuex.Store({
         intakes,
         locations,
         messages,
+        models,
         notes,
         outcomes,
         phones,

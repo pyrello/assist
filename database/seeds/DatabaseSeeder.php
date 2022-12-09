@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GenderTableSeeder::class);
         $this->call(IncidentTypesTableSeeder::class);
         $this->call(ReferralSourcesTableSeeder::class);
+        $this->call(ReportsTableSeeder::class);
     }
 }

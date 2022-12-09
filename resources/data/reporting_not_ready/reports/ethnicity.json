@@ -1,0 +1,19 @@
+{
+  "label": "Ethnicity",
+  "base_table": "clients",
+  "aggregate_column": "client_ethnicity.ethnicity_id",
+  "start_column": "activities.started_at",
+  "list": "Ethnicity",
+  "joins": [
+    "clients JOIN activities ON clients.id = activities.client_id",
+    "clients JOIN client_ethnicity ON clients.id = client_ethnicity.client_id"
+  ],
+  "wheres": [
+    {
+      "clause_table": "activities",
+      "clause_column": "service_provided",
+      "operator": "=",
+      "arguments": true
+    }
+  ]
+}

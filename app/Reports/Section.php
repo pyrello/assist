@@ -2,6 +2,8 @@
 
 namespace App\Reports;
 
+use App\Reports\Counters\BasicCounter;
+use App\Reports\Counters\CounterInterface;
 use App\Reports\Traits\Joinable;
 use App\Reports\Traits\Whereable;
 use Carbon\Carbon;
@@ -15,6 +17,7 @@ use Illuminate\Support\Collection;
  * @property Profile $profile
  * @property string $data_table
  * @property string $aggregate_column
+ * @property string $counter_class
  * @property string $date_column
  * @property Collection $calculatedRows
  */
@@ -37,14 +40,22 @@ class Section extends ModelWithQueries
         'order_by',
         'excluded_rows',
     ];
+    public $guarded = [
+        'counter_class',
+    ];
     public $timestamps = false;
+    public $total = 0;
     protected $table = 'report_sections';
     protected $appends = ['data', 'total', 'queries'];
     protected $hidden = ['wheres', 'joins', 'profile'];
     protected $casts = [
         'excluded_rows' => 'array'
     ];
-
+    /**
+     * A counter for the data
+     * @var null|CounterInterface
+     */
+    protected $counter = null;
     /**
      * A flag indicating whether the section has been built yet.
      *
@@ -66,8 +77,33 @@ class Section extends ModelWithQueries
      * @var bool
      */
     protected $includeZeroRows = false;
-    protected $total = 0;
 
+    /**
+     * Section constructor.
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        if (is_null($this->counter_class) || !class_exists($this->counter_class)) {
+            $this->counter_class = BasicCounter::class;
+        }
+
+        $this->counter = new $this->counter_class($this);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function calculatedRows()
+    {
+        return $this->hasMany(CalculatedRow::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function profile()
     {
         return $this->belongsTo(Profile::class);
@@ -80,6 +116,24 @@ class Section extends ModelWithQueries
         }
 
         return $this->data;
+    }
+
+    /**
+     * This is the main entry point for building the
+     * sections of the report.
+     *
+     * @param Profile|null $profile
+     * @return $this
+     */
+    public function build(Profile $profile = null)
+    {
+        $this->init($profile);
+
+        $this->getList();
+
+        $this->built = true;
+
+        return $this;
     }
 
     public function fetchData()
@@ -123,23 +177,7 @@ class Section extends ModelWithQueries
 
                     $this->buildCalculatedRowsData();
 
-                    foreach($this->compareData as $item) {
-                        $label = $item->{$this->aggregate_column};
-                        // Todo: Is this the best way to handle labeling?
-                        if (!is_null($this->list) && isset($this->list[$item->{$this->aggregate_column}])) {
-                            $label = $this->list[$item->{$this->aggregate_column}];
-                        }
-
-                        if (!isset($data[$label])) {
-                            $data[$label] = 0;
-                        }
-
-                        $data[$label]++;
-                        $this->total++;
-
-                    }
-
-                    $this->data = $data;
+                    $this->counter->count($this->compareData);
 
                     $this->addCalculatedRowsToData();
                 }
@@ -173,9 +211,11 @@ class Section extends ModelWithQueries
     {
         info('Section::initReportQuery()');
 
-        // If a report has been passed in, set it as the relation
-        // so that we continue to reference the same report. Otherwise,
-        // load the relationship.
+        /**
+         * If a report has been passed in, set it as the relation
+         * so that we continue to reference the same report. Otherwise,
+         * load the relationship.
+         */
 
         if (!is_null($profile)) {
             $this->setRelation('profile', $profile);
@@ -256,7 +296,6 @@ class Section extends ModelWithQueries
         } else {
             $date_field = $this->profile->date_column;
         }
-        logger('Date field: ' . $date_field);
 
         $sameCollection = $first === $second;
 
@@ -319,38 +358,22 @@ class Section extends ModelWithQueries
 
     public function addCalculatedRow($label, $data)
     {
-        $this->calculatedRowData->push(compact('label', 'data'));
-
-        //debug($this->calculatedRowData);
+        // Only add if there is data or we are including rows with 0
+        if ($this->includeZeroRows || $data->count() > 0) {
+            $this->calculatedRowData->push(compact('label', 'data'));
+        }
     }
 
     public function addCalculatedRowsToData()
     {
-        foreach ($this->calculatedRowData as $rowData) {
-            $count = $rowData['data']->count();
-            if ($this->includeZeroRows || $count > 0) {
-                $this->data[$rowData['label']] = $count;
-                $this->total += $count;
-            }
-        }
-    }
+        $this->counter->count($this->calculatedRowData);
+//        foreach ($this->calculatedRowData as $rowData) {
+//            logger('rowData: ' . print_r($rowData, true));
 
-    /**
-     * This is the main entry point for building the
-     * sections of the report.
-     *
-     * @param Profile|null $profile
-     * @return $this
-     */
-    public function build(Profile $profile = null)
-    {
-        $this->init($profile);
-
-        $this->getList();
-
-        $this->built = true;
-
-        return $this;
+//            $count = $rowData['data']->count();
+//            $this->data[$rowData['label']] = $count;
+//            $this->total += $count;
+//        }
     }
 
     public function getList()
@@ -400,16 +423,40 @@ class Section extends ModelWithQueries
         }
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function calculatedRows()
+    public function getLabel($item)
     {
-        return $this->hasMany(CalculatedRow::class);
+        $label = $item->{$this->aggregate_column};
+        // Todo: Is this the best way to handle labeling?
+        if (!is_null($this->list) && isset($this->list[$item->{$this->aggregate_column}])) {
+            $label = $this->list[$item->{$this->aggregate_column}];
+        }
+
+        return $label;
     }
 
     protected function aggregateColumn()
     {
-        return $this->data_table.'.'.$this->aggregate_column;
+        return $this->prefixedColumn($this->aggregate_column);
+    }
+
+    public function prefixedColumn($column, $prefix = null)
+    {
+        // If the $prefix exists, use it, overwriting a
+        // prefix if there was one.
+        if ($prefix) {
+            if ($pos = strpos($column, '.') > -1) {
+                $column = substr($column, $pos);
+            }
+        }
+        // If the $prefix doesn't exist, only use the base_table
+        // if there isn't already a prefix.
+        else {
+            if (strpos($column, '.') > -1) {
+                return $column;
+            }
+            $prefix = $this->data_table;
+        }
+
+        return $prefix . '.' . $column;
     }
 }

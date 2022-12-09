@@ -125,6 +125,7 @@ const app = new Vue({
             this.$store.commit('phoneTypes/receiveItems', window.Laravel.data.phoneTypes)
             this.$store.commit('referralSources/receiveItems', window.Laravel.data.referralSources )
             this.$store.dispatch('services/init', { payload: window.Laravel.data.services })
+            this.$store.commit('serviceNotProvidedReasons/receiveItems', window.Laravel.data.serviceNotProvidedReasons )
         }
     },
 

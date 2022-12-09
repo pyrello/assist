@@ -5,20 +5,31 @@ namespace App\Reports;
 use App\BaseModel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
+use Symfony\Component\VarDumper\Cloner\VarCloner;
 
+/**
+ * Class Join
+ * @package App\Reports
+ * @property string|null $from_table
+ * @property string $from_column
+ * @property string $to_table
+ * @property string $to_column
+ * @property string $operator
+ * @property string $type
+ */
 class Join extends Model
 {
-    protected $table = 'report_joins';
+    protected $table = 'reporting_joins';
 
     public $fillable = [
-        'first_table',
-        'field',
+        'label',
+        'from_table',
+        'from_column',
         'operator',
-        'second',
+        'to_table',
+        'to_column',
         'type',
         'unique',
-        'joinable_id',
-        'joinable_type',
     ];
 
     public $timestamps = false;
@@ -31,19 +42,28 @@ class Join extends Model
     {
         // Check if the join is unique
         if ($this->isUniqueJoin($query)) {
-            return $query->join($this->first_table, $this->first_table.'.'.$this->first, $this->operator, $this->prefixedSecond($query->from), $this->type);
+            info('Adding join', [$this->to_table, $this->to_table.'.'.$this->to_column, $this->operator, $this->prefixedFrom(), $this->type]);
+            $operator = (is_null($this->operator)) ? '=' : $this->operator;
+            $query = $query->join($this->to_table, $this->to_table.'.'.$this->to_column, $operator, $this->prefixedFrom(), $this->type);
+            info ('Query (add joins to query): ' . $query->toSql());
+            return $query;
         }
 
         return $query;
     }
 
-    public function prefixedSecond($baseTable = null)
+    public function prefixedFrom($table = null)
     {
-        if (is_null($baseTable) || $baseTable === '') {
-            return $this->second;
+        $from_table = '';
+        if (!is_null($table) && $table !== '') {
+            $from_table = $table;
+        } elseif (!is_null($this->from_table)) {
+            $from_table = $this->from_table;
         }
 
-        return $baseTable . '.' . $this->second;
+        info('From table: ' . $from_table);
+
+        return $from_table . '.' . $this->from_column;
     }
 
     /**
@@ -56,7 +76,7 @@ class Join extends Model
     {
         if (!is_null($query->joins)) {
             foreach ($query->joins as $join) {
-                if ($join->type == $this->type && $join->table == $this->first_table) {
+                if ($join->type == $this->type && $join->table == $this->to_table) {
                     return false;
                 }
             }

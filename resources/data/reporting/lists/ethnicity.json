@@ -1,0 +1,6 @@
+{
+  "label": "Ethnicity",
+  "list_table": "ethnicity",
+  "key_column": "id",
+  "label_column": "name"
+}

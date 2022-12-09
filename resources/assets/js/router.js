@@ -671,11 +671,37 @@ const routes = [
         component: loadPage('reporting/Container'),
         redirect: '/reporting/reports',
     },
+
+    // reportUpload
+    {
+        name: 'reportUpload',
+        path: '/reporting/upload',
+        component: loadPage('reporting/Upload'),
+        meta: {
+            breadcrumb: {
+                label: 'Upload Report',
+                parent: 'reports',
+            },
+        },
+    },
+
     // reportAdd
     {
         name: 'reportAdd',
         path: '/reporting/reports/add',
         component: loadPage('reporting/Add'),
+        meta: {
+            breadcrumb: {
+                label: 'Add Report',
+                parent: 'reports',
+            },
+        },
+    },
+    // reportAdd
+    {
+        name: 'reportAddExperimental',
+        path: '/reporting/reports/add/exp',
+        component: loadPage('reporting/Add--SAVE'),
         meta: {
             breadcrumb: {
                 label: 'Add Report',
@@ -700,6 +726,13 @@ const routes = [
         name: 'reportProfileShow',
         path: '/reporting/profiles/:id',
         component: loadPage('reporting/Show')
+    },
+
+
+    {
+        name: 'reportBuilder',
+        path: '/reporting/builder',
+        component: loadPage('reporting/Builder')
     },
 
     // Not found

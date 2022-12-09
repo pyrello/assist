@@ -1,0 +1,10 @@
+{
+  "label": "Outcomes",
+  "base_table": "client_outcome",
+  "aggregate_column": "outcome_id",
+  "aggregation_type": "percent",
+  "start_column": "date",
+  "percent_column": "completed",
+  "percent_value": 1,
+  "list": "Outcomes"
+}

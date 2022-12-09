@@ -11,27 +11,26 @@ class Where extends Model
 {
     use Joinable;
 
-    protected $table = 'report_wheres';
+    protected $table = 'reporting_wheres';
 
     protected $casts = [
         'arguments' => 'array'
     ];
 
     public $fillable = [
-        'column_table',
-        'column',
+        'label',
+        'clause_table',
+        'clause_column',
         'operator',
         'arguments',
-        'whereable_id',
-        'whereable_type',
     ];
 
     public $timestamps = false;
 
     public function prefix()
     {
-        if (!is_null($this->attributes['column_table'])) {
-            return $this->attributes['column_table'].'.';
+        if (!is_null($this->attributes['clause_table'])) {
+            return $this->attributes['clause_table'].'.';
         }
 
         return '';
@@ -39,7 +38,7 @@ class Where extends Model
 
     public function prefixedColumn()
     {
-        return $this->prefix().$this->column;
+        return $this->prefix().$this->clause_column;
     }
 
     public function addWhereToQuery(Builder $query)

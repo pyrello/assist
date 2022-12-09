@@ -36,27 +36,24 @@
                         <!--</div>-->
                     <!--</div>-->
                 <!--</div>-->
-                <div v-for="section in current.profile.sections">
-                    <h2 v-if="section.label">{{ section.label }}</h2>
-                    <table class="table table-striped">
-                        <tbody>
-                        <tr v-for="(row, $index) in section.data">
-                            <td>{{ $index }}</td>
-                            <td class="fit-content">{{ row }}</td>
-                        </tr>
-                        <tr class="report-total-row">
-                            <th>Total</th>
-                            <th>{{ section.total }}</th>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table class="table table-striped">
+                    <tbody>
+                    <tr v-for="(row, $index) in current.report_data">
+                        <td>{{ $index }}</td>
+                        <td class="fit-content">{{ row }}</td>
+                    </tr>
+                    <tr class="report-total-row">
+                        <th>Total</th>
+                        <th>{{ current.total }}</th>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-            <!--<pre>{{ current }}</pre>-->
         </div>
         <div v-else class="lead section">
             <i class="fa fa-refresh fa-spin"></i> Your report is being generated. Please allow some time for the process to complete.
         </div>
+        <pre>{{ current }}</pre>
     </div>
 </template>
 

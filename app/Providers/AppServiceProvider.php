@@ -15,6 +15,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+//        if (app()->environment() !== 'production') {
+//            \DB::listen(function ($query) {
+//                if (app()->runningInConsole()) {
+//                    dump($query->sql, $query->bindings, $query->time);
+//                }
+//            });
+//        }
     }
 
     /**

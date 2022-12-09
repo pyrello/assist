@@ -103,34 +103,15 @@
                 this.setAuthUser()
             },
 
-            client() {
-                console.warn('watch@client')
-                if (defined(this.client)) {
-                    // console.log('watched client is changing...', this.client)
-                    // Copy in data from the client
-                    if (this.client.address) {
-                        this.incident.update({
-                            state: this.client.state,
-                            city: this.client.city,
-                        })
-                    }
-                }
-            },
-
             ['params.client_id']() {
                 if (this.params.client_id) {
                     this.incident.update({ client_id: this.params.client_id })
-                    this.init()
                 }
             },
         },
 
         methods: {
             ...mapActions('incidents', ['create']),
-
-            init() {
-                this.fetchCurrentClient()
-            },
 
             process() {
                 // If the form is valid

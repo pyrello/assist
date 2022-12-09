@@ -1,0 +1,7 @@
+{
+  "label": "Age",
+  "base_table": "activities",
+  "aggregate_column": "client_id",
+  "raw_sql": "select year(activities.started_at) - year(clients.birth_date) as label, count(activities.client_id) as aggregate from activities inner join clients on activities.client_id = clients.id inner join (select client_id, max(started_at) maxdate from activities group by client_id) activities_filtered on activities_filtered.client_id = activities.client_id and activities.started_at = activities_filtered.maxdate where date(activities.started_at) > :start_date and date(activities.started_at) <= :end_date and activities.service_provided = 1 group by label order by label;",
+  "start_column": "activities.started_at"
+}

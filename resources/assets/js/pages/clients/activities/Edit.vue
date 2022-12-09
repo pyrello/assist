@@ -25,7 +25,6 @@
                     <a class="btn btn-link" @click.stop="$router.back()">Cancel</a>
                 </form>
             </div>
-            <!--<pre>{{ $data }}</pre>-->
         </div>
     </div>
 </template>
@@ -53,11 +52,6 @@
 
         components: {
             RequiredAsterisk,
-            SelectAdvocate,
-            SelectCity,
-            SelectFunding,
-            SelectService,
-            SelectState,
             ServiceRequestFormPartial,
         },
 
@@ -111,28 +105,28 @@
         },
 
         // Hooks
-        created() {
-            this.init()
-        },
+        // created() {
+        //     this.init()
+        // },
 
        beforeRouteLeave(to, from, next) {
            this.reset()
            next()
        },
 
-        watch: {
-            ['params.activity_id']() {
-                this.init()
-            },
-        },
+        // watch: {
+        //     ['params.activity_id']() {
+        //         this.init()
+        //     },
+        // },
 
         methods: {
             ...mapActions('activities', ['update']),
 
-            init() {
-                this.fetchCurrentActivity()
-                this.fetchCurrentClient()
-            },
+            // init() {
+            //     this.fetchCurrentActivity()
+            //     this.fetchCurrentClient()
+            // },
 
             process() {
                 if (this.activity.isDirty()) {

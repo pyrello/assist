@@ -36,7 +36,6 @@
             <label class="control-label" for="note">Add a Note</label>
             <textarea class="form-control" id="note" name="model.note" v-model.trim="model.note"></textarea>
         </div>
-        <!--<pre>{{ { value } }}</pre>-->
     </div>
 </template>
 

@@ -1,0 +1,95 @@
+{
+  "label": "Type of Victim",
+  "base_table": "activities",
+  "aggregate_column": "client_id",
+  "start_column": "started_at",
+  "joins": [
+    "activities JOIN clients ON activities.client_id = clients.id",
+    "activities JOIN incidents ON activities.client_id = incidents.client_id"
+  ],
+  "wheres": [
+    {
+      "clause_table": "activities",
+      "clause_column": "service_provided",
+      "operator": "=",
+      "arguments": true
+    }
+  ],
+  "calculated_rows": [
+    {
+      "label": "Domestic Abuse, Female, including dating violence (18 years and over)",
+      "data_table": "incidents",
+      "data_column": "incident_type_id",
+      "wheres": [
+        {
+          "clause_table": "incidents",
+          "clause_column": "incident_type_id",
+          "operator": "in",
+          "arguments": [1, 2]
+        },
+        {
+          "clause_table": "clients",
+          "clause_column": "gender",
+          "operator": "in",
+          "arguments": ["female", "trangender (f)"]
+        },
+        {
+          "clause_table": "incidents",
+          "clause_column": "client_age",
+          "operator": ">=",
+          "arguments": "18"
+        }
+      ]
+    },
+    {
+      "label": "Domestic Abuse, Male, including dating violence (18 years and over)",
+      "data_table": "incidents",
+      "data_column": "incident_type_id",
+      "wheres": [
+        {
+          "clause_table": "incidents",
+          "clause_column": "incident_type_id",
+          "operator": "in",
+          "arguments": [1, 2]
+        },
+        {
+          "clause_table": "clients",
+          "clause_column": "gender",
+          "operator": "in",
+          "arguments": ["male", "trangender (m)"]
+        },
+        {
+          "clause_table": "incidents",
+          "clause_column": "client_age",
+          "operator": ">=",
+          "arguments": "18"
+        }
+      ]
+    },
+    {
+      "label": "Teen dating violence (13 - 17)",
+      "data_table": "incidents",
+      "data_column": "incident_type_id",
+      "wheres": [
+        {
+          "clause_table": "incidents",
+          "clause_column": "incident_type_id",
+          "arguments": 2
+        },
+        {
+          "clause_table": "incidents",
+          "clause_column": "client_age",
+          "operator": ">=",
+          "arguments": 13
+        },
+        {
+          "clause_table": "incidents",
+          "clause_column": "client_age",
+          "operator": "<",
+          "arguments": 18
+        }
+      ]
+    }
+  ],
+  "excluded_rows": [1, 2]
+}

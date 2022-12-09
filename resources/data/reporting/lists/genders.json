@@ -1,0 +1,6 @@
+{
+  "label": "Genders",
+  "list_table": "genders",
+  "key_column": "id",
+  "label_column": "name"
+}

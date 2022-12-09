@@ -169,13 +169,10 @@
             },
 
             value(value) {
+                // console.log('value', value)
                 // Don't update unless the value has changed
 //                if (value !== this.previousValue) {
                 this.previousValue = value
-
-                if (!value) {
-                    this.clearOptions()
-                }
 
                 if (this.selectize) {
                     // this.selectize.load(callback => callback)

@@ -99,23 +99,25 @@
                 this.setAuthUser()
             },
 
-            ['params.client_id']() {
-                // console.log('params.client_id is changing', this.params.client_id)
-                if (!isNaN(this.params.client_id)) {
-                    this.fetchCurrentClient()
-                }
-            },
+            // ['params.client_id']() {
+            //     console.log('params.client_id is changing', this.params.client_id)
+            //     if (!isNaN(this.params.client_id)) {
+            //         this.fetchCurrentClient()
+            //     }
+            // },
         },
 
         methods: {
             ...mapActions('incidents', ['update']),
 
             init() {
-                this.fetchCurrentIncident()
+                console.log('initing')
+                this.fetchRouteIncident()
                     .then(() => {
-                        // console.log('incident', this.incidentData)
+                        console.log('incident', this.incidentData)
                         // this.params.client_id = this.incident.client_id
-                        this.$set(this.params, 'client_id', this.incidentData.client_id)
+                        this.setClientId(this.incidentData.client_id)
+                        // this.$set(this.params, 'client_id', this.incidentData.client_id)
                     })
             },
 

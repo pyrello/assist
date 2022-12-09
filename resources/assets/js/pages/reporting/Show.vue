@@ -3,11 +3,11 @@
         <div v-if="current">
             <header class="content-header padded">
                 <div class="header-actions pull-right hidden-xs hidden-sm desktop">
-                    <a class="btn btn-success btn" :href="'/reports/'+current.id+'/download'"><i class="fa fa-download"></i> Download</a>
+                    <a class="btn btn-success btn" :href="downloadPath"><i class="fa fa-download"></i> Download</a>
                 </div>
                 <h1 v-if="current.label">{{ current.label }}</h1>
                 <div class="header-actions hidden-md hidden-lg mobile">
-                    <a class="btn btn-success btn" :href="'/reports/'+current.id+'/download'"><i class="fa fa-download"></i> Download</a>
+                    <a class="btn btn-success btn" :href="downloadPath"><i class="fa fa-download"></i> Download</a>
                 </div>
             </header>
             <div class="section">
@@ -46,27 +46,36 @@
                         </div>
                     </div>
                 </div>
-                <div v-for="section in current.sections">
-                    <h2 v-if="section.label">{{ section.label }}</h2>
-                    <table class="table table-striped">
-                        <tbody>
-                        <tr v-for="(row, $index) in section.data">
-                            <td>{{ $index }}</td>
-                            <td class="fit-content">{{ row }}</td>
-                        </tr>
-                        <tr class="report-total-row">
-                            <th>Total</th>
-                            <th>{{ section.total }}</th>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th v-if="current.aggregation_type === 'percent'">Completed</th>
+                        <th>Total</th>
+                        <th v-if="current.aggregation_type === 'percent'">Percent</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(row, $index) in current.report_data">
+                        <td>{{ row.label }}</td>
+                        <td class="fit-content" v-if="current.aggregation_type === 'percent'">{{ row.partial }}</td>
+                        <td class="fit-content">{{ row.total }}</td>
+                        <td class="fit-content" v-if="current.aggregation_type === 'percent'">{{ Math.round(row.percent) }}%</td>
+                    </tr>
+                    <tr class="report-total-row">
+                        <th>Total</th>
+                        <th v-if="current.aggregation_type === 'percent'"></th>
+                        <th>{{ current.total }}</th>
+                        <th v-if="current.aggregation_type === 'percent'">100%</th>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-            <!--<pre>{{ current }}</pre>-->
         </div>
         <div v-else class="lead section">
             <i class="fa fa-refresh fa-spin"></i> Your report is being generated. Please allow some time for the process to complete.
         </div>
+        <pre>{{ current }}</pre>
     </div>
 </template>
 
@@ -79,7 +88,7 @@
         data() {
             return {
                 generating: true,
-                range: 'This quarter',
+                range: 'Last year',
                 start_date: null,
                 end_date: null,
             }
@@ -91,6 +100,29 @@
             current() {
                 return this.byId(this.$route.params.id)
             },
+
+            downloadPath() {
+                let path = '/reports/'+this.current.id+'/download'
+                let query = ''
+
+                if (this.start_date) {
+                    query += 'start_date=' + this.start_date
+                }
+
+                if (this.end_date) {
+                    if (query !== '') {
+                        query += '&'
+                    }
+                    query += 'end_date=' + this.end_date
+                }
+
+                if (query !== '') {
+                    path += '?' + query
+                }
+                console.log(path)
+
+                return path
+            }
         },
 
         created() {

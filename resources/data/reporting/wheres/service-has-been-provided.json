@@ -1,0 +1,7 @@
+{
+  "label": "Service has been provided",
+  "clause_table": "activities",
+  "clause_column": "service_provided",
+  "operator": "=",
+  "arguments": true
+}

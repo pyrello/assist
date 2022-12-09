@@ -1,0 +1,17 @@
+{
+  "label": "Services - By Hour",
+  "base_table": "activities",
+  "aggregate_column": "requested_service_id",
+  "start_column": "started_at",
+  "end_column": "ended_at",
+  "aggregation_type": "sum",
+  "list": "Services",
+  "wheres": [
+    {
+      "clause_table": "activities",
+      "clause_column": "service_provided",
+      "operator": "=",
+      "arguments": true
+    }
+  ]
+}

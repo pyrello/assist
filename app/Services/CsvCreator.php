@@ -58,7 +58,11 @@ class CsvCreator
         $fp = fopen($this->filePath(), 'w');
 
         foreach ($this->data as $k => $v) {
-            fputcsv($fp, [$k, $v]);
+            if (is_array($v)) {
+                fputcsv($fp, $v);
+            } else {
+                fputcsv($fp, [$k, $v]);
+            }
         }
 
         fclose($fp);

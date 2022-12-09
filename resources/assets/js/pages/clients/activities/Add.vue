@@ -32,6 +32,7 @@
 </template>
 
 <script>
+    import moment from 'moment'
     import { numeric, required, requiredIf } from 'vuelidate/lib/validators'
     import { mapActions } from 'vuex'
     import { defined } from '../../../common'

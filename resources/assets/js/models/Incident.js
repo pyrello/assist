@@ -9,8 +9,8 @@ export const defaultIncident = () => {
         client_id: null,
         advocate_id: null,
         incident_type_id: null,
-        state: null,
-        city: null,
+        state: '',
+        city: '',
         note: '',
     }
 }

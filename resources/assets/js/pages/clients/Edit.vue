@@ -180,17 +180,6 @@
                 })
             },
 
-            // currentClientFetched() {
-            //     this.$nextTick(() => {
-            //         if (this.client.parent_id) {
-            //             this.isDependent = true
-            //         }
-            //         if (!this.client.parent_id && this.client.household) {
-            //             this.household.assign(this.client.household)
-            //         }
-            //     })
-            // },
-
             process() {
                 if (!this.client.isDirty() && !this.household.isDirty()) {
                     window.scrollTo(0, 0)
