@@ -15,7 +15,7 @@ use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProfileController extends BaseController
 {
@@ -112,7 +112,7 @@ class ProfileController extends BaseController
             $report->createAndAttachCalculatedRows($report_structure['calculated_rows']);
         }
 
-        return new Resource($report);
+        return new JsonResource($report);
     }
 
     /**
@@ -120,7 +120,7 @@ class ProfileController extends BaseController
      *
      * @param Request $request
      * @param Profile $profile
-     * @return Resource
+     * @return JsonResource
      */
     public function show(Request $request, Profile $profile)
     {
@@ -129,7 +129,7 @@ class ProfileController extends BaseController
 //        $profile->load('sections.joins');
         $profile->build($start_date, $end_date);
 
-        return new Resource($profile);
+        return new JsonResource($profile);
     }
 
     public function download(Request $request, $profile)

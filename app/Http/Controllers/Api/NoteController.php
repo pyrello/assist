@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Note;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class NoteController extends BaseController
 {
@@ -58,13 +58,13 @@ class NoteController extends BaseController
      * Store a newly created resource in storage.
      *
      * @param Note $note
-     * @return Resource
+     * @return JsonResource
      */
     public function show(Note $note)
     {
         $note->load(['noteable', 'advocate']);
 
-        return new Resource($note);
+        return new JsonResource($note);
     }
 
     /**
@@ -72,7 +72,7 @@ class NoteController extends BaseController
      *
      * @param  \Illuminate\Http\Request $request
      * @param Note $note
-     * @return Resource
+     * @return JsonResource
      */
     public function update(Request $request, Note $note)
     {
@@ -81,7 +81,7 @@ class NoteController extends BaseController
         $note->update($data);
         $note->load(['noteable', 'advocate']);
 
-        return new Resource($note);
+        return new JsonResource($note);
     }
 
     /**

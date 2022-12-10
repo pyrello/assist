@@ -7,7 +7,7 @@ use App\Http\Resources\Dependent as DependentResource;
 use App\Services\DependentService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class DependentController extends BaseController
 {
@@ -32,14 +32,14 @@ class DependentController extends BaseController
 
         logger('Dependent SQL: ' . $query->toSql());
 
-        return Resource::collection($query->paginate(20));
+        return JsonResource::collection($query->paginate(20));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return Resource
+     * @return JsonResource
      */
     public function store(Request $request)
     {
@@ -47,7 +47,7 @@ class DependentController extends BaseController
 
         $dependent = DependentService::create($data);
 
-        return new Resource($dependent);
+        return new JsonResource($dependent);
     }
 
     /**

@@ -11,7 +11,7 @@ use App\Note;
 use App\Http\Resources\Incident as IncidentResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class IncidentController extends BaseController
 {
@@ -34,14 +34,14 @@ class IncidentController extends BaseController
             $query->with('client');
         }
 
-        return Resource::collection($query->paginate(20));
+        return JsonResource::collection($query->paginate(20));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  CreateIncidentRequest $request
-     * @return Resource
+     * @return JsonResource
      */
     public function store(CreateIncidentRequest $request)
     {
@@ -81,7 +81,7 @@ class IncidentController extends BaseController
 
         $incident->load('advocate', 'type', 'notes.advocate');
 
-        return new Resource($incident);
+        return new JsonResource($incident);
 
     }
 
@@ -89,12 +89,12 @@ class IncidentController extends BaseController
      * Display the specified resource.
      *
      * @param  \App\Incident  $incident
-     * @return Resource
+     * @return JsonResource
      */
     public function show(Incident $incident)
     {
         $incident->load('advocate', 'type', 'notes.advocate');
-        return new Resource($incident);
+        return new JsonResource($incident);
     }
 
     /**
@@ -102,7 +102,7 @@ class IncidentController extends BaseController
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \App\Incident $incident
-     * @return Resource
+     * @return JsonResource
      */
     public function update(Request $request, Incident $incident)
     {
@@ -141,7 +141,7 @@ class IncidentController extends BaseController
 
         $incident->load('advocate', 'type', 'notes');
 
-        return new Resource($incident);
+        return new JsonResource($incident);
     }
 
     /**

@@ -1,31 +1,31 @@
 
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-//@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,600');
+//@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 // Variables
-@import "variables";
+@import 'variables';
 
 // Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
-@import "bootstrap";
+@import '~bootstrap-sass/assets/stylesheets/bootstrap';
+@import 'bootstrap';
 
 // Font Awesome
-//@import "~font-awesome/scss/font-awesome";
-//@import "~@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss";
-@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
-@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+//@import '~font-awesome/scss/font-awesome';
+//@import '~@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
 
 // AdminLTE
-@import "~admin-lte/dist/css/AdminLTE.min.css";
-@import "~admin-lte/dist/css/skins/_all-skins.min.css";
-@import "admin-lte";
+@import '~admin-lte/dist/css/AdminLTE.min.css';
+@import '~admin-lte/dist/css/skins/_all-skins.min.css';
+@import 'admin-lte';
 
 // Selectize
-@import "~selectize/dist/css/selectize";
-@import "~selectize/dist/css/selectize.bootstrap3";
+@import '~selectize/dist/css/selectize';
+@import '~selectize/dist/css/selectize.bootstrap3';
 
-@import "selectize";
+@import 'selectize';
 
 // Flatpickr
 @import '~flatpickr/dist/flatpickr.min.css';
@@ -33,10 +33,10 @@
 // TiTaToggle
 @import '~titatoggle/dist/titatoggle-dist-min.css';
 
-//@import "node_modules/choices.js/assets/styles/scss/base";
-//@import "node_modules/choices.js/assets/styles/scss/choices";
+//@import 'node_modules/choices.js/assets/styles/scss/base';
+//@import 'node_modules/choices.js/assets/styles/scss/choices';
 
-@import "grid";
+@import 'grid';
 
 
 .full-height {
