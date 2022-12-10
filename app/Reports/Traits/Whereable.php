@@ -13,7 +13,7 @@ trait Whereable
      */
     public function wheres()
     {
-        return $this->morphMany(Where::class, 'whereable');
+        return $this->morphToMany(Where::class, 'whereable', 'reporting_whereables');
     }
 
     /**
@@ -56,5 +56,10 @@ trait Whereable
                 $where->createAndAttachJoins($joins);
             }
         }
+    }
+
+    public function attachWheres(array $ids = [])
+    {
+        $this->wheres()->attach($ids);
     }
 }

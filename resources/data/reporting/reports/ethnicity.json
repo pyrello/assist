@@ -1,0 +1,7 @@
+{
+ "label": "Ethnicity",
+ "base_table": "client_ethnicity",
+ "aggregate_column": "client_id",
+ "raw_sql": "select ethnicity.name as label, count(client_ethnicity.client_id) as aggregate from client_ethnicity inner join activities on client_ethnicity.client_id = activities.client_id inner join ethnicity on client_ethnicity.ethnicity_id = ethnicity.id inner join   (select client_id, max(started_at) maxdate   from activities   group by client_id) activities_filtered on activities_filtered.client_id = client_ethnicity.client_id and activities.started_at = activities_filtered.maxdate inner join (select client_id, min(`order`) minorder from client_ethnicity group by client_id) ce_limited on ce_limited.client_id = client_ethnicity.client_id and client_ethnicity.order = ce_limited.minorder where date(activities.started_at) > :start_date and date(activities.started_at) <= :end_date and activities.service_provided = 1 group by ethnicity.name order by ethnicity.name;",
+ "start_column": "activities.started_at"
+}

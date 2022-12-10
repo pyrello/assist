@@ -1,0 +1,8 @@
+{
+  "label": "clients JOIN incidents ON clients.id = incidents.client_id",
+  "from_table": "clients",
+  "from_column": "id",
+  "operator": "=",
+  "to_table": "incidents",
+  "to_column": "client_id"
+}

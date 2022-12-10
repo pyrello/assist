@@ -1,0 +1,6 @@
+{
+  "label": "Outcomes",
+  "list_table": "outcomes",
+  "key_column": "id",
+  "label_column": "description"
+}

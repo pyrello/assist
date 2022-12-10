@@ -114,6 +114,7 @@
                         name: 'phone',
                         title: 'Phone',
                     },
+                    'gender',
 //                    {
 //                        name: 'last_activity_date',
 //                        title: 'Last Activity',

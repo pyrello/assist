@@ -145,15 +145,15 @@
 </template>
 
 <script>
-    import Client from '../../models/Client'
     import Localities from '../../mixins/localities'
-    import RequiredAsterisk from '../RequiredAsterisk'
-    import SelectEthnicity from '../controls/selects/Ethnicity.vue'
-    import SelectGender from '../controls/selects/Genders.vue'
+    import ValidationClasses from '../../mixins/validationClasses'
+    import Client from '../../models/Client'
     import SelectCity from '../controls/selects/Cities.vue'
     import SelectCounty from '../controls/selects/Counties.vue'
+    import SelectEthnicity from '../controls/selects/Ethnicity.vue'
+    import SelectGender from '../controls/selects/Genders.vue'
     import SelectState from '../controls/selects/States.vue'
-    import ValidationClasses from '../../mixins/validationClasses'
+    import RequiredAsterisk from '../RequiredAsterisk'
 
     export default {
 

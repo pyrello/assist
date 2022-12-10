@@ -1,0 +1,7 @@
+{
+  "label": "Gender",
+  "base_table": "clients",
+  "aggregate_column": "gender",
+  "raw_sql": "select clients.gender as label, count(clients.id) as aggregate from clients inner join activities on clients.id = activities.client_id inner join (select client_id, max(started_at) maxdate from activities group by client_id) activities_filtered on activities_filtered.client_id = clients.id and activities.started_at = activities_filtered.maxdate where date(activities.started_at) > :start_date and date(activities.started_at) <= :end_date and activities.service_provided = 1 group by clients.gender order by clients.gender;",
+  "start_column": "activities.started_at"
+}

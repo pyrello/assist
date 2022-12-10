@@ -1,0 +1,6 @@
+{
+  "label": "Services",
+  "list_table": "services",
+  "key_column": "id",
+  "label_column": "name"
+}

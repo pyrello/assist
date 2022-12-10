@@ -92,7 +92,7 @@
             }),
 
             confirmDelete(id) {
-                const name = this.byId(id).abuser.full_name
+                const name = this.byId(id) && this.byId(id).abuser && this.byId(id).abuser.full_name || ''
                 let c = confirm('Are you sure that you want to remove the abuse relationship between, ' + name + ' and ' + this.client.full_name + '? If this abuser is not attached to any other clients, their record will be deleted.')
 
                 if (c) {

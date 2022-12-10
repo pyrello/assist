@@ -15,16 +15,22 @@
                         <select-outcome v-model="outcome.outcome_id"></select-outcome>
                     </div>
 
+                    <label>Completed?</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="completed" v-model="outcome.completed" :value="true"> Yes
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="completed" v-model="outcome.completed" :value="false"> No
+                        </label>
+                    </div>
+
                     <div class="form-group" :class="controlClasses('date', 'outcome')" v-if="!outcome.activity_ids.length">
                         <label class="control-label" for="date">Date <required-asterisk></required-asterisk></label>
                         <input-date id="date" v-model="outcome.date"></input-date>
                     </div>
-
-                    <!-- Notes -->
-                    <!--<div class="form-group">-->
-                        <!--<label class="control-label" for="note">Notes</label>-->
-                        <!--<textarea class="form-control" id="note" name="note" v-model.trim="outcome.note"></textarea>-->
-                    <!--</div>-->
 
                     <p v-if="$v.outcome.$invalid">
                         <span class="text-warning">* Please ensure all fields are filled out correctly to proceed.</span>
@@ -33,6 +39,7 @@
                     <button type="submit" class="btn btn-primary btn-lg" :disabled="!outcome.isDirty() || $v.$invalid">Save</button>
                     <a class="btn btn-link" @click.stop="$router.back()">Cancel</a>
                 </form>
+<!--                <pre>{{ outcome }}</pre>-->
             </div>
         </div>
     </div>

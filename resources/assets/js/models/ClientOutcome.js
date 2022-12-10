@@ -7,6 +7,7 @@ export const defaultClientOutcome = () => {
         incident_id: null,
         outcome_id: null,
         activity_ids: [],
+        completed: false,
         date: null,
         note: '',
     }

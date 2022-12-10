@@ -20,7 +20,7 @@ const receiveItem = (state, item, key = 'id') => {
     } else {
         const normalizedItem = normalizeItem(item)
         if (state.all.constructor === Array) {
-            const localItem = state.all.find(i => i.id == item.id)
+            const localItem = state.all.find(i => i[state.keyField] == item[state.keyField])
             if (localItem) {
                 if (!_.isEqual(normalizedItem, localItem)) {
                     const index = state.all.indexOf(localItem)
@@ -30,13 +30,13 @@ const receiveItem = (state, item, key = 'id') => {
                 state.all.push(normalizedItem)
             }
         } else {
-            const localItem = _.find(state.all, { id: item.id })
+            const localItem = _.find(state.all, { [state.keyField]: item[state.keyField] })
             if (localItem) {
                 if (!_.isEqual(normalizedItem, localItem)) {
-                    Vue.set(state.all, item[key], normalizedItem)
+                    Vue.set(state.all, item[state.keyField], normalizedItem)
                 }
             } else {
-                Vue.set(state.all, item[key], normalizedItem)
+                Vue.set(state.all, item[state.keyField], normalizedItem)
             }
         }
     }

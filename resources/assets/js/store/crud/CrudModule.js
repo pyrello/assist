@@ -11,8 +11,16 @@ export default class CrudModule {
         namespaced = true,
         modules,
         endpoint,
-        keyField = 'id'
+        keyField = 'id',
+        singular = false,
     } = {}) {
+
+        if (!singular) {
+            singular = name
+            if (singular.slice(-1) === 's') {
+                singular = singular.slice(0, -1)
+            }
+        }
 
         this.endpoint = endpoint || name
         this.name = name
@@ -40,6 +48,7 @@ export default class CrudModule {
             listing: [],
             meta: {},
             type: name,
+            singular: singular,
             ...state,
         }
 

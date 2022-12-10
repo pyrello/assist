@@ -13,17 +13,23 @@
     import { formattedDatetime } from '../../common'
     import { MOMENT_DATETIME_FORMAT } from '../../factory'
 
-
     export default {
 
         props: ['id', 'config', 'value', 'enableTime', 'start', 'end'],
+        computed: {
+            getDefaultConfig() {
+                return this.defaultConfig()
+            }
+        },
 
         mounted() {
+            // console.log('enableTime', this.enableTime)
             flatpickr(this.$refs.date, this.buildConfig())
         },
 
         // Hooks
         updated() {
+            // Todo: figure out a better way to handle this
             flatpickr(this.$refs.date, this.buildConfig())
         },
 
@@ -100,8 +106,9 @@
                 const config = {
                     altFormat,
                     altInput: true,
-                    altInputClass: 'test',
+                    // altInputClass: 'test',
                     // allowInput: true,
+                    enableTime: this.enableTime,
                     dateFormat,
                 }
 

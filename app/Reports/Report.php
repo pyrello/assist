@@ -43,21 +43,22 @@ class Report extends Model
             // Create a ZIP archive containing all of them
             // Return the ZIP archive
 
-        if (count($this->profile->section_data) < 2) {
-            $section = $this->profile->section_data[0];
-            // Section label overrides the general label
-            $label = isset($section['label']) ? $section['label'] : $this->label;
-            $download = new CsvCreator($label, $section['data']);
-        } else {
-            $files = [];
-            foreach($this->profile->section_data as $section) {
-                // Section label overrides the general label
-                $label = isset($section['label']) ? $section['label'] : $this->label;
-                $csv = new CsvCreator($label, $section['data']);
-                $files[] = $csv->getDownload();
-            }
-            $download = new ZipCreator($this->profile->label, $files);
-        }
+        $report = $this->profile->report_data;
+        // Section label overrides the general label
+//        $label = isset($section['label']) ? $section['label'] : $this->label;
+        $download = new CsvCreator($this->profile->label, $report['data']);
+
+//        if (count($this->profile->section_data) < 2) {
+//        } else {
+//            $files = [];
+//            foreach($this->profile->section_data as $section) {
+//                // Section label overrides the general label
+//                $label = isset($section['label']) ? $section['label'] : $this->label;
+//                $csv = new CsvCreator($label, $section['data']);
+//                $files[] = $csv->getDownload();
+//            }
+//            $download = new ZipCreator($this->profile->label, $files);
+//        }
 
         return $download->getDownload();
     }

@@ -17,12 +17,12 @@
             <label>When was the service provided?</label>
             <div class="form-group" :class="controlClasses('started_at')">
                 <label class="control-label" for="started_at">Start <required-asterisk></required-asterisk></label>
-                <input-date id="started_at" v-model="model.started_at" :end="'now'" enable-time="true"></input-date>
+                <input-date id="started_at" v-model="model.started_at" :end="'now'" :enable-time="true"></input-date>
             </div>
 
             <div class="form-group" :class="controlClasses('ended_at')">
                 <label class="control-label" for="ended_at">End <required-asterisk></required-asterisk></label>
-                <input-date id="ended_at" v-model="model.ended_at" :start="model.started_at" :end="'now'" enable-time="true"></input-date>
+                <input-date id="ended_at" v-model="model.ended_at" :start="model.started_at" :end="'now'" :enable-time="true"></input-date>
             </div>
 
             <div class="form-group" :class="controlClasses('funding_source_id')">
@@ -52,8 +52,6 @@
                         :all="serviceNotProvidedReasons"
                         v-model="model.why_not_provided"
                         placeholder="Select the reason..."
-                        valueField="id"
-                        valueType="number"
                 ></selectize>
             </div>
         </div>
@@ -62,7 +60,6 @@
 
 <script>
     import { mapGetters } from 'vuex'
-    import { defined } from '../../common'
     import CheckboxSlider from '../../components/controls/CheckboxSlider'
     import SelectAdvocate from '../../components/controls/selects/Advocates.vue'
     import SelectFunding from '../../components/controls/selects/Funding'
@@ -107,16 +104,14 @@
         // Watchers
         watch: {
             model() {
-                if (this.model.isDirty()) {
+                if (this.model && this.model.isDirty()) {
                     this.$emit('input', this.model)
                 }
             },
 
             value(value) {
-                if (defined(value)) {
                     this.model = value
                 }
-            }
         },
     }
 </script>

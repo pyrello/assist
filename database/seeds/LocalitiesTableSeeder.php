@@ -78,7 +78,7 @@ class LocalitiesTableSeeder extends Seeder
 
         $census_data = Cache::rememberForever('lists:states:all', function() {
 
-            $response = $this->client->get('http://api.census.gov/data/2010/dec/sf1?for=state:*&get=NAME&key='.config('services.census.key'));
+            $response = $this->client->get('http://api.census.gov/data/2010/sf1?for=state:*&get=NAME&key='.config('services.census.key'));
             $body = $response->getBody();
             $census_data = json_decode($body);
             array_shift($census_data);
@@ -106,7 +106,7 @@ class LocalitiesTableSeeder extends Seeder
     {
         $census_data = Cache::rememberForever('lists:states:' . $state->name . ':counties:all', function() use ($fips_id) {
 
-            $response = $this->client->get('http://api.census.gov/data/2010/dec/sf1?for=county:*&in=state:'.$fips_id.'&get=NAME&key='.config('services.census.key'));
+            $response = $this->client->get('http://api.census.gov/data/2010/sf1?for=county:*&in=state:'.$fips_id.'&get=NAME&key='.config('services.census.key'));
 
             $body = $response->getBody();
             $census_data = json_decode($body);
@@ -126,7 +126,7 @@ class LocalitiesTableSeeder extends Seeder
     protected function importCityData($fips_id, State $state)
     {
         $census_data = Cache::rememberForever('lists:states:' . $state->name . ':cities:all', function() use ($fips_id) {
-            $response = $this->client->get('http://api.census.gov/data/2010/dec/sf1?for=place:*&in=state:'.$fips_id.'&get=NAME&key='.config('services.census.key'));
+            $response = $this->client->get('http://api.census.gov/data/2010/sf1?for=place:*&in=state:'.$fips_id.'&get=NAME&key='.config('services.census.key'));
 
             $body = $response->getBody();
             $census_data = json_decode($body);

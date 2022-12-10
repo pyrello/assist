@@ -42,7 +42,6 @@
             <h4><i class="fas fa-plus"></i> Add New Abuser</h4>
             <abuser-form v-model="abuser" :$v="$v.abuser"></abuser-form>
         </div>
-        <!--<pre>{{ { abuser, relationship } }}</pre>-->
     </div>
 </template>
 

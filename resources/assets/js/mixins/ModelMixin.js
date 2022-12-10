@@ -31,10 +31,17 @@ export default class ModelMixin {
                 [`fetching${capitalize(name)}`]: 'fetching',
             }),
 
+            [`routeHas${capitalize(name)}Model`]() {
+                return this.$route.params && this.$route.params[`${name}_id`] || false
+            },
+
             // modelData
             [`${name}Data`]() {
                 const fetching = this[`fetching${capitalize(name)}`] // This is a hack to force this to re-render when fetch completes
-                return this[`route${capitalize(name)}`]
+                if (this[`routeHas${capitalize(name)}Model`]) {
+                    return this[`route${capitalize(name)}`]
+                }
+                return this[`${name}ById`](this.params[`${name}_id`])
             },
         }
 
@@ -43,23 +50,32 @@ export default class ModelMixin {
         }
 
         this.watch = {
-            [`${name}Data`]() {
-                // this.log(`${name}Data`, this[`${name}Data`])
-                // Reset the model to prevent lingering data
-                this[`reset${that.modelMixinOptions.name}`]()
-                // Assign the raw data to the model
-                if (this[`${that.modelMixinOptions.name}Data`]) {
-                    this[`${that.modelMixinOptions.name}`].assign(this[`${that.modelMixinOptions.name}Data`])
-                }
+            [`${name}Data`]: {
+                deep: true,
+                handler: function() {
+                    // console.log(`${that.modelMixinOptions.name}Data`, this[`${that.modelMixinOptions.name}Data`])
+                    // Reset the model to prevent lingering data
+                    this[`reset${that.modelMixinOptions.name}`]()
+                    // Assign the raw data to the model
+                    if (this[`${that.modelMixinOptions.name}Data`]) {
+                        this[`${that.modelMixinOptions.name}`].assign(this[`${that.modelMixinOptions.name}Data`])
+                    }
+                },
             },
 
-            [`this.$route.params.${name}_id`]() {
+            [`$route.params.${name}_id`]() {
                 this[`set${capitalize(name)}Id`]()
             },
+
+            [`params.${name}_id`](value) {
+                if (value !== null) {
+                    this[`fetchCurrent${capitalize(name)}`]()
+                }
+            }
         }
 
         this.methods = {
-            ...mapActions(storeName, { [`fetch${capitalize(name)}`]: 'fetch' }),
+            ...mapActions(storeName, { [`fetch${capitalize(name)}Data`]: 'fetch' }),
 
             // setModelId
             [`set${capitalize(name)}Id`](id) {
@@ -71,7 +87,7 @@ export default class ModelMixin {
                 } else {
                     id = null
                 }
-                // this.log(`set${capitalize(name)}Id`, id)
+                // console.log(`set${capitalize(name)}Id`, id)
 
                 Vue.set(this.params, `${name}_id`, id)
             },
@@ -81,13 +97,24 @@ export default class ModelMixin {
                 return defined(this.params[`${name}_id`]) && this.params[`${name}_id`] !== null
             },
 
+            [`fetch${capitalize(name)}`](config) {
+                this[`fetch${capitalize(name)}Data`](config)
+                    .then(results => {
+                        this[`${name}Fetched`](results)
+                        return results
+                    })
+                    .catch(error => {
+                        console.error(error)
+                    })
+            },
+
             // fetchCurrentModel
             [`fetchRoute${capitalize(name)}`]() {
                 const id = Number(this.$route.params[`${name}_id`])
                 if (!id) {
                     return false
                 }
-                return this[`fetch${capitalize(name)}`]({ id: id, fetchId: `id:${id}` })
+                return this[`fetch${capitalize(name)}Data`]({ id: id, fetchId: `id:${id}` })
                     .then(current => {
                         this[`route${capitalize(name)}Fetched`]()
                         this[`current${capitalize(name)}Fetched`]()
@@ -95,17 +122,25 @@ export default class ModelMixin {
                     })
                     .catch(error => {
                         console.error(error)
-                        // this.addMessage({
-                        //     text: error,
-                        //     type: 'danger',
-                        // })
-                        // this.$router.push('/abusers')
                     })
             },
 
             // fetchCurrentModel
             [`fetchCurrent${capitalize(name)}`]() {
-                return this[`fetchRoute${capitalize(name)}`]()
+
+                const id = Number(this.params[`${name}_id`])
+                if (!id) {
+                    return false
+                }
+                return this[`fetch${capitalize(name)}Data`]({ id: id, fetchId: `id:${id}` })
+                    .then(current => {
+                        this[`route${capitalize(name)}Fetched`]()
+                        this[`current${capitalize(name)}Fetched`]()
+                        return current
+                    })
+                    .catch(error => {
+                        console.error(error)
+                    })
             },
             [`current${capitalize(name)}Fetched`]() {
                 //

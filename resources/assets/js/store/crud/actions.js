@@ -66,12 +66,11 @@ export const destroy = ({ commit, state }, params = {}) => new Promise((resolve,
  */
 export const fetch = ({ commit, state }, config) => {
 
-
     if (_.has(config, 'fetchId') && state.fetching && state.fetching.fetchId && state.fetching.fetchId == config.fetchId) {
         return state.fetching.request
     }
 
-    console.warn('fetch', state.endpoint, config)
+    // console.warn('fetch', state.endpoint, config)
 
     let endpoint = state.endpoint
 
@@ -97,8 +96,7 @@ export const fetch = ({ commit, state }, config) => {
                 // Multiple items
                 commit('receiveItems', payload.data)
 
-                const ids = payload.data.map(item => item.id)
-
+                const ids = payload.data.map(item => item[state.keyField])
 
                 const signature = paramSignature(config)
                 // console.log('fetch', 'param signature', signature)

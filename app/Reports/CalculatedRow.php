@@ -16,67 +16,58 @@ class CalculatedRow extends ModelWithQueries
     public $data;
 
     public $fillable = [
-        'section_id',
+        'reporting_profile_id',
         'label',
         'data_table',
         'data_column',
     ];
 
     protected $appends = ['queries', 'data'];
-    protected $hidden = ['wheres', 'joins', 'section'];
+    protected $hidden = ['wheres', 'joins', 'profile'];
 
-    protected $table = 'report_calculated_rows';
+    protected $table = 'reporting_calculated_rows';
 
     public $timestamps = false;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function section()
+    public function profile()
     {
-        return $this->belongsTo(Section::class);
+        return $this->belongsTo(Profile::class, 'reporting_profile_id');
     }
 
-    public function build(Section $section = null)
+    public function build(Profile $profile = null)
     {
-        info('CalculatedRow::build() (' . $this->label . ')');
-        if (!is_null($section)) {
-            $this->setRelation('section', $section);
+        if (!is_null($profile)) {
+            $this->setRelation('profile', $profile);
         } else {
-            if (!$this->relationLoaded('section')) {
-                $this->load('section');
+            if (!$this->relationLoaded('profile')) {
+                $this->load('profile');
             }
-            if (!$this->relationLoaded('section.profile')) {
-                $this->load('section.report');
-            }
+            /** @var Profile $profile */
+            $profile = $this->profile;
         }
 
-        /** @var Profile $profile */
-        $profile = $this->section->profile;
-        //var_dump($this->section);
-        //die();
 
         // Get ID field and filters from Report to set fields to pull back
         /** @var Builder $query */
-        $query = $this->section->cloneQuery('report')
-            ->addSelect($this->section->profile->base_table . '.' . $this->section->profile->aggregate_column)
-            ->addSelect($this->section->data_table . '.' . $this->section->aggregate_column)
-            ->addSelect($this->section->profile->base_table . '.' . $this->section->profile->date_column);
-//            ->where($this->section->profile->base_table . '.' . $this->section->profile->date_column, '=', function (Builder $q) use ($profile) {
+        $query = $profile->cloneQuery('base')
+            ->addSelect($profile->base_table . '.' . $profile->aggregate_column)
+            ->addSelect($profile->base_table . '.' . $profile->start_column);
+//            ->where($profile->base_table . '.' . $profile->date_column, '=', function (Builder $q) use ($profile) {
 //                /** Builder $q */
 //                $q->from($profile->base_table . ' as bt2')
 //                    ->selectRaw('max(`bt2`.`' . $profile->date_column . '`)')
-//                    ->whereColumn($profile->base_table . '.' . $this->section->profile->aggregate_column, '=', 'bt2.' . $this->section->profile->aggregate_column);
+//                    ->whereColumn($profile->base_table . '.' . $profile->aggregate_column, '=', 'bt2.' . $profile->aggregate_column);
 //            });
 
         $this->addWheresToQuery($query);
-        info('C. Row query: ' . print_r($query->toSql(), true));
 
         $this->addQuery($query);
 
         /** @var Collection $results */
         $this->data = $query->get();
-        info('Calculated row results: ' . print_r($this->data, true));
 
         return $this;
     }

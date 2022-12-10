@@ -1,0 +1,26 @@
+{
+  "label": "Gender",
+  "base_table": "clients",
+  "join_to_column": "client_id",
+  "join_key_column": "id",
+  "aggregate_column": "id",
+  "start_column": "incidents.date",
+  "aggregation_type": "count",
+  "list": "Genders",
+  "joins": [
+    {
+      "to_table": "activities"
+    },
+    {
+      "to_table": "incidents"
+    }
+  ],
+  "wheres": [
+    {
+      "clause_table": "activities",
+      "clause_column": "service_provided",
+      "operator": "=",
+      "arguments": true
+    }
+  ]
+}

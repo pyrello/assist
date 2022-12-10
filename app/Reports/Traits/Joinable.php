@@ -18,7 +18,7 @@ trait Joinable
      */
     public function joins()
     {
-        return $this->morphMany(Join::class, 'joinable');
+        return $this->morphToMany(Join::class, 'joinable', 'reporting_joinables');
     }
 
     /**
@@ -53,5 +53,12 @@ trait Joinable
 
             $this->joins()->save($join);
         }
+    }
+
+    public function attachJoins(array $ids = [])
+    {
+        $this->joins()->attach($ids);
+
+        return $this;
     }
 }

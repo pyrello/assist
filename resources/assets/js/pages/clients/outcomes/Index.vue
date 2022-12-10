@@ -14,6 +14,9 @@
                         <button class="btn btn-danger btn-xs" @click="confirmDelete(props.item.id)" v-if="authUser.is_admin"><i class="fas fa-trash-alt fa-fw"></i> Delete</button>&nbsp;&nbsp;
                     </div>
                 </template>
+                <template slot="completed" slot-scope="props">
+                    <i class="fas fa-check-circle fa-fw text-success" v-if="props.item.completed === 1"></i>
+                </template>
                 <template slot="date" slot-scope="props">
                     {{ props.item.date | prettyDate }}
                 </template>
@@ -47,6 +50,7 @@
                         title: 'Outcome',
                     },
                     'date',
+                    'completed',
                     {
                         name: 'actions',
                         dataClass: 'fit-content',

@@ -69,9 +69,9 @@ export default {
                 required = false,
                 value = _.get(model, prop),
                 changed = defined(model.getChanges(prop)),
-                empty = !defined(value) || value === null || !((typeof value === 'string' || typeof value === 'number') && value !== '') || (prop === 'id' && !value)
+                empty = !defined(value) || value === null || ((typeof value === 'string' || typeof value === 'number') && value === '') || (prop === 'id' && !value)
 
-            if (log) console.log('empty', value, !defined(value), value === null, typeof value === 'string', typeof value === 'number', value !== '', !((typeof value === 'string' || typeof value === 'number') && value !== ''))
+            if (log) console.log('empty', empty, value, !defined(value), value === null, typeof value === 'string', typeof value === 'number', value !== '', ((typeof value === 'string' || typeof value === 'number') && value === ''), !value, (prop === 'id' && !value))
 
             // Validation is defined
             if (defined($validation)) {

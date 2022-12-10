@@ -42,26 +42,6 @@
 
         mixins: [ InitAbuser ],
 
-        computed: {
-            ...mapGetters('eyeColors', {
-                eyeColors: 'all',
-            }),
-            ...mapGetters('hairColors', {
-                hairColors: 'all',
-            }),
-            ...mapGetters('hairLengths', {
-                hairLengths: 'all',
-            }),
-
-            heights() {
-                const heights = []
-                for (let $i = 54; $i <= 90; $i++) {
-                    heights.push($i);
-                }
-
-                return heights
-            }
-        },
 
         // Hooks
         created() {

@@ -76,9 +76,9 @@
         },
 
         // Hooks
-        created() {
-            this.init(this.$route.query)
-        },
+        // created() {
+        //     this.init(this.$route.query)
+        // },
 
         beforeRouteUpdate(to, from, next) {
             this.init(to.query)

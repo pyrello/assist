@@ -15,6 +15,18 @@
                         <select-outcome v-model="model.outcome_id"></select-outcome>
                     </div>
 
+                    <label>Completed?</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="completed" v-model="model.completed" :value="true"> Yes
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="completed" v-model="model.completed" :value="false"> No
+                        </label>
+                    </div>
+
                     <div class="form-group" :class="controlClasses('date')" v-if="!model.activity_ids.length">
                         <label class="control-label" for="date">Date <required-asterisk></required-asterisk></label>
                         <input-date id="date" v-model="model.date"></input-date>
@@ -33,7 +45,7 @@
                     <button type="submit" class="btn btn-primary btn-lg">Save</button>
                     <a class="btn btn-link" @click.stop="$router.back()">Cancel</a>
                 </form>
-                <!--<pre>{{ { client, model } }}</pre>-->
+<!--                <pre>{{ { model } }}</pre>-->
             </div>
         </div>
     </div>
