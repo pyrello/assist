@@ -7,7 +7,7 @@ use App\Http\Resources\ClientOutcome as ClientOutcomeResource;
 use App\Note;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class ClientOutcomeController extends BaseController
 {
@@ -78,7 +78,7 @@ class ClientOutcomeController extends BaseController
      *
      * @param  \Illuminate\Http\Request $request
      * @param ClientOutcome $clientOutcome
-     * @return Resource
+     * @return JsonResource
      */
     public function update(Request $request, ClientOutcome $clientOutcome)
     {

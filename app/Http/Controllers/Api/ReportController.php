@@ -14,7 +14,7 @@ use App\Service;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class ReportController extends BaseController
 {
@@ -58,7 +58,7 @@ class ReportController extends BaseController
         $report = Report::find($id);
         $report->build();
 
-        return new Resource($report);
+        return new JsonResource($report);
     }
 
     public function test(Request $request) {

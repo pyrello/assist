@@ -3,11 +3,11 @@
 /public/storage
 /storage/*.key
 /vendor
+.env
+.env.backup
+.phpunit.result.cache
+npm-debug.log
+yarn-error.log
 /.idea
 /.vscode
 /.vagrant
-npm-debug.log
-yarn-error.log
-.env
-/coverage
-/.nyc_output

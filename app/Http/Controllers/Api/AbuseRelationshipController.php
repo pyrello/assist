@@ -8,7 +8,7 @@ use App\Client;
 use App\Services\AbuserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Response;
 
 /**
@@ -44,7 +44,7 @@ class AbuseRelationshipController extends BaseController
             });
         }
 
-        return Resource::collection($query->paginate(20));
+        return JsonResource::collection($query->paginate(20));
     }
 
     /**
@@ -52,7 +52,7 @@ class AbuseRelationshipController extends BaseController
      * POST /abuse-relationships
      *
      * @param Request $request
-     * @return Resource
+     * @return JsonResource
      */
     public function store(Request $request)
     {
@@ -72,7 +72,7 @@ class AbuseRelationshipController extends BaseController
 
         $relationship->load(['client', 'abuser']);
 
-        return new Resource($relationship);
+        return new JsonResource($relationship);
     }
 
     /**
@@ -80,11 +80,11 @@ class AbuseRelationshipController extends BaseController
      * GET|HEAD /abuse-relationships/{id}
      *
      * @param AbuseRelationship $relationship
-     * @return Resource
+     * @return JsonResource
      */
     public function show(AbuseRelationship $relationship)
     {
-        return new Resource($relationship);
+        return new JsonResource($relationship);
     }
 
     /**
@@ -93,7 +93,7 @@ class AbuseRelationshipController extends BaseController
      *
      * @param AbuseRelationship $relationship
      * @param Request $request
-     * @return Resource
+     * @return JsonResource
      */
     public function update(AbuseRelationship $relationship, Request $request)
     {
@@ -101,7 +101,7 @@ class AbuseRelationshipController extends BaseController
 
         $relationship->update($data);
 
-        return new Resource($relationship);
+        return new JsonResource($relationship);
     }
 
     /**

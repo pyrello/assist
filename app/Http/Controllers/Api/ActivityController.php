@@ -7,7 +7,7 @@ use App\Note;
 use App\Service;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class ActivityController extends BaseController
 {
@@ -82,12 +82,13 @@ class ActivityController extends BaseController
      * Display the specified resource.
      *
      * @param  Activity  $activity
-     * @return \Illuminate\Http\Response
+     *
+     * @return \Illuminate\Http\Resources\Json\JsonResource
      */
     public function show(Activity $activity)
     {
         $activity->load('service', 'advocate', 'notes');
-        return new Resource($activity);
+        return new JsonResource($activity);
     }
 
     /**

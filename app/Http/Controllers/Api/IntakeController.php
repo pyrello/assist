@@ -15,7 +15,7 @@ use App\Http\Resources\Intake as IntakeResource;
 use App\Services\IntakeService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\JsonResponse;
 
 class IntakeController extends Controller
@@ -29,7 +29,7 @@ class IntakeController extends Controller
     {
         $intakes = Intake::all();
 
-        return Resource::collection($intakes);
+        return JsonResource::collection($intakes);
     }
 
     /**
@@ -44,7 +44,7 @@ class IntakeController extends Controller
 
         $resources = IntakeService::create($data);
 
-        return Resource::collection(new Collection($resources));
+        return JsonResource::collection(new Collection($resources));
     }
 
     /**
@@ -58,7 +58,7 @@ class IntakeController extends Controller
         $intake = Intake::with('client', 'notes', 'abuseRelationships.abuser')->findOrFail($id);
 //        $intake->load('client', 'notes');
 
-        return new Resource($intake);
+        return new JsonResource($intake);
     }
 
     /**

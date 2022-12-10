@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\MissingValue;
 
-class Dependent extends Resource
+class Dependent extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,7 +16,7 @@ class Dependent extends Resource
     public function toArray($request)
     {
         $ethnicityLoaded = $this->whenLoaded('ethnicity');
-        $ethnicityIds = ($ethnicityLoaded instanceof MissingValue || $ethnicityLoaded->isEmpty()) ? null : Resource::collection($ethnicityLoaded)->pluck('id', 'pivot.order');
+        $ethnicityIds = ($ethnicityLoaded instanceof MissingValue || $ethnicityLoaded->isEmpty()) ? null : JsonResource::collection($ethnicityLoaded)->pluck('id', 'pivot.order');
 
         return [
             'id' => $this->id,

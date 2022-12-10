@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\MissingValue;
 
-class Abuser extends Resource
+class Abuser extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -34,7 +34,7 @@ class Abuser extends Resource
             'vehicle' => $this->vehicle,
             'ethnicity_ids' => $this->ethnicity_ids,
             'ethnicity' => $this->ethnicity,
-            'clients' => Resource::collection($clientsLoaded),
+            'clients' => JsonResource::collection($clientsLoaded),
             'relationship' => $this->whenPivotLoaded('abuser_client', function() {
                 return $this->pivot->relationship;
             }),

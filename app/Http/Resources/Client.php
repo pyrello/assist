@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\MissingValue;
 
-class Client extends Resource
+class Client extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,7 +19,7 @@ class Client extends Resource
         $lastIncidentId = ($lastIncident instanceof MissingValue || $lastIncident->isEmpty()) ? null : $lastIncident->first()->id;
 
         $ethnicityLoaded = $this->whenLoaded('ethnicity');
-        $ethnicityIds = ($ethnicityLoaded instanceof MissingValue || $ethnicityLoaded->isEmpty()) ? null : Resource::collection($ethnicityLoaded)->pluck('id', 'pivot.order');
+        $ethnicityIds = ($ethnicityLoaded instanceof MissingValue || $ethnicityLoaded->isEmpty()) ? null : JsonResource::collection($ethnicityLoaded)->pluck('id', 'pivot.order');
         //logger('Ethnicity ids: ' . print_r($ethnicityIds, true));
 
         $householdLoaded = $this->whenLoaded('household');
@@ -41,7 +41,7 @@ class Client extends Resource
             'phones' => Phone::collection($this->whenLoaded('phones')),
             'primary_phone_number' => $this->primaryPhoneNumber,
             'ethnicity_ids' => $this->when($ethnicityIds, $ethnicityIds),
-            'ethnicity' => Resource::collection($ethnicityLoaded),
+            'ethnicity' => JsonResource::collection($ethnicityLoaded),
             'intake' => $this->whenLoaded('intake'),
             'intake_id' => $this->intake_id,
             'head_of_household' => $this->when($headOfHousehold, $headOfHousehold),
