@@ -23,13 +23,13 @@
 
     <!-- Scripts -->
     <script>
-        window.Laravel = <?php echo json_encode([
+        window.Laravel = {!! json_encode([
                 'apiBaseUri' => '/api',
                 'csrfToken' => csrf_token(),
                 'environment' => App::environment(),
                 'url' => config('app.url'),
                 'site_name' => config('app.name', 'Assist')
-        ]); ?>
+        ]); !!}
     </script>
 </head>
 <body class="skin-purple">

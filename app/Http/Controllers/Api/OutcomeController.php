@@ -6,7 +6,7 @@ use App\Activity;
 use App\Outcome;
 use App\Service;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class OutcomeController extends BaseController
 {
@@ -30,7 +30,7 @@ class OutcomeController extends BaseController
         }
         $outcomes = $outcomes->get();
 
-        return Resource::collection($outcomes);
+        return JsonResource::collection($outcomes);
     }
 
     /**
@@ -54,7 +54,7 @@ class OutcomeController extends BaseController
 
         //$outcome->load('services');
 
-        return new Resource($outcome);
+        return new JsonResource($outcome);
     }
 
     /**
@@ -65,7 +65,7 @@ class OutcomeController extends BaseController
      */
     public function show(Outcome $outcome)
     {
-        return new Resource($outcome);
+        return new JsonResource($outcome);
     }
 
     /**
@@ -93,7 +93,7 @@ class OutcomeController extends BaseController
 
         $outcome->load('services');
 
-        return new Resource($outcome);
+        return new JsonResource($outcome);
     }
 
     /**
