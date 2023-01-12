@@ -68,7 +68,7 @@
         "laravel-mix": "^5.0.4",
         "lodash": "^4.17.13",
         "marked": "^0.3.19",
-        "mocha": "^3.2.0",
+        "mocha": "^10.2.0",
         "moment": "^2.22.1",
         "popper.js": "^1.12",
         "promise-polyfill": "^7.0.0",
